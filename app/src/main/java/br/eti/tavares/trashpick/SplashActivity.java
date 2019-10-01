@@ -17,13 +17,13 @@ public class SplashActivity extends AppCompatActivity {
         handle.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mostrarMapsActivity();
+                mostrarCadastroActivity();
             }
         }, 2000);
     }
-    private void mostrarMapsActivity() {
-        Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
-        startActivity(iMap);
+    private void mostrarCadastroActivity() {
+        Intent iCadastro= new Intent(getApplicationContext(), CadastroActivity.class);
+        startActivity(iCadastro);
         finish();
     }
 }

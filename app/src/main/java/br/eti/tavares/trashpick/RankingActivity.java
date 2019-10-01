@@ -42,8 +42,8 @@ public class RankingActivity extends AppCompatActivity {
     }
 
     public void OnClickMaps(View v) {
-        Intent iMaps = new Intent(getApplicationContext(), MapsActivity.class);
-        startActivity(iMaps);
+    Intent iMaps = new Intent(getApplicationContext(), MapsActivity.class);
+    startActivity(iMaps);
     }
     public void OnClickObjetivos(View v) {
         Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);

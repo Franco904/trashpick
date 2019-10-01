@@ -26,10 +26,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final double LATTICAN = -27.452139; //altitude e longetude do Tican
     private static final double LONGTICAN = -48.4581527;
 
-
+    private static final float NUMERO_PONTOS = 10;
     private static final float ZOOM_CAMERA = 17f;
-    private static final LatLng LOCALIZACAO_FLORIANOPOLIS = new LatLng(LATITUDE, LONGITUDE);
-    private static final String TITULO = "Florianópolis";
+    private static final LatLng LOCALIZACAO_SENAI = new LatLng(LATITUDE, LONGITUDE);
+    private static final LatLng LOCALIZACAO_TICAN = new LatLng(LATTICAN, LONGTICAN);
+    private static final String TITULOTICAN = "Terminal de Integração de Canasvieiras";
+    private static final String TITULOSENAI = "Florianópolis";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +59,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
         } else {
             //Define como padrão a Localização do Senai
-            mMap.addMarker(new MarkerOptions().position(LOCALIZACAO_FLORIANOPOLIS).title(TITULO));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(LOCALIZACAO_FLORIANOPOLIS));
+            mMap.addMarker(new MarkerOptions().position(LOCALIZACAO_SENAI).title(TITULOSENAI));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(LOCALIZACAO_SENAI));
 
         }
+        mMap.addMarker(new MarkerOptions().position(LOCALIZACAO_SENAI).title(TITULOSENAI));
+
+        
     }
     public void Exibir(View v) {
 

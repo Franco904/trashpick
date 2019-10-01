@@ -8,6 +8,19 @@
     android:paddingRight="0dp"
     android:orientation="vertical" >
 
+    <Button
+        android:id="@+id/btnSobre"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginEnd="162dp"
+        android:text="Sobre"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="1.0"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/btnAjuda" />
+
     <ImageButton
         android:id="@+id/imgFoto"
         android:layout_width="100dp"
@@ -72,14 +85,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="81dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="84dp"
-        android:fontFamily="serif"
+        android:fontFamily="sans-serif-condensed-light"
         android:text="Nome Sobrenome"
         android:textSize="30sp"
         android:textStyle="italic"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="1.0"
+        map:layout_constraintHorizontal_bias="0.536"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 
