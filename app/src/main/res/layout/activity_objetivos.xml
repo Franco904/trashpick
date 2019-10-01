@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:background="@color/common_google_signin_btn_text_dark_focused"
             android:onClick="OnClickMaps"
             android:src="@android:drawable/ic_dialog_map" />
 
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:background="@color/common_google_signin_btn_text_dark_focused"
             android:src="@android:drawable/ic_dialog_email" />
 
         <ImageButton
@@ -40,7 +40,7 @@
             android:layout_width="34dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:background="@color/common_google_signin_btn_text_dark_focused"
             android:onClick="OnClickRanking"
             android:src="@android:drawable/ic_dialog_dialer" />
 
@@ -49,7 +49,7 @@
             android:layout_width="34dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:background="@color/common_google_signin_btn_text_dark_focused"
             android:onClick="OnClickPerfil"
             android:src="@android:drawable/ic_dialog_info" />
 
