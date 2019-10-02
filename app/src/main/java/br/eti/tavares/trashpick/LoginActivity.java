@@ -13,12 +13,15 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }
-    public void OnClickMaps(View v){
-        Intent iMaps = new Intent(getApplicationContext(), MapsActivity.class);
-        startActivity(iMaps);
-    }
-    public void OnClickCadastro(View v){
+
+    public void OnClickCadastro(View v) {
         finish();
     }
 
+    public void OnClickMaps(View v) {
+        Intent iMaps = new Intent(getApplicationContext(), MapsActivity.class);
+        startActivity(iMaps);
+
+
+    }
 }
