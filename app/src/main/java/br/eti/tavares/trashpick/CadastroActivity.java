@@ -36,19 +36,19 @@ public class CadastroActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "O campo nome é obrigatório!", Toast.LENGTH_SHORT).show();
         }
 
-        if (email.equals("")) {
+        else if (email.equals("")) {
             Toast.makeText(getApplicationContext(), "O campo e-mail é obrigatório!", Toast.LENGTH_SHORT).show();
         }
 
-        if (senha.equals("")) {
+        else if (senha.equals("")) {
             Toast.makeText(getApplicationContext(), "O campo senha é obrigatório!", Toast.LENGTH_SHORT).show();
         }
 
-        if (confirmacaoSenha.equals("")) {
+        else if (confirmacaoSenha.equals("")) {
             Toast.makeText(getApplicationContext(), "O campo confirmação de senha é obrigatório!", Toast.LENGTH_SHORT).show();
         }
 
-        if (!confirmacaoSenha.equals(senha)){
+        else if (!confirmacaoSenha.equals(senha)){
             Toast.makeText(getApplicationContext(), "A senha não é a mesma informada!", Toast.LENGTH_SHORT).show();
         }
 

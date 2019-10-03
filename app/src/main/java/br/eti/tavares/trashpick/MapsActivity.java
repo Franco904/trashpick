@@ -10,6 +10,7 @@ import android.view.View;
 import java.util.Random;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));//zoom da câmera
         //mMap.setTrafficEnabled(true);//tráfeto de carros
-
 
         //Caso tenha permissão para localização via GPS
 
