@@ -80,7 +80,7 @@
         android:layout_marginTop="65dp"
         android:layout_marginEnd="16dp"
         android:background="#8BC34A"
-        android:onClick="OnClickMaps"
+        android:onClick="OnClickEntrar"
         android:text="Pronto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editConfirmarSenha" />
@@ -121,7 +121,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:textColor="@android:color/holo_red_dark"
-
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editNome" />

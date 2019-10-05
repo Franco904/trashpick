@@ -1,8 +1,11 @@
 package br.eti.tavares.trashpick;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -21,7 +24,7 @@ public class CadastroActivity extends AppCompatActivity {
         startActivity(iLogin);
     }
 
-    public void OnClickMaps(View v) {
+    public void OnClickEntrar(View v) {
 
         EditText editNome = findViewById(R.id.editNome);
         EditText editEmail = findViewById(R.id.editEmail);
@@ -36,48 +39,49 @@ public class CadastroActivity extends AppCompatActivity {
         String email = editEmail.getText().toString();
         String senha = editSenha.getText().toString();
         String confirmacaoSenha = editConfirmarSenha.getText().toString();
+        boolean erro = false;
+
+        nomeInvalido.setText("");
+        emailInvalido.setText("");
+        senhaInvalido.setText("");
+        confirmacaoInvalido.setText("");
+
+        editNome.setHintTextColor(Color.parseColor("#AAAAAA"));
+        editEmail.setHintTextColor(Color.parseColor("#AAAAAA"));
+        editSenha.setHintTextColor(Color.parseColor("#AAAAAA"));
+        editConfirmarSenha.setHintTextColor(Color.parseColor("#AAAAAA"));
 
         if (nome.equals("")) {
-            nomeInvalido.setText("O campo nome é obrigatório!"); //nomeInvalido.setHintTextColor("FFCC0000");
+            nomeInvalido.setText("O campo nome é obrigatório!");
+            editNome.setHintTextColor(Color.parseColor("#FFCC0000"));
+            erro = true;
             }
 
-            else if(!nome.equals("")){
-                nomeInvalido.setText("");
-            }
-
-        else if (email.equals("")) {
+        if (email.equals("")) {
             emailInvalido.setText("O campo e-mail é obrigatório!");
-
+            editEmail.setHintTextColor(Color.parseColor("#FFCC0000"));
+            erro = true;
         }
-            else if(!email.equals("")){
-                emailInvalido.setText("");
-            }
 
-        else if (senha.equals("")) {
+        if (senha.equals("")) {
             senhaInvalido.setText("Insira uma senha válida!");
-
+            editSenha.setHintTextColor(Color.parseColor("#FFCC0000"));
+            erro = true;
         }
-            else if(!senha.equals("")){
-                senhaInvalido.setText("");
-            }
 
-        else if (confirmacaoSenha.equals("")) {
+        if (confirmacaoSenha.equals("")) {
             confirmacaoInvalido.setText("O campo confirmação de senha é obrigatório!");
-
+            editConfirmarSenha.setHintTextColor(Color.parseColor("#FFCC0000"));
+            erro = true;
         }
-            else if(!confirmacaoSenha.equals("")){
-                confirmacaoInvalido.setText("");
-            }
 
-        else if (!confirmacaoSenha.equals(senha)){
+        if (!confirmacaoSenha.equals(senha)){
             confirmacaoInvalido.setText("A senha não é a mesma informada!");
-
+            editConfirmarSenha.setHintTextColor(Color.parseColor("#FFCC0000"));
+            erro = true;
         }
-            else if(!nome.equals("")){
-                nomeInvalido.setText("");
-            }
 
-        else {
+        if(!erro){
             //Objeto c1 da classe Carro
             Cadastro c1 = new Cadastro(nome, email, senha, confirmacaoSenha);
 

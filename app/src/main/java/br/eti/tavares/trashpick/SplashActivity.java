@@ -17,13 +17,13 @@ public class SplashActivity extends AppCompatActivity {
         handle.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mostrarCadastroActivity();
+                mostrarLoginActivity();
             }
         }, 2000);
     }
-    private void mostrarCadastroActivity() {
-        Intent iCadastro= new Intent(getApplicationContext(), CadastroActivity.class);
-        startActivity(iCadastro);
+    private void mostrarLoginActivity() {
+        Intent iLogin = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(iLogin);
         finish();
     }
 }

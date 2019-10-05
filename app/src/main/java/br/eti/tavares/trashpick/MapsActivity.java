@@ -61,15 +61,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         mMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));//zoom da câmera
-        //mMap.setTrafficEnabled(true);//tráfeto de carros
+        //mMap.setTrafficEnabled(true);//tráfeto de carros (não se aplica no contexto)
 
         //Caso tenha permissão para localização via GPS
 
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-            checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
         } else {
-            for(int i=0; i<pontos.size(); i++){
+            for (int i = 0; i < pontos.size(); i++) {
 
                 mMap.addMarker(new MarkerOptions().position(pontos.get(i).localizacao()).title(pontos.get(i).getTitulo()));
             }
@@ -79,33 +79,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.moveCamera(CameraUpdateFactory.newLatLng(pontos.get(0).localizacao()));
 
         }
-        //mMap.addMarker(new MarkerOptions().position(LOCALIZACAO_SENAI).title(TITULOSENAI));
-        //for(cont=0;cont<NUMERO_COORDENADAS;cont++){
-          //  mMap.addMarker(new MarkerOptions().position(LOCALIZACAO_SENAI).title(TITULOSENAI));
-     //   }
-        
-    }
-    //public void Exibir(View v) {
 
-    //   Random RandomPoint1 = new Random();
-    //   Random RandomPoint2 = new Random();
-    //   Random RandomPoint3 = new Random();
-    //   Random RandomPoint4 = new Random();
-    //    Random RandomPoint5 = new Random();
-    //   Random RandomPoint6 = new Random();
-    // }
-
-    public void OnClickPerfil(View v) {
-        Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
-        startActivity(iPerfil);
     }
-    public void OnClickObjetivos(View v) {
-        Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
-        startActivity(iObjetivos);
+        public void OnClickPerfil (View v){
+            Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
+            startActivity(iPerfil);
+        }
+        public void OnClickObjetivos (View v){
+            Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
+            startActivity(iObjetivos);
+        }
+        public void OnClickRanking (View v){
+            Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
+            startActivity(iRanking);
+        }
     }
-    public void OnClickRanking(View v) {
-        Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
-        startActivity(iRanking);
-    }
-
-}
