@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -26,6 +27,10 @@ public class CadastroActivity extends AppCompatActivity {
         EditText editEmail = findViewById(R.id.editEmail);
         EditText editSenha = findViewById(R.id.editSenha);
         EditText editConfirmarSenha = findViewById(R.id.editConfirmarSenha);
+        TextView nomeInvalido = findViewById(R.id.textNomeInvalido);
+        TextView emailInvalido = findViewById(R.id.textEmailInvalido);
+        TextView senhaInvalido = findViewById(R.id.textSenhaInvalido);
+        TextView confirmacaoInvalido = findViewById(R.id.textConfirmacaoInvalido);
 
         String nome = editNome.getText().toString();
         String email = editEmail.getText().toString();
@@ -33,24 +38,44 @@ public class CadastroActivity extends AppCompatActivity {
         String confirmacaoSenha = editConfirmarSenha.getText().toString();
 
         if (nome.equals("")) {
-            Toast.makeText(getApplicationContext(), "O campo nome é obrigatório!", Toast.LENGTH_SHORT).show();
-        }
+            nomeInvalido.setText("O campo nome é obrigatório!"); //nomeInvalido.setHintTextColor("FFCC0000");
+            }
+
+            else if(!nome.equals("")){
+                nomeInvalido.setText("");
+            }
 
         else if (email.equals("")) {
-            Toast.makeText(getApplicationContext(), "O campo e-mail é obrigatório!", Toast.LENGTH_SHORT).show();
+            emailInvalido.setText("O campo e-mail é obrigatório!");
+
         }
+            else if(!email.equals("")){
+                emailInvalido.setText("");
+            }
 
         else if (senha.equals("")) {
-            Toast.makeText(getApplicationContext(), "O campo senha é obrigatório!", Toast.LENGTH_SHORT).show();
+            senhaInvalido.setText("Insira uma senha válida!");
+
         }
+            else if(!senha.equals("")){
+                senhaInvalido.setText("");
+            }
 
         else if (confirmacaoSenha.equals("")) {
-            Toast.makeText(getApplicationContext(), "O campo confirmação de senha é obrigatório!", Toast.LENGTH_SHORT).show();
+            confirmacaoInvalido.setText("O campo confirmação de senha é obrigatório!");
+
         }
+            else if(!confirmacaoSenha.equals("")){
+                confirmacaoInvalido.setText("");
+            }
 
         else if (!confirmacaoSenha.equals(senha)){
-            Toast.makeText(getApplicationContext(), "A senha não é a mesma informada!", Toast.LENGTH_SHORT).show();
+            confirmacaoInvalido.setText("A senha não é a mesma informada!");
+
         }
+            else if(!nome.equals("")){
+                nomeInvalido.setText("");
+            }
 
         else {
             //Objeto c1 da classe Carro
