@@ -1,6 +1,18 @@
 package br.eti.tavares.trashpick;
 
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthRegistrar;
+import com.google.firebase.auth.FirebaseUser;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class Cadastro {
 
@@ -8,12 +20,14 @@ public class Cadastro {
     private String email;
     private String senha;
     private String confirmacaoSenha;
+    private FirebaseAuth auth;
 
-    public Cadastro(String nome, String email, String senha, String confirmacaoSenha){
+    public Cadastro(String nome, String email, String senha, String confirmacaoSenha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.confirmacaoSenha = confirmacaoSenha;
+        auth = FirebaseAuth.getInstance();
     }
 
     public String getNome() {
@@ -46,8 +60,5 @@ public class Cadastro {
 
     public void setConfirmacaoSenha(String confirmacaoSenha) {
         this.confirmacaoSenha = confirmacaoSenha;
-    }
-
-    public void salvar(){
     }
 }
