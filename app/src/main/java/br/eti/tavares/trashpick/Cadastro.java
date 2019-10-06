@@ -1,5 +1,7 @@
 package br.eti.tavares.trashpick;
 
+import com.google.firebase.auth.FirebaseAuthRegistrar;
+
 public class Cadastro {
 
     private String nome;
@@ -44,5 +46,8 @@ public class Cadastro {
 
     public void setConfirmacaoSenha(String confirmacaoSenha) {
         this.confirmacaoSenha = confirmacaoSenha;
+    }
+
+    public void salvar(){
     }
 }

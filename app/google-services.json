@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "31131430053",
+    "firebase_url": "https://trashpick-1.firebaseio.com",
+    "project_id": "trashpick-1",
+    "storage_bucket": "trashpick-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31131430053:android:4b73999956848e2b68f14c",
+        "android_client_info": {
+          "package_name": "br.eti.tavares.trashpick"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31131430053-c1ek52e2cu6jrnm580trh16lf4di0thj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDWe9rZanV-3t-McC98dtlkGkXfm7o-ZxA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "31131430053-c1ek52e2cu6jrnm580trh16lf4di0thj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

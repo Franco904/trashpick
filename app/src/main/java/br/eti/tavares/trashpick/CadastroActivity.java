@@ -63,12 +63,11 @@ public class CadastroActivity extends AppCompatActivity {
             erro = true;
         }
 
-        if (senha.equals("")) {
-            senhaInvalido.setText("Insira uma senha válida!");
+        if (senha.length() < 8){
+            senhaInvalido.setText("A senha deve ter pelo menos 8 caracteres!");
             editSenha.setHintTextColor(Color.parseColor("#FFCC0000"));
             erro = true;
         }
-
         if (confirmacaoSenha.equals("")) {
             confirmacaoInvalido.setText("O campo confirmação de senha é obrigatório!");
             editConfirmarSenha.setHintTextColor(Color.parseColor("#FFCC0000"));
