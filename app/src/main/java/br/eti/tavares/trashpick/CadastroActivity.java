@@ -1,14 +1,11 @@
 package br.eti.tavares.trashpick;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,8 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -45,7 +40,7 @@ public class CadastroActivity extends AppCompatActivity {
         EditText editSenha = findViewById(R.id.editSenha);
         EditText editConfirmarSenha = findViewById(R.id.editConfirmarSenha);
         TextView nomeInvalido = findViewById(R.id.textNomeInvalido);
-        TextView emailInvalido = findViewById(R.id.textEmailInvalido);
+        TextView emailInvalido = findViewById(R.id.txtEmailInvalido);
         TextView senhaInvalido = findViewById(R.id.textSenhaInvalido);
         TextView confirmacaoInvalido = findViewById(R.id.textConfirmacaoInvalido);
 
@@ -103,9 +98,10 @@ public class CadastroActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                FirebaseUser user = auth.getCurrentUser();
+                                //FirebaseUser user = auth.getCurrentUser();
                                 Intent iMaps = new Intent(getApplicationContext(), MapsActivity.class);
                                 startActivity(iMaps);
+                                Toast.makeText(getApplicationContext(), "Cadastro efetuado com sucesso!", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(getApplicationContext(), "Falha na criação do usuário!", Toast.LENGTH_SHORT).show();
                             }

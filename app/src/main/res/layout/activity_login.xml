@@ -90,10 +90,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textErroAutenticar" />
+        app:layout_constraintTop_toBottomOf="@+id/txtErroAutenticar" />
 
     <TextView
-        android:id="@+id/textEmailInvalido"
+        android:id="@+id/txtEmailInvalido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
@@ -103,7 +103,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
     <TextView
-        android:id="@+id/textSenhaInvalida"
+        android:id="@+id/txtSenhaInvalida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="17dp"
@@ -113,7 +113,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editSenha" />
 
     <TextView
-        android:id="@+id/textErroAutenticar"
+        android:id="@+id/txtErroAutenticar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
