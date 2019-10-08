@@ -81,16 +81,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
     }
-        public void OnClickPerfil (View v){
-            Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
-            startActivity(iPerfil);
-        }
-        public void OnClickObjetivos (View v){
-            Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
-            startActivity(iObjetivos);
-        }
-        public void OnClickRanking (View v){
-            Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
-            startActivity(iRanking);
-        }
+    public void OnClickPerfil (View v){
+        Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
+        startActivity(iPerfil);
     }
+    public void OnClickObjetivos (View v){
+        Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
+        startActivity(iObjetivos);
+    }
+    public void OnClickRanking (View v){
+        Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
+        startActivity(iRanking);
+    }
+}
