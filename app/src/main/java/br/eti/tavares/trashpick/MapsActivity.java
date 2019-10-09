@@ -26,6 +26,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private static final float ZOOM_CAMERA = 17f;
+    private static final float A1 = 17f;
+    private static final float A2 = 17f;
 
     private List<Coordenada> pontos = new ArrayList<>();
 
@@ -67,20 +69,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(true);
+                mMap.setMyLocationEnabled(true);
+
         } else {
-            for (int i = 0; i < pontos.size(); i++) {
-
-                mMap.addMarker(new MarkerOptions().position(pontos.get(i).localizacao()).title(pontos.get(i).getTitulo()));
-            }
-
             //Define como padrão a Localização do Senai
 
             mMap.moveCamera(CameraUpdateFactory.newLatLng(pontos.get(0).localizacao()));
 
         }
+        for (int i = 0; i < pontos.size(); i++) {
 
+            valor = new Random()
+                    if(valor > A1) & (valor < A2){
+                        mMap.addMarker(new MarkerOptions().position(pontos.get(i).localizacao()).title(pontos.get(i).getTitulo()));
+            }
+
+        }
     }
+
     public void OnClickPerfil (View v){
         Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
         startActivity(iPerfil);

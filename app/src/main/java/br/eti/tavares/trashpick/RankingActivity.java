@@ -5,11 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RankingActivity extends AppCompatActivity {
+
+    private FirebaseAuth auth;
 
     private List<PessoaRanking> jogadores = new ArrayList<>();
 
@@ -34,6 +40,13 @@ public class RankingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ranking);
 
         this.GetPessoasRanking();
+
+        auth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = auth.getCurrentUser();
+
+        final TextView txtNome = findViewById(R.id.txtNome);
+        txtNome.setText(user.getDisplayName());
 
         ListView ranking = (ListView) findViewById(R.id.listranking);
         AdapterListView adapter = new AdapterListView(this, jogadores);

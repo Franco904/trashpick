@@ -23,18 +23,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="118dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="133dp"
             android:fontFamily="sans-serif-condensed-light"
             android:text="Nome Sobrenome"
             android:textAlignment="center"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="24sp"
-            android:textStyle="italic"
+            android:textStyle="normal"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.549"
+            map:layout_constraintHorizontal_bias="0.54"
             map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@+id/imgFoto" />
+            map:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <TextView
             android:id="@+id/textMediaPontos"
@@ -61,19 +61,6 @@
             android:textSize="18sp"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintTop_toBottomOf="@+id/txtNome" />
-
-        <ImageButton
-            android:id="@+id/imgFoto"
-            android:layout_width="87dp"
-            android:layout_height="82dp"
-            android:layout_marginStart="255dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="255dp"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.0"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars[11]" />
 
         <TextView
             android:id="@+id/textMediaAtual"
@@ -102,6 +89,19 @@
             android:textStyle="italic"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintTop_toBottomOf="@+id/txtNome" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="332dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="132dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="133dp"
+            android:scaleType="fitCenter"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:srcCompat="@drawable/perfillogo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ListView
