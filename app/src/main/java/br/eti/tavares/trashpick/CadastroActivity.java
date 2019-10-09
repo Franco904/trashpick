@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -35,7 +38,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void OnClickEntrar(View v) {
 
-        EditText editNome = findViewById(R.id.editNome);
+        final EditText editNome = findViewById(R.id.editNome);
         EditText editEmail = findViewById(R.id.editEmail);
         EditText editSenha = findViewById(R.id.editSenha);
         EditText editConfirmarSenha = findViewById(R.id.editConfirmarSenha);
@@ -98,7 +101,22 @@ public class CadastroActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                //FirebaseUser user = auth.getCurrentUser();
+                                FirebaseUser user = auth.getCurrentUser();
+
+                                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(editNome.getText().toString())
+                                        .build();
+
+                                user.updateProfile(profileUpdates)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                   // Não faz nada
+                                                }
+                                            }
+                                        });
+
                                 Intent iMaps = new Intent(getApplicationContext(), MapsActivity.class);
                                 startActivity(iMaps);
                                 Toast.makeText(getApplicationContext(), "Cadastro efetuado com sucesso!", Toast.LENGTH_SHORT).show();

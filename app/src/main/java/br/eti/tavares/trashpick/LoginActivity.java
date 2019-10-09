@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,6 +26,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = auth.getCurrentUser();
     }
 
     public void OnClickCadastro(View v) {
@@ -75,8 +79,10 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                FirebaseUser user = auth.getCurrentUser();
                                 Intent iMaps = new Intent(getApplicationContext(), MapsActivity.class);
                                 startActivity(iMaps);
+                                Toast.makeText(getApplicationContext(), "Bem-vindo(a) " + (user.getDisplayName()) + "!", Toast.LENGTH_LONG).show();
                             } else {
                                 txtErroAutenticar.setText("Não foi possível encontrar este usuário e/ou senha!");
                                 txtErroAutenticar.setBackgroundColor(Color.parseColor("#A8F78B8B"));

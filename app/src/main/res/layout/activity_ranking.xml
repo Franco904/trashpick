@@ -19,7 +19,7 @@
         map:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textNome"
+            android:id="@+id/txtNome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="118dp"
@@ -47,7 +47,7 @@
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="18sp"
             map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@+id/textNome" />
+            map:layout_constraintTop_toBottomOf="@+id/txtNome" />
 
         <TextView
             android:id="@+id/textMeusPontos"
@@ -60,7 +60,7 @@
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="18sp"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintTop_toBottomOf="@+id/textNome" />
+            map:layout_constraintTop_toBottomOf="@+id/txtNome" />
 
         <ImageButton
             android:id="@+id/imgFoto"
@@ -87,7 +87,7 @@
             android:textSize="24sp"
             android:textStyle="italic"
             map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@+id/textNome" />
+            map:layout_constraintTop_toBottomOf="@+id/txtNome" />
 
         <TextView
             android:id="@+id/textMediaAtual2"
@@ -101,7 +101,7 @@
             android:textSize="24sp"
             android:textStyle="italic"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintTop_toBottomOf="@+id/textNome" />
+            map:layout_constraintTop_toBottomOf="@+id/txtNome" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ListView

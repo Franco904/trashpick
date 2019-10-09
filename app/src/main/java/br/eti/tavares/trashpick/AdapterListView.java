@@ -43,7 +43,7 @@ public class AdapterListView extends BaseAdapter {
             //cria um item de suporte para não precisarmos sempre
             //inflar as mesmas informacoes
             itemHolder = new ItemSuporte();
-            itemHolder.nome = ((TextView) view.findViewById(R.id.textNome));
+            itemHolder.nome = ((TextView) view.findViewById(R.id.txtNome));
             itemHolder.pontos = ((TextView) view.findViewById(R.id.textPontos));
             itemHolder.foto = ((ImageView) view.findViewById(R.id.imgPerfil));
 
