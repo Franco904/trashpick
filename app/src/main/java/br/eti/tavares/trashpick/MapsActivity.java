@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -30,26 +31,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private static final float ZOOM_CAMERA = 17f;
-    private static final double A1_LAT = -27.547472;
-    private static final double A1_LNG = -48.5000183;
-    private static final double A2_LAT = -27.547472;
-    private static final double A2_LNG = -48.5000183;
 
-    private Polyline polyline;
+    //private Polyline polyline;
     private List<Coordenada> pontos = new ArrayList<>();
 
     private void GetPontosCoordenadas() {
 
-        pontos.add(0, new Coordenada(-27.5481014, -48.4980635, "SENAI CTAI Florianópolis"));
-        pontos.add(1, new Coordenada(-27.452139, -48.4581527, "Terminal de Integração de Canasvieiras"));
-        pontos.add(2, new Coordenada(-27.5842091, -48.5227018, "Terminal de Integração da Trindade"));
-        pontos.add(3, new Coordenada(-27.5874017, -48.4998144, "CIASC"));
-        pontos.add(4, new Coordenada(-27.554041, -48.498309, "Floripa Shopping"));
-        pontos.add(5, new Coordenada(-27.5898513, -48.5174582, "Iguatemi Florianópolis"));
-        pontos.add(6, new Coordenada(-27.5849209, -48.5450034, "Beiramar Shopping"));
-        pontos.add(7, new Coordenada(-27.5429536, -48.5234776, "Hotel Sesc Cacupé"));
-        pontos.add(8, new Coordenada(-27.5918307, -48.4931127, "FIESC"));
-        pontos.add(9, new Coordenada(-27.5918563, -48.5162041, "Forneria Catarina"));
+        pontos.add(0, new Coordenada(-27.5481014, -48.4980635, 3));
+        pontos.add(1, new Coordenada(-27.547380, -48.496937, 4));
+        pontos.add(2, new Coordenada(-27.548012, -48.498001, 5));
+        pontos.add(3, new Coordenada(-27.548020, -48.498480, 6));
+        pontos.add(4, new Coordenada(-27.548028, -48.497641, 10));
+        pontos.add(5, new Coordenada(-27.548204, -48.498768, 8));
+        pontos.add(6, new Coordenada(-27.548340, -48.499066, 3));
+        pontos.add(7, new Coordenada(-27.547908, -48.497289, 6));
+        pontos.add(8, new Coordenada(-27.5918307, -48.497605, 5));
+        pontos.add(9, new Coordenada(-27.5918563, -48.5162041, 9));
     }
 
     @Override
@@ -68,47 +65,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        //zoom da câmera
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
 
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));//zoom da câmera
-        //mMap.setTrafficEnabled(true);//tráfeto de carros (não se aplica no contexto)
 
         //Caso tenha permissão para localização via GPS
-
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
                 checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
 
+            for (int i = 0; i < pontos.size(); i++) {
+
+                //valor = new Random()
+                //      if(valor > A1) & (valor < A2){
+                mMap.addMarker(new MarkerOptions().position(pontos.get(i).localizacao()));
+            }
+
         } else {
-            //Define como padrão a Localização do Senai
+            //Define como padrão a localização do Senai
 
             mMap.moveCamera(CameraUpdateFactory.newLatLng(pontos.get(0).localizacao()));
 
         }
-        for (int i = 0; i < pontos.size(); i++) {
-
-            //valor = new Random()
-            //      if(valor > A1) & (valor < A2){
-            mMap.addMarker(new MarkerOptions().position(pontos.get(i).localizacao()).title(pontos.get(i).getTitulo()));
-        }
-
     }
-
-    public void drawRoute() {
+   /* public void drawRoute() {
         PolylineOptions po;
 
-        if(polyline == null){
+        if (polyline == null) {
             po = new PolylineOptions();
 
             for (int i = 0; i < pontos.size(); i++) {
                 po.add(pontos.get(i));
 
             }
+            po.color(Color.BLUE);
             polyline = mMap.addPolyline(po);
-        }
-        else{
+        } else {
+
             polyline.setPoints(pontos);
         }
-    }
+    }*/
 
     public void OnClickPerfil(View v) {
         Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);

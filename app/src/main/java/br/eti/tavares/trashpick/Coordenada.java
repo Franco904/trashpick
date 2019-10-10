@@ -6,23 +6,22 @@ public class Coordenada {
 
     private double latitude;
     private double longitude;
-    private String titulo;
+    private double duracao;
 
-    public Coordenada(double latitude, double longitude, String titulo){
+    public Coordenada(double latitude, double longitude, double duracao){
         this.latitude = latitude;
         this.longitude = longitude;
-        this.titulo = titulo;
+        this.duracao = duracao;
     }
     public LatLng localizacao(){
         return new LatLng(latitude, longitude);
     }
 
-    public String getTitulo() {
-        return titulo;
+    public double getDuracao() {
+        return duracao;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setDuracao(double duracao) {
+        this.duracao = duracao;
     }
-
 }
