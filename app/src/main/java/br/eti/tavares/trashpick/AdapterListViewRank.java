@@ -9,12 +9,12 @@ import android.widget.ImageView;
 import android.view.View;
 import java.util.List;
 
-public class AdapterListView extends BaseAdapter {
+public class AdapterListViewRank extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private List<PessoaRanking> itens;
 
-    public AdapterListView(Context context, List<PessoaRanking> itens) {
+    public AdapterListViewRank(Context context, List<PessoaRanking> itens) {
         //Itens do listview
         this.itens = itens;
         //Objeto responsável por pegar o Layout do item.

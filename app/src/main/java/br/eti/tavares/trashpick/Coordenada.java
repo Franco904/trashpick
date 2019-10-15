@@ -2,26 +2,20 @@ package br.eti.tavares.trashpick;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class Coordenada {
+public abstract class Coordenada {
 
-    private double latitude;
-    private double longitude;
-    private double duracao;
+    protected double latitude;
+    protected double longitude;
 
-    public Coordenada(double latitude, double longitude, double duracao){
+
+    protected Coordenada() {}
+
+    protected Coordenada(double latitude, double longitude){
         this.latitude = latitude;
         this.longitude = longitude;
-        this.duracao = duracao;
     }
+
     public LatLng localizacao(){
         return new LatLng(latitude, longitude);
-    }
-
-    public double getDuracao() {
-        return duracao;
-    }
-
-    public void setDuracao(double duracao) {
-        this.duracao = duracao;
     }
 }

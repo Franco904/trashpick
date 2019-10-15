@@ -3,10 +3,12 @@ package br.eti.tavares.trashpick;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import java.util.Random;
@@ -27,26 +29,49 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
+
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private static final float ZOOM_CAMERA = 17f;
 
-    //private Polyline polyline;
-    private List<Coordenada> pontos = new ArrayList<>();
+    private List<Coordenada_lixo> lixos = new ArrayList<>();
+
+    private DatabaseReference myRef;
 
     private void GetPontosCoordenadas() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        this.myRef = database.getReference("coordenada_lixo");
 
-        pontos.add(0, new Coordenada(-27.5481014, -48.4980635, 3));
-        pontos.add(1, new Coordenada(-27.547380, -48.496937, 4));
-        pontos.add(2, new Coordenada(-27.548012, -48.498001, 5));
-        pontos.add(3, new Coordenada(-27.548020, -48.498480, 6));
-        pontos.add(4, new Coordenada(-27.548028, -48.497641, 10));
-        pontos.add(5, new Coordenada(-27.548204, -48.498768, 8));
-        pontos.add(6, new Coordenada(-27.548340, -48.499066, 3));
-        pontos.add(7, new Coordenada(-27.547908, -48.497289, 6));
-        pontos.add(8, new Coordenada(-27.5918307, -48.497605, 5));
-        pontos.add(9, new Coordenada(-27.5918563, -48.5162041, 9));
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+
+                for (DataSnapshot csls: dataSnapshot.getChildren()) {
+                    Coordenada_lixo cl = csls.getValue(Coordenada_lixo.class);
+                    Log.e("Get Coordenada_lixo", cl.getCoordenada());
+                }
+
+               int a=1;
+        }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+            }
+        });
+
+        int b=1;
     }
 
     @Override
@@ -74,37 +99,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mMap.setMyLocationEnabled(true);
 
-            for (int i = 0; i < pontos.size(); i++) {
+            for (int i = 0; i < lixos.size(); i++) {
 
                 //valor = new Random()
                 //      if(valor > A1) & (valor < A2){
-                mMap.addMarker(new MarkerOptions().position(pontos.get(i).localizacao()));
+                mMap.addMarker(new MarkerOptions().position(lixos.get(i).localizacao()));
             }
 
         } else {
             //Define como padrão a localização do Senai
 
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(pontos.get(0).localizacao()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).localizacao()));
 
         }
     }
-   /* public void drawRoute() {
-        PolylineOptions po;
-
-        if (polyline == null) {
-            po = new PolylineOptions();
-
-            for (int i = 0; i < pontos.size(); i++) {
-                po.add(pontos.get(i));
-
-            }
-            po.color(Color.BLUE);
-            polyline = mMap.addPolyline(po);
-        } else {
-
-            polyline.setPoints(pontos);
-        }
-    }*/
 
     public void OnClickPerfil(View v) {
         Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
