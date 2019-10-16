@@ -71,7 +71,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         dbRef = FirebaseDatabase.getInstance().getReference();
 
         // this.GetPontosCoordenadas();
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -91,12 +90,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     // Extract a Message object from the DataSnapshot
                     Coordenada_lixo cl = child.getValue(Coordenada_lixo.class);
-int b=1;
-                    // Use the Message
-                    // [START_EXCLUDE]
-                    // Log.d(TAG, "message text:" + message.getText());
-                    // Log.d(TAG, "message sender name:" + message.getName());
-                    // [END_EXCLUDE]
+//int b=1;
+                    // TODO: RECUPERAR COORDENADAS E LIXO CORRESPONDENTE A CADA COORDENADALIXO
                 }
             }
 
