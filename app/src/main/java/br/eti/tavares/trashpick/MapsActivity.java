@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,37 +42,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private static final float ZOOM_CAMERA = 17f;
-
     private List<Coordenada_lixo> lixos = new ArrayList<>();
-
-    private DatabaseReference myRef;
+    private DatabaseReference dbRef;
+    private DatabaseReference clRef;
+    private ValueEventListener clListener;
 
     private void GetPontosCoordenadas() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        this.myRef = database.getReference("coordenada_lixo");
 
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+        clRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-
-                for (DataSnapshot csls: dataSnapshot.getChildren()) {
-                    Coordenada_lixo cl = csls.getValue(Coordenada_lixo.class);
-                    Log.e("Get Coordenada_lixo", cl.getCoordenada());
-                }
-
-               int a=1;
-        }
+                    for (DataSnapshot coordenadas: dataSnapshot.getChildren()) {
+                        // TODO: handle the post
+                    }
+            }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
+            public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-        int b=1;
     }
 
     @Override
@@ -79,13 +68,66 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        this.GetPontosCoordenadas();
+        dbRef = FirebaseDatabase.getInstance().getReference();
+
+        // this.GetPontosCoordenadas();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
+
+    public void basicListen() {
+        clRef = dbRef.child("coordenada_lixo");
+        ValueEventListener clListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // New data at this path. This method will be called after every change in the
+                // data at this path or a subpath.
+
+                // Get the data as Message objects
+                // Log.d(TAG, "Number of messages: " + dataSnapshot.getChildrenCount());
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    // Extract a Message object from the DataSnapshot
+                    Coordenada_lixo cl = child.getValue(Coordenada_lixo.class);
+int b=1;
+                    // Use the Message
+                    // [START_EXCLUDE]
+                    // Log.d(TAG, "message text:" + message.getText());
+                    // Log.d(TAG, "message sender name:" + message.getName());
+                    // [END_EXCLUDE]
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Could not successfully listen for data, log the error
+                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+            }
+        };
+        clRef.addValueEventListener(clListener);
+    }
+
+    public void cleanBasicListener() {
+        clRef.removeEventListener(clListener);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        basicListen();
+//        basicQuery();
+//        basicQueryValueListener();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        cleanBasicListener();
+//        cleanBasicQuery();
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

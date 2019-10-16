@@ -16,6 +16,8 @@ public class Coordenada_lixo extends Coordenada {
     private int lixo_id;
     private DatabaseReference myRef;
 
+    public Coordenada_lixo(){}
+
     public Coordenada_lixo(double latitude, double longitude, int lixo_id, int coordenada_id){
         super(latitude, longitude);
         this.coordenada_id = coordenada_id;
