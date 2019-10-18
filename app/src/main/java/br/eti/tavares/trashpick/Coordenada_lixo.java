@@ -1,50 +1,92 @@
 package br.eti.tavares.trashpick;
 
-import android.util.Log;
+import com.google.android.gms.maps.model.LatLng;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+public class Coordenada_lixo {
 
-import static android.content.ContentValues.TAG;
-
-public class Coordenada_lixo extends Coordenada {
-
-    private int coordenada_id;
-    private int lixo_id;
-    private DatabaseReference myRef;
+    Lixo lixo;
+    Coordinate coordenada;
 
     public Coordenada_lixo(){}
 
-    public Coordenada_lixo(double latitude, double longitude, int lixo_id, int coordenada_id){
-        super(latitude, longitude);
-        this.coordenada_id = coordenada_id;
-        this.lixo_id = lixo_id;
+    public Coordenada_lixo(Double latitude, Double longitude, String descricao, String imagem) {
+        lixo = new Lixo();
+        lixo.setDescricao(descricao);
+        lixo.setImagem(imagem);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        this.myRef = database.getReference("coordenada_lixo");
+        coordenada = new Coordinate();
+        coordenada.setLatitude(latitude);
+        coordenada.setLongitude(longitude);
     }
 
-    public int getCoordenada_id() {
-        return coordenada_id;
+    public Lixo getLixo() {
+        return lixo;
     }
 
-    public void setCoordenada_id(int coordenada_id) {
-        this.coordenada_id = coordenada_id;
+    public void setLixo(Lixo lixo) {
+        this.lixo = lixo;
     }
 
-    public int getLixo_id() {
-        return lixo_id;
+    public Coordinate getCoordenada() {
+        return coordenada;
     }
 
-    public void setLixo_id(int lixo_id) {
-        this.lixo_id = lixo_id;
+    public void setCoordenada(Coordinate coordenada) {
+        this.coordenada = coordenada;
     }
 
-    public String getCoordenada(){
-        return "Latitude : " + this.latitude + ", Longitude : " + this.longitude;
+    public LatLng getLatLng() {
+        return new LatLng(coordenada.latitude, coordenada.longitude);
+    }
 
+    /////////////////////////////////////////////////////////////////
+    // Classe Lixo
+    private class Lixo {
+        private String descricao;
+        private String imagem;
+
+        public Lixo() {
+        }
+
+        public String getDescricao() {
+            return descricao;
+        }
+
+        public void setDescricao(String descricao) {
+            this.descricao = descricao;
+        }
+
+        public String getImagem() {
+            return imagem;
+        }
+
+        public void setImagem(String imagem) {
+            this.imagem = imagem;
+        }
+    }
+
+    // Classe Coordinate
+    private class Coordinate {
+        private double latitude;
+        private double longitude;
+
+        public Coordinate() {
+        }
+
+        public double getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(double latitude) {
+            this.latitude = latitude;
+        }
+
+        public double getLongitude() {
+            return longitude;
+        }
+
+        public void setLongitude(double longitude) {
+            this.longitude = longitude;
+        }
     }
 }

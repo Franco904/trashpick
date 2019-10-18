@@ -27,6 +27,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         auth = FirebaseAuth.getInstance();
 
+
+
         FirebaseUser user = auth.getCurrentUser();
     }
 
@@ -53,8 +55,10 @@ public class LoginActivity extends AppCompatActivity {
         editEmail.setHintTextColor(Color.parseColor("#AAAAAA"));
         editSenha.setHintTextColor(Color.parseColor("#AAAAAA"));
 
-        String email = editEmail.getText().toString();
-        String senha = editSenha.getText().toString();
+//        String email = editEmail.getText().toString();
+//        String senha = editSenha.getText().toString();
+        String email = "marcelo@tavares.eti.br";
+        String senha = "minhasenha";
         boolean erro = false;
 
 

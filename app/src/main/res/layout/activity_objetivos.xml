@@ -67,34 +67,31 @@
             android:id="@+id/txtObjetivos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="134dp"
+            android:layout_marginStart="18dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="134dp"
+            android:layout_marginEnd="256dp"
             android:fontFamily="sans-serif-condensed-light"
             android:text="Objetivos"
             android:textSize="36sp"
             android:textStyle="bold"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.666"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ListView
         android:id="@+id/listEmAndamento"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        map:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_width="411dp"
+        android:layout_height="182dp"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.0"
+        map:layout_constraintHorizontal_bias="1.0"
         map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        map:layout_constraintVertical_bias="1.0" />
+        map:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="412dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="1dp"
+        android:id="@+id/constraintLayout5"
+        android:layout_width="420dp"
+        android:layout_height="30dp"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
@@ -102,18 +99,61 @@
 
         <Button
             android:id="@+id/btnEmAndamento"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="410dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="sans-serif-medium"
+
+            android:layout_width="427dp"
+            android:layout_height="30dp"
+            android:background="@drawable/buttonshape"
+
+            android:shadowColor="#8BC34A"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
             android:text="Em andamento"
-            android:textAlignment="viewStart"
-            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.666"
+            map:layout_constraintHorizontal_bias="0.476"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
+        android:layout_width="420dp"
+        android:layout_height="30dp"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/listEmAndamento">
+
+        <Button
+            android:id="@+id/btnDisponiveis"
+
+            android:layout_width="427dp"
+            android:layout_height="30dp"
+            android:background="@drawable/buttonshape"
+
+            android:shadowColor="#8BC34A"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:text="Disponíveis"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.466"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ListView
+        android:id="@+id/listDisponiveis"
+        android:layout_width="411dp"
+        android:layout_height="182dp"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="1.0"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

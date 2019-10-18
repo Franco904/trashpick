@@ -1,67 +1,38 @@
 package br.eti.tavares.trashpick;
 
-import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import java.util.Random;
-
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
-
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private static final float ZOOM_CAMERA = 17f;
-    private List<Coordenada_lixo> lixos = new ArrayList<>();
+    private static final float ZOOM_CAMERA = 5f;
+    private final List<Coordenada_lixo> lixos = new ArrayList<>();
     private DatabaseReference dbRef;
     private DatabaseReference clRef;
     private ValueEventListener clListener;
 
-    private void GetPontosCoordenadas() {
-
-        clRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot coordenadas: dataSnapshot.getChildren()) {
-                        // TODO: handle the post
-                    }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
+    private int debug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,29 +41,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         dbRef = FirebaseDatabase.getInstance().getReference();
 
-        // this.GetPontosCoordenadas();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
-    public void basicListen() {
+    @Override
+    public void onStart() {
+        super.onStart();
+        //basicListen();
+//        basicQuery();
+//        basicQueryValueListener();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        cleanBasicListener();
+//        cleanBasicQuery();
+    }
+
+    public void basicListen(GoogleMap googleMap) {
+        final GoogleMap oMap = googleMap;
         clRef = dbRef.child("coordenada_lixo");
-        ValueEventListener clListener = new ValueEventListener() {
+        clListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // New data at this path. This method will be called after every change in the
-                // data at this path or a subpath.
+                for (DataSnapshot cl : dataSnapshot.getChildren()) {
+                    Double latitude = (Double)cl.child("coordenada").child("latitude").getValue();
+                    Double longitude = (Double)cl.child("coordenada").child("longitude").getValue();
+                    String descricao = (String)cl.child("lixo").child("descricao").getValue();
+                    String imagem = (String)cl.child("lixo").child("imagem").getValue();
 
-                // Get the data as Message objects
-                // Log.d(TAG, "Number of messages: " + dataSnapshot.getChildrenCount());
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    // Extract a Message object from the DataSnapshot
-                    Coordenada_lixo cl = child.getValue(Coordenada_lixo.class);
-//int b=1;
-                    // TODO: RECUPERAR COORDENADAS E LIXO CORRESPONDENTE A CADA COORDENADALIXO
+                    lixos.add(new Coordenada_lixo(latitude, longitude, descricao, imagem));
+                    debug = 0; // Apenas para colocar um brakepoint aqui;
                 }
+                criaMarcadores(oMap);
+                debug = 0; // Apenas para colocar um brakepoint aqui;
             }
 
             @Override
@@ -108,24 +94,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         clRef.removeEventListener(clListener);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        basicListen();
-//        basicQuery();
-//        basicQueryValueListener();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        cleanBasicListener();
-//        cleanBasicQuery();
-    }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        basicListen(googleMap);
+    }
+
+    private void criaMarcadores(GoogleMap googleMap) {
         mMap = googleMap;
         //zoom da câmera
         mMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
@@ -140,14 +115,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 //valor = new Random()
                 //      if(valor > A1) & (valor < A2){
-                mMap.addMarker(new MarkerOptions().position(lixos.get(i).localizacao()));
+                mMap.addMarker(new MarkerOptions().position(lixos.get(i).getLatLng()));
             }
 
         } else {
             //Define como padrão a localização do Senai
 
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).localizacao()));
-
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).getLatLng()));
         }
     }
 
@@ -166,3 +140,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         startActivity(iRanking);
     }
 }
+
