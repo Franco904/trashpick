@@ -8,52 +8,23 @@
     android:paddingRight="0dp"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        map:layout_constraintBottom_toBottomOf="parent">
+    <FrameLayout
 
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/imgMaps"
-            android:layout_width="25dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/common_google_signin_btn_text_dark_focused"
-            android:onClick="OnClickMaps"
-            android:src="@android:drawable/ic_dialog_map" />
-
-        <ImageButton
-            android:id="@+id/imgObjetivos"
-            android:layout_width="25dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/common_google_signin_btn_text_dark_focused"
-            android:src="@android:drawable/ic_dialog_email" />
-
-        <ImageButton
-            android:id="@+id/imgRanking"
-            android:layout_width="25dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/common_google_signin_btn_text_dark_focused"
-            android:onClick="OnClickRanking"
-            android:src="@android:drawable/ic_dialog_dialer" />
-
-        <ImageButton
-            android:id="@+id/imgPerfil"
-            android:layout_width="25dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/common_google_signin_btn_text_dark_focused"
-            android:onClick="OnClickPerfil"
-            android:src="@android:drawable/ic_dialog_info" />
-
-    </LinearLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            map:itemIconTint="@color/colorWhite"
+            map:itemTextColor="@color/colorWhite"
+            map:menu="@menu/bottom_navigation_menu" />
+    </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"

@@ -17,13 +17,12 @@
 
         <TextView
             android:id="@+id/textRegistar"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="136dp"
             android:layout_marginTop="9dp"
-            android:layout_marginEnd="137dp"
             android:fontFamily="sans-serif-condensed"
             android:text="Registrar-se"
+            android:textAlignment="center"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,11 +32,9 @@
 
     <EditText
         android:id="@+id/editNome"
-        android:layout_width="372dp"
+        android:layout_width="0dp"
         android:layout_height="49dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="23dp"
         android:ems="10"
         android:hint="Nome de usuário"
         android:inputType="textPersonName"
@@ -47,11 +44,9 @@
 
     <EditText
         android:id="@+id/editEmail"
-        android:layout_width="377dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="45dp"
-        android:layout_marginEnd="18dp"
         android:ems="10"
         android:hint="Endereço de e-mail "
         android:inputType="textPersonName"
@@ -62,9 +57,8 @@
     <Button
         android:id="@+id/btnLogin"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="184dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="28dp"
         android:onClick="OnClickLogin"
@@ -76,23 +70,22 @@
     <Button
         android:id="@+id/btnFeito"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="167dp"
-        android:layout_height="44dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="29dp"
         android:layout_marginTop="65dp"
-        android:layout_marginEnd="16dp"
         android:background="#8BC34A"
         android:onClick="OnClickEntrar"
         android:text="Pronto"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnLogin"
         app:layout_constraintTop_toBottomOf="@+id/editConfirmarSenha" />
 
     <EditText
         android:id="@+id/editSenha"
-        android:layout_width="379dp"
+        android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="45dp"
-        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPassword"
@@ -102,11 +95,9 @@
 
     <EditText
         android:id="@+id/editConfirmarSenha"
-        android:layout_width="379dp"
+        android:layout_width="0dp"
         android:layout_height="46dp"
-        android:layout_marginStart="14dp"
         android:layout_marginTop="45dp"
-        android:layout_marginEnd="18dp"
         android:cursorVisible="false"
         android:ems="10"
         android:hint="Confirmar senha"
@@ -118,10 +109,8 @@
 
     <TextView
         android:id="@+id/textNomeInvalido"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="396dp"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,10 +119,8 @@
 
     <TextView
         android:id="@+id/txtEmailInvalido"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="396dp"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,10 +129,8 @@
 
     <TextView
         android:id="@+id/textSenhaInvalido"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="396dp"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -154,10 +139,8 @@
 
     <TextView
         android:id="@+id/textConfirmacaoInvalido"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="396dp"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

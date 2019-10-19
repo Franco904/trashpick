@@ -8,75 +8,32 @@
     android:paddingRight="0dp"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btnSobre"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginEnd="162dp"
-        android:text="Sobre"
+    <FrameLayout
+
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="1.0"
         map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/btnAjuda" />
+        map:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:paddingLeft="0dp"
-        android:paddingRight="0dp"
-        map:layout_constraintBottom_toBottomOf="parent">
-
-
-        <ImageButton
-            android:id="@+id/imgMaps"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/common_google_signin_btn_text_dark_focused"
-            android:onClick="OnClickMaps"
-            android:src="@android:drawable/ic_dialog_map" />
-
-        <ImageButton
-            android:id="@+id/imgObjetivos"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/common_google_signin_btn_text_dark_focused"
-            android:onClick="OnClickObjetivos"
-            android:src="@android:drawable/ic_dialog_email" />
-
-        <ImageButton
-            android:id="@+id/imgRanking"
-            android:layout_width="34dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/common_google_signin_btn_text_dark_focused"
-            android:onClick="OnClickRanking"
-            android:src="@android:drawable/ic_dialog_dialer" />
-
-        <ImageButton
-            android:id="@+id/imgPerfil"
-            android:layout_width="34dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/common_google_signin_btn_text_dark_focused"
-            android:src="@android:drawable/ic_dialog_info" />
-
-    </LinearLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            map:itemIconTint="@color/colorWhite"
+            map:itemTextColor="@color/colorWhite"
+            map:menu="@menu/bottom_navigation_menu" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/txtNome"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="81dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="84dp"
         android:fontFamily="sans-serif-condensed-light"
         android:text="Nome Sobrenome"
+        android:textAlignment="center"
         android:textColor="#8BC34A"
         android:textSize="30sp"
         android:textStyle="normal"
@@ -88,7 +45,7 @@
     <Button
         android:id="@+id/btnConfiguracoes"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
 
         android:layout_marginTop="44dp"
@@ -98,55 +55,26 @@
         map:layout_constraintTop_toBottomOf="@+id/txtNome" />
 
     <Button
-        android:id="@+id/btnAjuda"
+        android:id="@+id/btnSobre"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-
-        android:layout_marginEnd="162dp"
-        android:text="Ajuda"
+        android:text="Sobre"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.0"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/btnConvidar" />
-
-    <Button
-        android:id="@+id/btnNotificacoes"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-        android:text="Notificações"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.501"
+        map:layout_constraintHorizontal_bias="1.0"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toBottomOf="@+id/btnConfiguracoes" />
-
-    <Button
-        android:id="@+id/btnConvidar"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-
-        android:layout_marginEnd="131dp"
-        android:text="Convidar Amigos"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.0"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/btnNotificacoes" />
 
     <ImageView
         android:id="@+id/imgFoto"
         style="f"
-        android:layout_width="105dp"
-        android:layout_height="93dp"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
         android:layout_marginTop="80dp"
         android:scaleType="fitCenter"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toTopOf="parent"
-        map:srcCompat="@drawable/perfillogo" />
+        map:srcCompat="@drawable/ic_account_circle_black_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

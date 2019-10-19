@@ -4,8 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.MenuItem;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -13,6 +17,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,6 +45,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        onCreateView();
+
         dbRef = FirebaseDatabase.getInstance().getReference();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -47,7 +55,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
-    @Override
+    public void onCreateView() {
+
+        BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
+
+        menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                String title = (String) item.getTitle();
+                switch (title) {
+                    case "Jogar":
+//                        Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
+//                        startActivity(iMap);
+                        break;
+                    case "Objetivos":
+                        Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
+                        startActivity(iObjetivos);
+                        break;
+                    case "Ranking":
+                        Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
+                        startActivity(iRanking);
+                        break;
+
+                    case "Perfil":
+                        Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
+                        startActivity(iPerfil);
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+
+        @Override
     public void onStart() {
         super.onStart();
         //basicListen();
