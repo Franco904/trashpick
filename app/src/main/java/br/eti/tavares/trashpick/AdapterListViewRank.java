@@ -59,7 +59,7 @@ public class AdapterListViewRank extends BaseAdapter {
         PessoaRanking item = itens.get(position);
         itemHolder.nome.setText(item.getNome());
         itemHolder.pontos.setText(Integer.toString(item.getPontos()) + " pontos");
-        itemHolder.foto.setImageResource(R.drawable.perfillogo);
+        itemHolder.foto.setImageResource(R.drawable.ic_account_circle_black_24dp);
 
         //retorna a view com as informações
         return view;

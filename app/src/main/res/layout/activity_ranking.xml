@@ -103,9 +103,9 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ListView
-        android:id="@+id/listEmAndamento"
+        android:id="@+id/listranking"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintHorizontal_bias="0.0"
         map:layout_constraintStart_toStartOf="parent"
@@ -127,6 +127,7 @@
             map:itemIconTint="@color/colorWhite"
             map:itemTextColor="@color/colorWhite"
             map:menu="@menu/bottom_navigation_menu" />
+
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,9 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         auth = FirebaseAuth.getInstance();
-
-
 
         FirebaseUser user = auth.getCurrentUser();
     }
@@ -55,8 +54,8 @@ public class LoginActivity extends AppCompatActivity {
         editEmail.setHintTextColor(Color.parseColor("#AAAAAA"));
         editSenha.setHintTextColor(Color.parseColor("#AAAAAA"));
 
-//        String email = editEmail.getText().toString();
-//        String senha = editSenha.getText().toString();
+//       String email = editEmail.getText().toString();
+//       String senha = editSenha.getText().toString();
         String email = "marcelo@tavares.eti.br";
         String senha = "minhasenha";
         boolean erro = false;

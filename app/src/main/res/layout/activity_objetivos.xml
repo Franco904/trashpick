@@ -24,6 +24,7 @@
             map:itemIconTint="@color/colorWhite"
             map:itemTextColor="@color/colorWhite"
             map:menu="@menu/bottom_navigation_menu" />
+
     </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,14 +37,14 @@
 
         <TextView
             android:id="@+id/txtObjetivos"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="256dp"
             android:fontFamily="sans-serif-condensed-light"
             android:text="Objetivos"
-            android:textSize="36sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintStart_toStartOf="parent"
@@ -51,7 +52,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ListView
-        android:id="@+id/listEmAndamento"
+        android:id="@+id/listranking"
         android:layout_width="411dp"
         android:layout_height="182dp"
         map:layout_constraintEnd_toEndOf="parent"
@@ -61,8 +62,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
-        android:layout_width="420dp"
-        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
@@ -91,11 +92,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout6"
-        android:layout_width="420dp"
-        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/listEmAndamento">
+        map:layout_constraintTop_toBottomOf="@+id/listranking">
 
         <Button
             android:id="@+id/btnDisponiveis"

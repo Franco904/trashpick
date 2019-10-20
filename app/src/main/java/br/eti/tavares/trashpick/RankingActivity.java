@@ -53,7 +53,7 @@ public class RankingActivity extends AppCompatActivity {
         final TextView txtNome = findViewById(R.id.txtNome);
         txtNome.setText(user.getDisplayName());
 
-        ListView ranking = (ListView) findViewById(R.id.listEmAndamento);
+        ListView ranking = (ListView) findViewById(R.id.listranking);
         AdapterListViewRank adapter = new AdapterListViewRank(this, jogadores);
         ranking.setAdapter(adapter);
 
@@ -62,6 +62,7 @@ public class RankingActivity extends AppCompatActivity {
     public void onCreateView() {
 
         BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
+        menu.setSelectedItemId(R.id.bottomNavigationRankingMenuId);
 
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

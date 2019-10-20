@@ -1,6 +1,8 @@
 package br.eti.tavares.trashpick;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -17,6 +20,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -58,6 +64,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onCreateView() {
 
         BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
+        menu.setSelectedItemId(R.id.bottomNavigationJogarMenuId);
 
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -148,6 +155,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //zoom da câmera
         mMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
 
+        mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+
+//                Toast.makeText(MapsActivity.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
+//                synchronized (DataStorage.paradas) {
+//                    Parada p = DataStorage.paradas.get(Integer.parseInt(marker.getTitle()));
+//                    DialogFragment f = MostrarInfoParada.newInstance(p.getId());
+//                    f.show(getActivity().getSupportFragmentManager(), "Info");
+//                }
+
+                return true;
+            }
+        });
 
         //Caso tenha permissão para localização via GPS
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
@@ -155,10 +177,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
 
             for (int i = 0; i < lixos.size(); i++) {
-
-                //valor = new Random()
-                //      if(valor > A1) & (valor < A2){
-                mMap.addMarker(new MarkerOptions().position(lixos.get(i).getLatLng()));
+                mMap.addMarker(new MarkerOptions().position(lixos.get(i).getLatLng()).title("Lixo " + Integer.toString(i)));
             }
 
         } else {
@@ -168,19 +187,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void OnClickPerfil(View v) {
-        Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
-        startActivity(iPerfil);
-    }
-
-    public void OnClickObjetivos(View v) {
-        Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
-        startActivity(iObjetivos);
-    }
-
-    public void OnClickRanking(View v) {
-        Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
-        startActivity(iRanking);
-    }
 }
 
+//    findViewById().setOnClickListener(new View.OnClickListener() {
+//@Override
+//public void onClick(View v) {
+//        exibirInformacoes();
+//        }
+//        });
+
+
+//    public void exibirInformacoes(){
+//        AlertDialog.Builder magBox = new AlertDialog.Builder(this);
+//        magBox.setTitle("");
+//        magBox.setIcon(android.R.drawable.ic_dialog_map);
+//        magBox.setMessage("Este é seu lixo coletado!");
+//        magBox.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Toast.makeText(MapsActivity.this, "Lixo coletado!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        magBox.show();
+//    }
