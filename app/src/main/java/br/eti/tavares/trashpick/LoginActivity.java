@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
 
 //       String email = editEmail.getText().toString();
 //       String senha = editSenha.getText().toString();
-        String email = "marcelo@tavares.eti.br";
+        String email = "francostavares2003@gmail.com";
         String senha = "minhasenha";
         boolean erro = false;
 

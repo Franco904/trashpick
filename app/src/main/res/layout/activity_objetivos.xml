@@ -10,6 +10,7 @@
 
     <FrameLayout
 
+        android:id="@+id/frameLayout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         map:layout_constraintEnd_toEndOf="parent"
@@ -26,6 +27,14 @@
             map:menu="@menu/bottom_navigation_menu" />
 
     </FrameLayout>
+
+    <ListView
+        android:id="@+id/listemAndamento"
+        android:layout_width="411dp"
+        android:layout_height="182dp"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
@@ -49,16 +58,8 @@
             map:layout_constraintEnd_toEndOf="parent"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ListView
-        android:id="@+id/listranking"
-        android:layout_width="411dp"
-        android:layout_height="182dp"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="1.0"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
@@ -71,21 +72,12 @@
 
         <Button
             android:id="@+id/btnEmAndamento"
-
-            android:layout_width="427dp"
-            android:layout_height="30dp"
-            android:background="@drawable/buttonshape"
-
-            android:shadowColor="#8BC34A"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorTrashPick"
             android:text="Em andamento"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
+            android:textColor="@color/colorWhite"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.476"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -96,14 +88,14 @@
         android:layout_height="wrap_content"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/listranking">
+        map:layout_constraintTop_toBottomOf="@+id/listemAndamento">
 
         <Button
             android:id="@+id/btnDisponiveis"
 
             android:layout_width="427dp"
             android:layout_height="30dp"
-            android:background="@drawable/buttonshape"
+            android:background="@color/colorTrashPick"
 
             android:shadowColor="#8BC34A"
             android:shadowDx="0"

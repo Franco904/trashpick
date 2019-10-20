@@ -13,7 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -45,6 +48,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DatabaseReference clRef;
     private ValueEventListener clListener;
 
+//    private ConstraintLayout main_constraint;
+//
+//    private MapsActivity mapsFragment;
+//    private ObjetivosActivity objetivosFragment;
+//    private RankingActivity rankingFragment;
+//    private PerfilActivity perfilFragment;
+
     private int debug;
 
     @Override
@@ -53,6 +63,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
         onCreateView();
+
+//        main_constraint = (ConstraintLayout) findViewById(R.id.map);
+//        mapsFragment = new MapsActivity();
+//        objetivosFragment = new ObjetivosActivity();
+//        rankingFragment = new RankingActivity();
+//        perfilFragment = new PerfilActivity();
 
         dbRef = FirebaseDatabase.getInstance().getReference();
 
@@ -65,21 +81,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onCreateView() {
 
         BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
+
         menu.setSelectedItemId(R.id.bottomNavigationJogarMenuId);
 
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 String title = (String) item.getTitle();
                 switch (title) {
                     case "Jogar":
 //                        Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
 //                        startActivity(iMap);
                         break;
+
                     case "Objetivos":
                         Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
                         startActivity(iObjetivos);
+//                        setFragment(objetivosFragment);
                         break;
+
                     case "Ranking":
                         Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
                         startActivity(iRanking);
@@ -89,6 +110,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
                         startActivity(iPerfil);
                         break;
+
                     default:
                         break;
                 }
@@ -97,8 +119,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
     }
 
+//    private void setFragment(Fragment fragment) {
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.replace(R.id.map, fragment);
+//        fragmentTransaction.commit();
+//
+//    }
 
-        @Override
+
+    @Override
     public void onStart() {
         super.onStart();
         //basicListen();

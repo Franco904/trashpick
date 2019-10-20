@@ -34,6 +34,7 @@
             map:itemIconTint="@color/colorWhite"
             map:itemTextColor="@color/colorWhite"
             map:menu="@menu/bottom_navigation_menu" />
+
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
