@@ -8,24 +8,50 @@
 
     <TextView
         android:id="@+id/txtLixo"
-        android:layout_width="251dp"
-        android:layout_height="50dp"
+        android:layout_width="212dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="25dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgLixo"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtDetalhes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="311dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="28dp"
         android:singleLine="false"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.57"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLixo" />
+
+    <ImageView
+        android:id="@+id/imgLixo"
+        android:layout_width="60dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/txtLixo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnColetar"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="97dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorTrashPick"
+        android:onClick="onClickColetar"
+        android:text="Coletar"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.863"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDetalhes" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

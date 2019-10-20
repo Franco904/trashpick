@@ -40,6 +40,12 @@ public class Coordenada_lixo {
     }
 
     /////////////////////////////////////////////////////////////////
+
+    public String getDescricaoLixo(){
+        return lixo.descricao;
+    }
+
+    /////////////////////////////////////////////////////////////////
     // Classe Lixo
     private class Lixo {
         private String descricao;

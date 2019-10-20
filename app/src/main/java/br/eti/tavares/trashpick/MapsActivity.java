@@ -19,6 +19,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
@@ -144,6 +145,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         clRef.removeEventListener(clListener);
     }
 
+    public void onClickColetar(View v){
+        Toast.makeText(this, "Lixo coletado! :)", Toast.LENGTH_SHORT).show();
+
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -159,7 +164,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public boolean onMarkerClick(Marker marker) {
-
+                marker.showInfoWindow();
 //                Toast.makeText(MapsActivity.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
 //                synchronized (DataStorage.paradas) {
 //                    Parada p = DataStorage.paradas.get(Integer.parseInt(marker.getTitle()));
@@ -177,7 +182,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
 
             for (int i = 0; i < lixos.size(); i++) {
-                mMap.addMarker(new MarkerOptions().position(lixos.get(i).getLatLng()).title("Lixo " + Integer.toString(i)));
+
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(lixos.get(i).getLatLng())
+                        .title("Lixo " + Integer.toString(i))
+                        .snippet(lixos.get(i).getDescricaoLixo())
+                        .icon(BitmapDescriptorFactory.defaultMarker( BitmapDescriptorFactory.HUE_GREEN));
+
+                InfoWindowData info = new InfoWindowData();
+                info.setImagem("");
+                info.setNome_lixo("Lixo " + Integer.toString(i));
+                info.setDetalhes_lixo(lixos.get(i).getDescricaoLixo());
+
+                CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
+                mMap.setInfoWindowAdapter(customInfoWindow);
+
+                Marker m = mMap.addMarker(markerOptions);
+                m.setTag(info);
+
             }
 
         } else {
