@@ -6,7 +6,35 @@
     android:layout_height="match_parent"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
-    android:orientation="vertical" >
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="331dp"
+        android:layout_height="64dp"
+        android:background="@color/colorTrashPick"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="@+id/frameLayout">
+
+        <TextView
+            android:id="@+id/txtObjetivos"
+            android:layout_width="149dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="256dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="Objetivos"
+            android:textColor="@color/colorWhite"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.0"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
 
@@ -28,96 +56,5 @@
 
     </FrameLayout>
 
-    <ListView
-        android:id="@+id/listemAndamento"
-        android:layout_width="411dp"
-        android:layout_height="182dp"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
-        android:layout_width="409dp"
-        android:layout_height="83dp"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/txtObjetivos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="256dp"
-            android:fontFamily="sans-serif-condensed-light"
-            android:text="Objetivos"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout5"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
-
-
-        <Button
-            android:id="@+id/btnEmAndamento"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorTrashPick"
-            android:text="Em andamento"
-            android:textColor="@color/colorWhite"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout6"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/listemAndamento">
-
-        <Button
-            android:id="@+id/btnDisponiveis"
-
-            android:layout_width="427dp"
-            android:layout_height="30dp"
-            android:background="@color/colorTrashPick"
-
-            android:shadowColor="#8BC34A"
-            android:shadowDx="0"
-            android:shadowDy="0"
-            android:shadowRadius="5"
-            android:text="Disponíveis"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="14sp"
-            map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.466"
-            map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ListView
-        android:id="@+id/listDisponiveis"
-        android:layout_width="411dp"
-        android:layout_height="182dp"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="1.0"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
