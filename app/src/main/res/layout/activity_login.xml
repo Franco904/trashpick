@@ -7,113 +7,113 @@
     android:background="#FFFFFF"
     tools:context=".LoginActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="415dp"
-        android:layout_height="60dp"
-        android:background="#8BC34A"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textLogin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:text="Fazer login"
-            android:textAlignment="center"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.363"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <EditText
-        android:id="@+id/editEmail"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:hint="Insira seu e-mail"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
-
-    <EditText
-        android:id="@+id/editSenha"
-        android:layout_width="0dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="45dp"
-        android:ems="10"
-        android:hint="Insira sua senha"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
-
-    <Button
-        android:id="@+id/btnEntrar"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:background="#8BC34A"
-        android:onClick="OnClickEntrar"
-        android:text="Entrar"
-        android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCadastro" />
-
-    <Button
-        android:id="@+id/btnCadastro"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:onClick="OnClickCadastro"
-        android:text="Não tem uma conta? Cadastre-se"
-        android:textColor="@android:color/holo_blue_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtErroAutenticar" />
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/constraintLayout3"
+      android:layout_width="415dp"
+      android:layout_height="60dp"
+      android:background="#8BC34A"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
 
     <TextView
-        android:id="@+id/txtEmailInvalido"
+        android:id="@+id/textLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorErro"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
-
-    <TextView
-        android:id="@+id/txtSenhaInvalida"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorErro"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editSenha" />
-
-    <TextView
-        android:id="@+id/txtErroAutenticar"
-        android:layout_width="0dp"
-        android:layout_height="71dp"
-        android:layout_marginTop="44dp"
-        android:background="@color/common_google_signin_btn_text_dark_default"
-        android:padding="10dp"
+        android:layout_marginTop="9dp"
+        android:text="Fazer login"
         android:textAlignment="center"
-        android:textColor="@color/colorErro"
-        android:textSize="18sp"
-        android:visibility="visible"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editSenha"
-        tools:visibility="visible" />
+        app:layout_constraintTop_toTopOf="parent" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <EditText
+      android:id="@+id/editEmail"
+      android:layout_width="0dp"
+      android:layout_height="48dp"
+      android:layout_marginTop="50dp"
+      android:ems="10"
+      android:hint="Insira seu e-mail"
+      android:inputType="textEmailAddress"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
+  <EditText
+      android:id="@+id/editSenha"
+      android:layout_width="0dp"
+      android:layout_height="49dp"
+      android:layout_marginTop="45dp"
+      android:ems="10"
+      android:hint="Insira sua senha"
+      android:inputType="textPassword"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+
+  <Button
+      android:id="@+id/btnEntrar"
+      android:layout_width="0dp"
+      android:layout_height="48dp"
+      android:layout_marginTop="24dp"
+      android:background="#8BC34A"
+      android:onClick="OnClickEntrar"
+      android:text="Entrar"
+      android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnCadastro" />
+
+  <Button
+      android:id="@+id/btnCadastro"
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="15dp"
+      android:onClick="OnClickCadastro"
+      android:text="Não tem uma conta? Cadastre-se"
+      android:textColor="@android:color/holo_blue_light"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/txtErroAutenticar" />
+
+  <TextView
+      android:id="@+id/txtEmailInvalido"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:textColor="@color/colorErro"
+      android:textSize="18sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+
+  <TextView
+      android:id="@+id/txtSenhaInvalida"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:textColor="@color/colorErro"
+      android:textSize="18sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/editSenha" />
+
+  <TextView
+      android:id="@+id/txtErroAutenticar"
+      android:layout_width="0dp"
+      android:layout_height="71dp"
+      android:layout_marginTop="44dp"
+      android:background="@color/common_google_signin_btn_text_dark_default"
+      android:padding="10dp"
+      android:textAlignment="center"
+      android:textColor="@color/colorErro"
+      android:textSize="18sp"
+      android:visibility="visible"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/editSenha"
+      tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

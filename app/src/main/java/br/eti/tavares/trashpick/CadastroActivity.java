@@ -112,7 +112,7 @@ public class CadastroActivity extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                   // Não faz nada
+                                                    // Não faz nada
                                                 }
                                             }
                                         });

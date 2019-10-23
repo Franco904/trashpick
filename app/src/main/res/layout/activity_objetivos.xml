@@ -8,14 +8,37 @@
     android:paddingRight="0dp"
     android:orientation="vertical">
 
+
+    <ListView
+        android:id="@+id/listEmAndamento"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#00FF1414"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="0.0"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+    <ListView
+        android:id="@+id/listDisponiveis"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="0.52"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/listEmAndamento">
+
+    </ListView>
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"
-        android:layout_width="331dp"
+        android:layout_width="0dp"
         android:layout_height="64dp"
         android:background="@color/colorTrashPick"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toTopOf="@+id/frameLayout">
+        map:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/txtObjetivos"
@@ -38,9 +61,8 @@
 
     <FrameLayout
 
-        android:id="@+id/frameLayout"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toTopOf="parent">

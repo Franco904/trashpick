@@ -41,12 +41,12 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-    private static final float ZOOM_CAMERA = 5f;
-    private final List<Coordenada_lixo> lixos = new ArrayList<>();
-    private DatabaseReference dbRef;
-    private DatabaseReference clRef;
-    private ValueEventListener clListener;
+  private GoogleMap mMap;
+  private static final float ZOOM_CAMERA = 5f;
+  private final List<Coordenada_lixo> lixos = new ArrayList<>();
+  private DatabaseReference dbRef;
+  private DatabaseReference clRef;
+  private ValueEventListener clListener;
 
 //    private ConstraintLayout main_constraint;
 //
@@ -55,14 +55,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //    private RankingActivity rankingFragment;
 //    private PerfilActivity perfilFragment;
 
-    private int debug;
+  private int debug;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_maps);
 
-        onCreateView();
+    onCreateView();
 
 //        main_constraint = (ConstraintLayout) findViewById(R.id.map);
 //        mapsFragment = new MapsActivity();
@@ -70,54 +70,54 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        rankingFragment = new RankingActivity();
 //        perfilFragment = new PerfilActivity();
 
-        dbRef = FirebaseDatabase.getInstance().getReference();
+    dbRef = FirebaseDatabase.getInstance().getReference();
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-    }
+    // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+            .findFragmentById(R.id.map);
+    mapFragment.getMapAsync(this);
+  }
 
-    public void onCreateView() {
+  public void onCreateView() {
 
-        BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
+    BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
 
-        menu.setSelectedItemId(R.id.bottomNavigationJogarMenuId);
+    menu.setSelectedItemId(R.id.bottomNavigationJogarMenuId);
 
-        menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+      @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                String title = (String) item.getTitle();
-                switch (title) {
-                    case "Jogar":
+        String title = (String) item.getTitle();
+        switch (title) {
+          case "Jogar":
 //                        Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
 //                        startActivity(iMap);
-                        break;
+            break;
 
-                    case "Objetivos":
-                        Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
-                        startActivity(iObjetivos);
+          case "Objetivos":
+            Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosTabActivity.class);
+            startActivity(iObjetivos);
 //                        setFragment(objetivosFragment);
-                        break;
+            break;
 
-                    case "Ranking":
-                        Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
-                        startActivity(iRanking);
-                        break;
+          case "Ranking":
+            Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
+            startActivity(iRanking);
+            break;
 
-                    case "Perfil":
-                        Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
-                        startActivity(iPerfil);
-                        break;
+          case "Perfil":
+            Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
+            startActivity(iPerfil);
+            break;
 
-                    default:
-                        break;
-                }
-                return false;
-            }
-        });
-    }
+          default:
+            break;
+        }
+        return false;
+      }
+    });
+  }
 
 //    private void setFragment(Fragment fragment) {
 //        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -127,73 +127,73 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //    }
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        //basicListen();
+  @Override
+  public void onStart() {
+    super.onStart();
+    //basicListen();
 //        basicQuery();
 //        basicQueryValueListener();
-    }
+  }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        cleanBasicListener();
+  @Override
+  public void onStop() {
+    super.onStop();
+    cleanBasicListener();
 //        cleanBasicQuery();
-    }
+  }
 
-    public void basicListen(GoogleMap googleMap) {
-        final GoogleMap oMap = googleMap;
-        clRef = dbRef.child("coordenada_lixo");
-        clListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot cl : dataSnapshot.getChildren()) {
-                    Double latitude = (Double)cl.child("coordenada").child("latitude").getValue();
-                    Double longitude = (Double)cl.child("coordenada").child("longitude").getValue();
-                    String descricao = (String)cl.child("lixo").child("descricao").getValue();
-                    String imagem = (String)cl.child("lixo").child("imagem").getValue();
+  public void basicListen(GoogleMap googleMap) {
+    final GoogleMap oMap = googleMap;
+    clRef = dbRef.child("coordenada_lixo");
+    clListener = new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot dataSnapshot) {
+        for (DataSnapshot cl : dataSnapshot.getChildren()) {
+          Double latitude = (Double)cl.child("coordenada").child("latitude").getValue();
+          Double longitude = (Double)cl.child("coordenada").child("longitude").getValue();
+          String descricao = (String)cl.child("lixo").child("descricao").getValue();
+          String imagem = (String)cl.child("lixo").child("imagem").getValue();
 
-                    lixos.add(new Coordenada_lixo(latitude, longitude, descricao, imagem));
-                    debug = 0; // Apenas para colocar um brakepoint aqui;
-                }
-                criaMarcadores(oMap);
-                debug = 0; // Apenas para colocar um brakepoint aqui;
-            }
+          lixos.add(new Coordenada_lixo(latitude, longitude, descricao, imagem));
+          debug = 0; // Apenas para colocar um brakepoint aqui;
+        }
+        criaMarcadores(oMap);
+        debug = 0; // Apenas para colocar um brakepoint aqui;
+      }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Could not successfully listen for data, log the error
-                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
-            }
-        };
-        clRef.addValueEventListener(clListener);
-    }
+      @Override
+      public void onCancelled(DatabaseError error) {
+        // Could not successfully listen for data, log the error
+        // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+      }
+    };
+    clRef.addValueEventListener(clListener);
+  }
 
-    public void cleanBasicListener() {
-        clRef.removeEventListener(clListener);
-    }
+  public void cleanBasicListener() {
+    clRef.removeEventListener(clListener);
+  }
 
-    public void onClickColetar(View v){
-        Toast.makeText(this, "Lixo coletado! :)", Toast.LENGTH_SHORT).show();
+  public void onClickColetar(View v){
+    Toast.makeText(this, "Lixo coletado! :)", Toast.LENGTH_SHORT).show();
 
-    }
+  }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        basicListen(googleMap);
-    }
+  @Override
+  public void onMapReady(GoogleMap googleMap) {
+    basicListen(googleMap);
+  }
 
-    private void criaMarcadores(GoogleMap googleMap) {
-        mMap = googleMap;
-        //zoom da câmera
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
+  private void criaMarcadores(GoogleMap googleMap) {
+    mMap = googleMap;
+    //zoom da câmera
+    mMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
 
-        mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+    mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                marker.showInfoWindow();
+      @Override
+      public boolean onMarkerClick(Marker marker) {
+        marker.showInfoWindow();
 //                Toast.makeText(MapsActivity.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
 //                synchronized (DataStorage.paradas) {
 //                    Parada p = DataStorage.paradas.get(Integer.parseInt(marker.getTitle()));
@@ -201,42 +201,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                    f.show(getActivity().getSupportFragmentManager(), "Info");
 //                }
 
-                return true;
-            }
-        });
+        return true;
+      }
+    });
 
-        //Caso tenha permissão para localização via GPS
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-                checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            mMap.setMyLocationEnabled(true);
+    //Caso tenha permissão para localização via GPS
+    if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+            checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+      mMap.setMyLocationEnabled(true);
 
-            for (int i = 0; i < lixos.size(); i++) {
+      for (int i = 0; i < lixos.size(); i++) {
 
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(lixos.get(i).getLatLng())
-                        .title("Lixo " + Integer.toString(i))
-                        .snippet(lixos.get(i).getDescricaoLixo())
-                        .icon(BitmapDescriptorFactory.defaultMarker( BitmapDescriptorFactory.HUE_GREEN));
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(lixos.get(i).getLatLng())
+                .title("Lixo " + Integer.toString(i))
+                .snippet(lixos.get(i).getDescricaoLixo())
+                .icon(BitmapDescriptorFactory.defaultMarker( BitmapDescriptorFactory.HUE_GREEN));
 
-                InfoWindowData info = new InfoWindowData();
-                info.setImagem("");
-                info.setNome_lixo("Lixo " + Integer.toString(i));
-                info.setDetalhes_lixo(lixos.get(i).getDescricaoLixo());
+        InfoWindowData info = new InfoWindowData();
+        info.setImagem("");
+        info.setNome_lixo("Lixo " + Integer.toString(i));
+        info.setDetalhes_lixo(lixos.get(i).getDescricaoLixo());
 
-                CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
-                mMap.setInfoWindowAdapter(customInfoWindow);
+        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
+        mMap.setInfoWindowAdapter(customInfoWindow);
 
-                Marker m = mMap.addMarker(markerOptions);
-                m.setTag(info);
+        Marker m = mMap.addMarker(markerOptions);
+        m.setTag(info);
 
-            }
+      }
 
-        } else {
-            //Define como padrão a localização do Senai
+    } else {
+      //Define como padrão a localização do Senai
 
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).getLatLng()));
-        }
+      mMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).getLatLng()));
     }
+  }
 
 }
 

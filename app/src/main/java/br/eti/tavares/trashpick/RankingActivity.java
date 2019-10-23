@@ -18,80 +18,80 @@ import java.util.List;
 
 public class RankingActivity extends AppCompatActivity {
 
-    private FirebaseAuth auth;
+  private FirebaseAuth auth;
 
-    private List<PessoaRanking> jogadores = new ArrayList<>();
+  private List<PessoaRanking> jogadores = new ArrayList<>();
 
-    private void GetPessoasRanking(){
+  private void GetPessoasRanking(){
 
-        jogadores.add(0, new PessoaRanking("Paulo Battistella", 77777, 1));
-        jogadores.add(1,new PessoaRanking("Will Jones", 10567, 1));
-        jogadores.add(2,new PessoaRanking("Earl Oliver", 10300, 1));
-        jogadores.add(3,new PessoaRanking("Ruth Shermann", 9978, 1));
-        jogadores.add(4,new PessoaRanking("Dora Morton", 8900, 1));
-        jogadores.add(5,new PessoaRanking("Gary Warren", 8876, 1));
-        jogadores.add(6,new PessoaRanking("Andre Houston", 8769, 1));
-        jogadores.add(7,new PessoaRanking("Taylor Cage", 8704, 1));
-        jogadores.add(8,new PessoaRanking("Augusta Abbott", 8408, 1));
-        jogadores.add(9,new PessoaRanking("Scarlett Wilson", 8405, 1));
-        jogadores.add(10,new PessoaRanking("Tony Neff", 8357, 1));
-    }
+    jogadores.add(0, new PessoaRanking("Paulo Battistella", 77777, 1));
+    jogadores.add(1,new PessoaRanking("Will Jones", 10567, 1));
+    jogadores.add(2,new PessoaRanking("Earl Oliver", 10300, 1));
+    jogadores.add(3,new PessoaRanking("Ruth Shermann", 9978, 1));
+    jogadores.add(4,new PessoaRanking("Dora Morton", 8900, 1));
+    jogadores.add(5,new PessoaRanking("Gary Warren", 8876, 1));
+    jogadores.add(6,new PessoaRanking("Andre Houston", 8769, 1));
+    jogadores.add(7,new PessoaRanking("Taylor Cage", 8704, 1));
+    jogadores.add(8,new PessoaRanking("Augusta Abbott", 8408, 1));
+    jogadores.add(9,new PessoaRanking("Scarlett Wilson", 8405, 1));
+    jogadores.add(10,new PessoaRanking("Tony Neff", 8357, 1));
+  }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ranking);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_ranking);
 
-        this.GetPessoasRanking();
+    this.GetPessoasRanking();
 
-        onCreateView();
+    onCreateView();
 
-        auth = FirebaseAuth.getInstance();
+    auth = FirebaseAuth.getInstance();
 
-        FirebaseUser user = auth.getCurrentUser();
+    FirebaseUser user = auth.getCurrentUser();
 
-        final TextView txtNome = findViewById(R.id.txtNome);
-        txtNome.setText(user.getDisplayName());
+    final TextView txtNome = findViewById(R.id.txtNome);
+    txtNome.setText(user.getDisplayName());
 
-        ListView ranking = (ListView) findViewById(R.id.listranking);
-        AdapterListViewRank adapter = new AdapterListViewRank(this, jogadores);
-        ranking.setAdapter(adapter);
+    ListView ranking = (ListView) findViewById(R.id.listranking);
+    AdapterListViewRank adapter = new AdapterListViewRank(this, jogadores);
+    ranking.setAdapter(adapter);
 
-    }
+  }
 
-    public void onCreateView() {
+  public void onCreateView() {
 
-        BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
-        menu.setSelectedItemId(R.id.bottomNavigationRankingMenuId);
+    BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
+    menu.setSelectedItemId(R.id.bottomNavigationRankingMenuId);
 
-        menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                String title = (String) item.getTitle();
-                switch (title) {
-                    case "Jogar":
-                        Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
-                        startActivity(iMap);
-                        break;
-                    case "Objetivos":
-                        Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
-                        startActivity(iObjetivos);
-                        break;
-                    case "Ranking":
+    menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+      @Override
+      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        String title = (String) item.getTitle();
+        switch (title) {
+          case "Jogar":
+            Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
+            startActivity(iMap);
+            break;
+          case "Objetivos":
+            Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosTabActivity.class);
+            startActivity(iObjetivos);
+            break;
+          case "Ranking":
 //                        Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
 //                        startActivity(iRanking);
-                        break;
+            break;
 
-                    case "Perfil":
-                        Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
-                        startActivity(iPerfil);
-                        break;
-                    default:
-                        break;
-                }
-                return false;
-            }
-        });
-    }
+          case "Perfil":
+            Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
+            startActivity(iPerfil);
+            break;
+          default:
+            break;
+        }
+        return false;
+      }
+    });
+  }
 
 }

@@ -13,41 +13,41 @@ import com.google.android.gms.maps.model.Marker;
 
 public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter {
 
-    private Context context;
+  private Context context;
 
-    public CustomInfoWindowGoogleMap(Context ctx){
-        context = ctx;
-    }
+  public CustomInfoWindowGoogleMap(Context ctx){
+    context = ctx;
+  }
 
-    @Override
-    public View getInfoWindow(Marker marker) {
-        return null;
-    }
+  @Override
+  public View getInfoWindow(Marker marker) {
+    return null;
+  }
 
-    @Override
-    public View getInfoContents(Marker marker) {
-        View view = ((Activity)context).getLayoutInflater()
-                .inflate(R.layout.info_window_maps, null);
+  @Override
+  public View getInfoContents(Marker marker) {
+    View view = ((Activity)context).getLayoutInflater()
+            .inflate(R.layout.info_window_maps, null);
 
-        TextView nome_lixo = view.findViewById(R.id.txtLixo);
-        TextView detalhes_lixo = view.findViewById(R.id.txtDetalhes);
-        ImageView imagem_lixo = view.findViewById(R.id.imgLixo);
-        Button botao_coletar = view.findViewById(R.id.btnColetar);
+    TextView nome_lixo = view.findViewById(R.id.txtLixo);
+    TextView detalhes_lixo = view.findViewById(R.id.txtDetalhes);
+    ImageView imagem_lixo = view.findViewById(R.id.imgLixo);
+    Button botao_coletar = view.findViewById(R.id.btnColetar);
 
-        nome_lixo.setText(marker.getTitle());
-        detalhes_lixo.setText(marker.getSnippet());
+    nome_lixo.setText(marker.getTitle());
+    detalhes_lixo.setText(marker.getSnippet());
 
-        InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
+    InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
 
-        int imageId = context.getResources().getIdentifier(infoWindowData.getImagem().toLowerCase(),
-                "drawable", context.getPackageName());
-        imagem_lixo.setImageResource(imageId);
+    int imageId = context.getResources().getIdentifier(infoWindowData.getImagem().toLowerCase(),
+            "drawable", context.getPackageName());
+    imagem_lixo.setImageResource(imageId);
 
 //        hotel_tv.setText(infoWindowData.getHotel());
 //        food_tv.setText(infoWindowData.getFood());
 //        transport_tv.setText(infoWindowData.getTransport());
 
-        return view;
-    }
+    return view;
+  }
 
 }

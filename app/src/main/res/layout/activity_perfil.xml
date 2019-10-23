@@ -8,73 +8,73 @@
     android:paddingRight="0dp"
     android:orientation="vertical" >
 
-    <FrameLayout
+  <FrameLayout
 
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toTopOf="parent">
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      map:layout_constraintEnd_toEndOf="parent"
+      map:layout_constraintStart_toStartOf="parent"
+      map:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            map:itemIconTint="@color/colorWhite"
-            map:itemTextColor="@color/colorWhite"
-            map:menu="@menu/bottom_navigation_menu" />
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/txtNome"
-        android:layout_width="0dp"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-condensed-light"
-        android:text="Nome Sobrenome"
-        android:textAlignment="center"
-        android:textColor="#8BC34A"
-        android:textSize="30sp"
-        android:textStyle="normal"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.529"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/imgFoto" />
+        android:layout_gravity="bottom"
+        map:itemIconTint="@color/colorWhite"
+        map:itemTextColor="@color/colorWhite"
+        map:menu="@menu/bottom_navigation_menu" />
+  </FrameLayout>
 
-    <Button
-        android:id="@+id/btnConfiguracoes"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+  <TextView
+      android:id="@+id/txtNome"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:fontFamily="sans-serif-condensed-light"
+      android:text="Nome Sobrenome"
+      android:textAlignment="center"
+      android:textColor="#8BC34A"
+      android:textSize="30sp"
+      android:textStyle="normal"
+      map:layout_constraintEnd_toEndOf="parent"
+      map:layout_constraintHorizontal_bias="0.529"
+      map:layout_constraintStart_toStartOf="parent"
+      map:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 
-        android:layout_marginTop="44dp"
-        android:text="Configurações"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/txtNome" />
+  <Button
+      android:id="@+id/btnConfiguracoes"
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
 
-    <Button
-        android:id="@+id/btnSobre"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Sobre"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="1.0"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/btnConfiguracoes" />
+      android:layout_marginTop="44dp"
+      android:text="Configurações"
+      map:layout_constraintEnd_toEndOf="parent"
+      map:layout_constraintStart_toStartOf="parent"
+      map:layout_constraintTop_toBottomOf="@+id/txtNome" />
 
-    <ImageView
-        android:id="@+id/imgFoto"
-        style="f"
-        android:layout_width="0dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="80dp"
-        android:scaleType="fitCenter"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toTopOf="parent"
-        map:srcCompat="@drawable/ic_account_circle_black_24dp" />
+  <Button
+      android:id="@+id/btnSobre"
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:text="Sobre"
+      map:layout_constraintEnd_toEndOf="parent"
+      map:layout_constraintHorizontal_bias="1.0"
+      map:layout_constraintStart_toStartOf="parent"
+      map:layout_constraintTop_toBottomOf="@+id/btnConfiguracoes" />
+
+  <ImageView
+      android:id="@+id/imgFoto"
+      style="f"
+      android:layout_width="0dp"
+      android:layout_height="75dp"
+      android:layout_marginTop="80dp"
+      android:scaleType="fitCenter"
+      map:layout_constraintEnd_toEndOf="parent"
+      map:layout_constraintStart_toStartOf="parent"
+      map:layout_constraintTop_toTopOf="parent"
+      map:srcCompat="@drawable/ic_account_circle_black_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

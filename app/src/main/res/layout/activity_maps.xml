@@ -8,34 +8,33 @@
     android:paddingRight="0dp"
     android:orientation="vertical" >
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
-        android:layout_height="675dp"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toTopOf="parent"
-        tools:context=".MapsActivity" />
+  <fragment
+      android:id="@+id/map"
+      android:name="com.google.android.gms.maps.SupportMapFragment"
+      android:layout_width="0dp"
+      android:layout_height="675dp"
+      map:layout_constraintEnd_toEndOf="parent"
+      map:layout_constraintStart_toStartOf="parent"
+      map:layout_constraintTop_toTopOf="parent"
+      tools:context=".MapsActivity" />
 
-    <FrameLayout
+  <FrameLayout
 
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toTopOf="parent">
+      android:layout_width="0dp"
+      android:layout_height="match_parent"
+      map:layout_constraintEnd_toEndOf="parent"
+      map:layout_constraintStart_toStartOf="parent"
+      map:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            map:itemIconTint="@color/colorWhite"
-            map:itemTextColor="@color/colorWhite"
-            map:menu="@menu/bottom_navigation_menu" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        map:itemIconTint="@color/colorWhite"
+        map:itemTextColor="@color/colorWhite"
+        map:menu="@menu/bottom_navigation_menu" />
 
-    </FrameLayout>
+  </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
