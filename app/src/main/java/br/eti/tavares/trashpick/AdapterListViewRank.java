@@ -38,14 +38,14 @@ public class AdapterListViewRank extends BaseAdapter {
     //se a view estiver nula (nunca criada), inflamos o layout nela.
     if (view == null) {
       //infla o layout para podermos pegar as views
-      view = mInflater.inflate(R.layout.listview_item, null);
+      view = mInflater.inflate(R.layout.listview_item_ranking, null);
 
       //cria um item de suporte para não precisarmos sempre
       //inflar as mesmas informacoes
       itemHolder = new ItemSuporte();
       itemHolder.nome = ((TextView) view.findViewById(R.id.txtNome));
-      itemHolder.pontos = ((TextView) view.findViewById(R.id.textPontos));
-      itemHolder.foto = ((ImageView) view.findViewById(R.id.imgPerfil));
+      itemHolder.pontos = ((TextView) view.findViewById(R.id.textDescricaoPontos));
+      itemHolder.foto = ((ImageView) view.findViewById(R.id.imgLixo));
 
       //define os itens na view;
       view.setTag(itemHolder);

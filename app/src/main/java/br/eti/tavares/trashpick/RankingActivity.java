@@ -24,7 +24,7 @@ public class RankingActivity extends AppCompatActivity {
 
   private void GetPessoasRanking(){
 
-    jogadores.add(0, new PessoaRanking("Paulo Battistella", 77777, 1));
+    jogadores.add(0, new PessoaRanking("Paul Battist", 11569, 1));
     jogadores.add(1,new PessoaRanking("Will Jones", 10567, 1));
     jogadores.add(2,new PessoaRanking("Earl Oliver", 10300, 1));
     jogadores.add(3,new PessoaRanking("Ruth Shermann", 9978, 1));
