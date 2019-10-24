@@ -30,122 +30,134 @@
         app:layout_constraintTop_toTopOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 
-  <EditText
-      android:id="@+id/editNome"
-      android:layout_width="0dp"
-      android:layout_height="49dp"
-      android:layout_marginTop="50dp"
-      android:ems="10"
-      android:hint="Nome de usuário"
-      android:inputType="textPersonName"
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="412dp"
+      android:layout_height="671dp"
+      android:layout_marginEnd="411dp"
+      android:padding="24dp"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+      app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" >
 
-  <EditText
-      android:id="@+id/editEmail"
-      android:layout_width="0dp"
-      android:layout_height="50dp"
-      android:layout_marginTop="45dp"
-      android:ems="10"
-      android:hint="Endereço de e-mail "
-      android:inputType="textPersonName"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editNome" />
+    <EditText
+        android:id="@+id/editNome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="Nome de usuário"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-  <Button
-      android:id="@+id/btnLogin"
-      style="@style/Widget.AppCompat.Button.Borderless"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="64dp"
-      android:layout_marginEnd="28dp"
-      android:onClick="OnClickLogin"
-      android:text="Já tenho conta"
-      app:layout_constraintEnd_toStartOf="@+id/btnFeito"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editConfirmarSenha" />
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Endereço de e-mail "
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNomeInvalido" />
 
-  <Button
-      android:id="@+id/btnFeito"
-      style="@style/Widget.AppCompat.Button.Colored"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="29dp"
-      android:layout_marginTop="65dp"
-      android:background="#8BC34A"
-      android:onClick="OnClickEntrar"
-      android:text="Pronto"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@+id/btnLogin"
-      app:layout_constraintTop_toBottomOf="@+id/editConfirmarSenha" />
+    <TextView
+        android:id="@+id/textConfirmacaoInvalido"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editConfirmarSenha" />
 
-  <EditText
-      android:id="@+id/editSenha"
-      android:layout_width="0dp"
-      android:layout_height="46dp"
-      android:layout_marginTop="45dp"
-      android:ems="10"
-      android:hint="Senha"
-      android:inputType="textPassword"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+    <Button
+        android:id="@+id/btnLogin"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="185dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="35dp"
+        android:onClick="OnClickLogin"
+        android:text="Já tenho conta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textConfirmacaoInvalido" />
 
-  <EditText
-      android:id="@+id/editConfirmarSenha"
-      android:layout_width="0dp"
-      android:layout_height="46dp"
-      android:layout_marginTop="45dp"
-      android:cursorVisible="false"
-      android:ems="10"
-      android:hint="Confirmar senha"
-      android:inputType="textPassword"
-      android:singleLine="false"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editSenha" />
+    <Button
+        android:id="@+id/btnFeito"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="137dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="40dp"
+        android:background="#8BC34A"
+        android:onClick="OnClickEntrar"
+        android:text="Pronto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnLogin"
+        app:layout_constraintTop_toBottomOf="@+id/textConfirmacaoInvalido" />
 
-  <TextView
-      android:id="@+id/textNomeInvalido"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:textColor="@android:color/holo_red_dark"
-      android:textSize="18sp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editNome" />
+    <EditText
+        android:id="@+id/editSenha"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmailInvalido" />
 
-  <TextView
-      android:id="@+id/txtEmailInvalido"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:textColor="@android:color/holo_red_dark"
-      android:textSize="18sp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+    <EditText
+        android:id="@+id/editConfirmarSenha"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:cursorVisible="false"
+        android:ems="10"
+        android:hint="Confirmar senha"
+        android:inputType="textPassword"
+        android:singleLine="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSenhaInvalido" />
 
-  <TextView
-      android:id="@+id/textSenhaInvalido"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:textColor="@android:color/holo_red_dark"
-      android:textSize="18sp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editSenha" />
+    <TextView
+        android:id="@+id/textNomeInvalido"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editNome" />
 
-  <TextView
-      android:id="@+id/textConfirmacaoInvalido"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:textColor="@android:color/holo_red_dark"
-      android:textSize="18sp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/editConfirmarSenha" />
+    <TextView
+        android:id="@+id/textSenhaInvalido"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editSenha" />
 
+    <TextView
+        android:id="@+id/txtEmailInvalido"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

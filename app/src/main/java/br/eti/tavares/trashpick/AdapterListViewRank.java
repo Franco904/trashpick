@@ -44,7 +44,7 @@ public class AdapterListViewRank extends BaseAdapter {
       //inflar as mesmas informacoes
       itemHolder = new ItemSuporte();
       itemHolder.nome = ((TextView) view.findViewById(R.id.txtNome));
-      itemHolder.pontos = ((TextView) view.findViewById(R.id.textDescricaoPontos));
+      itemHolder.pontos = ((TextView) view.findViewById(R.id.txtPontos));
       itemHolder.foto = ((ImageView) view.findViewById(R.id.imgLixo));
 
       //define os itens na view;

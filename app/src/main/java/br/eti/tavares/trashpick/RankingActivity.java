@@ -54,8 +54,8 @@ public class RankingActivity extends AppCompatActivity {
     txtNome.setText(user.getDisplayName());
 
     ListView ranking = (ListView) findViewById(R.id.listranking);
-    AdapterListViewRank adapter = new AdapterListViewRank(this, jogadores);
-    ranking.setAdapter(adapter);
+    AdapterListViewRank adapterrank = new AdapterListViewRank(this, jogadores);
+    ranking.setAdapter(adapterrank);
 
   }
 

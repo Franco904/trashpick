@@ -52,6 +52,7 @@ public class ObjetivosTabActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
 
         ListView objetivosDisponiveis = (ListView) findViewById(R.id.listDisponiveis);
-
+        AdapterListViewObjetivos adapterobjetivos = new AdapterListViewObjetivos(this, objetivos);
+        objetivosDisponiveis.setAdapter(adapterobjetivos);
     }
 }
