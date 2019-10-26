@@ -23,8 +23,8 @@ public class PerfilActivity extends AppCompatActivity {
         onCreateView();
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        final TextView txtNome = findViewById(R.id.txtNome);
-        txtNome.setText(user.getDisplayName());
+        final TextView txtNomeSobrenome = findViewById(R.id.txtNomeSobrenome);
+        txtNomeSobrenome.setText(user.getDisplayName());
     }
 
     public void onCreateView() {

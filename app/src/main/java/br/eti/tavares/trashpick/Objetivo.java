@@ -2,7 +2,7 @@ package br.eti.tavares.trashpick;
 
 public class Objetivo {
 
-    private String titulo, descricao;
+    private String id, titulo, descricao;
     int imagem;
 
 

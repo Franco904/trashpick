@@ -91,14 +91,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String title = (String) item.getTitle();
         switch (title) {
           case "Jogar":
-//                        Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
-//                        startActivity(iMap);
+//           Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
+//           startActivity(iMap);
             break;
 
           case "Objetivos":
             Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosTabActivity.class);
             startActivity(iObjetivos);
-//                        setFragment(objetivosFragment);
             break;
 
           case "Ranking":
