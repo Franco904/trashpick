@@ -44,11 +44,11 @@ public class ObjetivosTabActivity extends AppCompatActivity implements TabLayout
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
                 switch (position) {
-                    case 1:
+                    case 0:
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.containerFragmentos, new DisponivelFragment()).commit();
                         break;
-                    case 0:
+                    case 1:
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.containerFragmentos, new EmAndamentoFragment()).commit();
                         break;

@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Olá, Franco!!!"></TextView>
+        tools:text="Olá, Franco!!!"></TextView>-->
 
     <ListView
         android:id="@+id/listDisponiveis"

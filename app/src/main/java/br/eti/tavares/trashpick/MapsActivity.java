@@ -215,7 +215,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerOptions.position(lixos.get(i).getLatLng())
                 .title("Lixo " + Integer.toString(i))
                 .snippet(lixos.get(i).getDescricaoLixo())
-                .icon(BitmapDescriptorFactory.defaultMarker( BitmapDescriptorFactory.HUE_GREEN));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_jornal_round));
 
         InfoWindowData info = new InfoWindowData();
         info.setImagem("");
