@@ -42,9 +42,10 @@
 
     <EditText
         android:id="@+id/editNome"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Nome de usuário"
         android:inputType="textPersonName"
@@ -54,9 +55,10 @@
 
     <EditText
         android:id="@+id/editEmail"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Endereço de e-mail "
         android:inputType="textPersonName"
@@ -66,8 +68,9 @@
 
     <TextView
         android:id="@+id/textConfirmacaoInvalido"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +81,7 @@
         android:id="@+id/btnLogin"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="185dp"
-        android:layout_height="41dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="35dp"
         android:onClick="OnClickLogin"
         android:text="Já tenho conta"
@@ -88,11 +91,11 @@
     <Button
         android:id="@+id/btnFeito"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="137dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="39dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginEnd="64dp"
         android:background="#8BC34A"
         android:onClick="OnClickEntrar"
         android:text="Pronto"
@@ -102,9 +105,10 @@
 
     <EditText
         android:id="@+id/editSenha"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPassword"
@@ -114,9 +118,10 @@
 
     <EditText
         android:id="@+id/editConfirmarSenha"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
         android:cursorVisible="false"
         android:ems="10"
         android:hint="Confirmar senha"
@@ -128,9 +133,10 @@
 
     <TextView
         android:id="@+id/textNomeInvalido"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -139,9 +145,10 @@
 
     <TextView
         android:id="@+id/textSenhaInvalido"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,9 +157,10 @@
 
     <TextView
         android:id="@+id/txtEmailInvalido"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

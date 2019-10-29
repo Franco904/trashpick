@@ -242,7 +242,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
   }
 
 
-
   private int getLixoImagem(String imagem) {
     Resources resources = this.getResources();
     return resources.getIdentifier(imagem, "drawable", this.getPackageName());
@@ -276,8 +275,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
   }
-
-
 }
 
 //    findViewById().setOnClickListener(new View.OnClickListener() {
