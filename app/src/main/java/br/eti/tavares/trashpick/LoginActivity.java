@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
       //Objeto c1 da classe Carro
       Login l1 = new Login(email, senha);
 
+      //Firebase autentication
       auth.signInWithEmailAndPassword(email, senha)
               .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override

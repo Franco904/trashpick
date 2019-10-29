@@ -29,7 +29,7 @@ public class DisponivelFragment extends Fragment {
         objetivos.add(1,new Objetivo("Notícias do Dia!", "Ache e recolha 1 jornal - 10 pts", R.drawable.ic_folha_papel_round));
         objetivos.add(2,new Objetivo("Algodão Doce", "Ache e recolha 20 algodões - 30 pts", R.drawable.ic_algodao_round));
         objetivos.add(3,new Objetivo("O Salvador Animal", "Ache e recolha 5 embalagens pet - 20 pts", R.drawable.ic_embalagempet_round));
-        objetivos.add(4,new Objetivo("Luvas de Ouro", "Ache e recolha 2 luvas de borracha - 50 pts", R.drawable.ic_luvasborracha_round));
+        objetivos.add(4,new Objetivo("Luvas de Ouro", "Ache e recolha 2 luvas de borracha - 50 pts",  R.drawable.ic_luvasborracha_round));
         objetivos.add(5,new Objetivo("O Robô", "Ache e recolha 5 lixos eletrônicos - 40 pts", R.drawable.ic_lixoeletronico_round));
         objetivos.add(6,new Objetivo("Uma Pausa para o Café", "Ache e recolha 2 copos de isopor - 30 pts", R.drawable.ic_copoisopor_round));
         objetivos.add(7,new Objetivo("Rei Esponja","Ache e recolha 3 esponjas - 40 pts" , R.drawable.ic_esponja_round));

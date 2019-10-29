@@ -96,6 +96,7 @@ public class CadastroActivity extends AppCompatActivity {
             //Objeto c1 da classe Carro
             Cadastro c1 = new Cadastro(nome, email, senha, confirmacaoSenha);
 
+            //Firebase
             auth.createUserWithEmailAndPassword(email, senha)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override

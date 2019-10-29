@@ -45,6 +45,10 @@ public class Coordenada_lixo {
     return lixo.descricao;
   }
 
+  public String getImagemLixo(){
+    return lixo.imagem;
+  }
+
   /////////////////////////////////////////////////////////////////
   // Classe Lixo
   private class Lixo {

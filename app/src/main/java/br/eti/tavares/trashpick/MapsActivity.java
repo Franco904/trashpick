@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -184,6 +186,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
   }
 
   private void criaMarcadores(GoogleMap googleMap) {
+    String nomeDrawable;
+    int idDrawable;
     mMap = googleMap;
     //zoom da câmera
     mMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
@@ -211,11 +215,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
       for (int i = 0; i < lixos.size(); i++) {
 
+        nomeDrawable = lixos.get(i).getImagemLixo();
+
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(lixos.get(i).getLatLng())
                 .title("Lixo " + Integer.toString(i))
                 .snippet(lixos.get(i).getDescricaoLixo())
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_jornal_round));
+                .icon(BitmapDescriptorFactory.fromResource(getDrawable(nomeDrawable)));
 
         InfoWindowData info = new InfoWindowData();
         info.setImagem("");
@@ -227,15 +233,50 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Marker m = mMap.addMarker(markerOptions);
         m.setTag(info);
-
       }
 
     } else {
       //Define como padrão a localização do Senai
-
       mMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).getLatLng()));
     }
   }
+
+
+
+  private int getLixoImagem(String imagem) {
+    Resources resources = this.getResources();
+    return resources.getIdentifier(imagem, "drawable", this.getPackageName());
+  }
+
+
+  private int getDrawable(String nome) {
+    switch (nome) {
+      case "ic_jornal_round":
+        return R.drawable.ic_jornal_round;
+      case "ic_folha_papel_round":
+        return R.drawable.ic_folha_papel_round;
+      case "ic_esponja_round":
+        return R.drawable.ic_esponja_round;
+      case "ic_lataaco_round":
+        return R.drawable.ic_lataaco_round;
+      case "ic_lixoeletronico_round":
+        return R.drawable.ic_lixoeletronico_round;
+      case "ic_algodao_round":
+        return R.drawable.ic_algodao_round;
+      case "ic_copoisopor_round":
+        return R.drawable.ic_copoisopor_round;
+      case "ic_garrafavidro_round":
+        return R.drawable.ic_garrafavidro_round;
+      case "ic_embalagempet_round":
+        return R.drawable.ic_embalagempet_round;
+      case "ic_luvasborracha_round":
+        return R.drawable.ic_luvasborracha_round;
+      default:
+        return R.drawable.logotp;
+    }
+
+  }
+
 
 }
 
