@@ -221,10 +221,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerOptions.position(lixos.get(i).getLatLng())
                 .title("Lixo " + Integer.toString(i))
                 .snippet(lixos.get(i).getDescricaoLixo())
-                .icon(BitmapDescriptorFactory.fromResource(getDrawable(nomeDrawable)));
+                .icon(BitmapDescriptorFactory.fromResource(Imagens.getDrawable(nomeDrawable)));
 
         InfoWindowData info = new InfoWindowData();
-        info.setImagem("");
+        info.setImagem(nomeDrawable);
         info.setNome_lixo("Lixo " + Integer.toString(i));
         info.setDetalhes_lixo(lixos.get(i).getDescricaoLixo());
 
@@ -247,34 +247,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     return resources.getIdentifier(imagem, "drawable", this.getPackageName());
   }
 
-
-  private int getDrawable(String nome) {
-    switch (nome) {
-      case "ic_jornal_round":
-        return R.drawable.ic_jornal_round;
-      case "ic_folha_papel_round":
-        return R.drawable.ic_folha_papel_round;
-      case "ic_esponja_round":
-        return R.drawable.ic_esponja_round;
-      case "ic_lataaco_round":
-        return R.drawable.ic_lataaco_round;
-      case "ic_lixoeletronico_round":
-        return R.drawable.ic_lixoeletronico_round;
-      case "ic_algodao_round":
-        return R.drawable.ic_algodao_round;
-      case "ic_copoisopor_round":
-        return R.drawable.ic_copoisopor_round;
-      case "ic_garrafavidro_round":
-        return R.drawable.ic_garrafavidro_round;
-      case "ic_embalagempet_round":
-        return R.drawable.ic_embalagempet_round;
-      case "ic_luvasborracha_round":
-        return R.drawable.ic_luvasborracha_round;
-      default:
-        return R.drawable.logotp;
-    }
-
-  }
 }
 
 //    findViewById().setOnClickListener(new View.OnClickListener() {

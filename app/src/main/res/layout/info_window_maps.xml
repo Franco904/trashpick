@@ -3,27 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
+    android:layout_height="150dp">
 
   <TextView
       android:id="@+id/txtLixo"
-      android:layout_width="212dp"
-      android:layout_height="35dp"
-      android:layout_marginStart="9dp"
-      android:layout_marginTop="28dp"
+      android:layout_width="158dp"
+      android:layout_height="30dp"
+      android:layout_marginTop="36dp"
+      android:layout_marginEnd="36dp"
       android:textAppearance="@style/TextAppearance.AppCompat.Headline"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintStart_toEndOf="@+id/imgLixo"
       app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
       android:id="@+id/txtDetalhes"
-      android:layout_width="209dp"
-      android:layout_height="47dp"
-      android:layout_marginTop="16dp"
+      android:layout_width="158dp"
+      android:layout_height="38dp"
+      android:layout_marginTop="12dp"
       android:singleLine="false"
-      app:layout_constraintHorizontal_bias="0.787"
+      app:layout_constraintHorizontal_bias="0.857"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintRight_toRightOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/txtLixo" />
@@ -32,8 +31,9 @@
       android:id="@+id/imgLixo"
       android:layout_width="92dp"
       android:layout_height="98dp"
-      android:layout_marginTop="16dp"
+      android:layout_marginTop="24dp"
       app:layout_constraintEnd_toStartOf="@+id/txtLixo"
+      app:layout_constraintHorizontal_bias="0.416"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
