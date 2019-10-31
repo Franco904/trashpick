@@ -1,7 +1,6 @@
 package br.eti.tavares.trashpick;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -36,6 +36,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -175,10 +177,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     clRef.removeEventListener(clListener);
   }
 
-  public void onClickColetar(View v){
-    Toast.makeText(this, "Lixo coletado! :)", Toast.LENGTH_SHORT).show();
-
-  }
 
   @Override
   public void onMapReady(GoogleMap googleMap) {
@@ -231,6 +229,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
         mMap.setInfoWindowAdapter(customInfoWindow);
 
+//         chamar getColetar para aparecer o AlertDialog quando InfoWindow clicada
+//        customInfoWindow(getColetar(View v))
+//
         Marker m = mMap.addMarker(markerOptions);
         m.setTag(info);
       }
@@ -240,6 +241,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
       mMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).getLatLng()));
     }
   }
+
+  public void getColetar(View v){
+
+    androidx.appcompat.app.AlertDialog dialog;
+    androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Informações do lixo");
+    builder.setMessage("Este é seu lixo encontrado!");
+    builder.setPositiveButton("Coletar", new DialogInterface.OnClickListener() {
+      public void onClick(DialogInterface arg0, int arg1) {
+
+        Toast.makeText(getApplicationContext(), "Lixo coletado! :)", Toast.LENGTH_SHORT).show();
+      }
+    });
+
+    //define um botão como negativo.
+    builder.setNegativeButton("Sair", new DialogInterface.OnClickListener() {
+      public void onClick(DialogInterface arg0, int arg1) {
+        //sem ação
+      }
+    });
+    //cria o AlertDialog
+    dialog = builder.create();
+    dialog.show();
+  }
+
+//
 
 
   private int getLixoImagem(String imagem) {
