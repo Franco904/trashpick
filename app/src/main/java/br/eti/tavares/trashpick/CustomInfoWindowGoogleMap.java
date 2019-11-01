@@ -33,8 +33,8 @@ public class CustomInfoWindowGoogleMap implements GoogleMap.InfoWindowAdapter {
         TextView detalhes_lixo = view.findViewById(R.id.txtDetalhes);
         ImageView imagem_lixo = view.findViewById(R.id.imgLixo);
 
-        nome_lixo.setText(marker.getTitle());
-        detalhes_lixo.setText(marker.getSnippet());
+        nome_lixo.setText(marker.getSnippet());
+        detalhes_lixo.setText(marker.getTitle());
 
         InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
 

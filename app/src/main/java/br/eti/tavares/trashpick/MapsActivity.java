@@ -223,8 +223,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         InfoWindowData info = new InfoWindowData();
         info.setImagem(nomeDrawable);
-        info.setNome_lixo("Lixo " + Integer.toString(i));
-        info.setDetalhes_lixo(lixos.get(i).getDescricaoLixo());
+        info.setNome_lixo(lixos.get(i).getDescricaoLixo());
+        info.setDetalhes_lixo("Lixo " + Integer.toString(i));
 
         CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
         mMap.setInfoWindowAdapter(customInfoWindow);

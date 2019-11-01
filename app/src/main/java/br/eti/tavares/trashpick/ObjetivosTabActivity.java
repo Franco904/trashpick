@@ -57,6 +57,7 @@ public class ObjetivosTabActivity extends AppCompatActivity {
         AdapterListViewObjetivos adapterobjetivos = new AdapterListViewObjetivos(this, objetivos);
         objetivosDisponiveis.setAdapter(adapterobjetivos);
 
+
     }
 
     public void onCreateView() {
