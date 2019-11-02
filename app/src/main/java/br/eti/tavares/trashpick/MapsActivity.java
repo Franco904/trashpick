@@ -229,6 +229,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
         mMap.setInfoWindowAdapter(customInfoWindow);
 
+
 //         chamar getColetar para aparecer o AlertDialog quando InfoWindow clicada
 //        customInfoWindow(getColetar(View v))
 //

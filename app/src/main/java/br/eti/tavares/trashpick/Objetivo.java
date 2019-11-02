@@ -5,6 +5,7 @@ public class Objetivo {
     private String id, titulo, descricao;
     int imagem;
 
+    public Objetivo(){}
 
     public Objetivo(String titulo, String descricao, int imagem){
         this.titulo = titulo;

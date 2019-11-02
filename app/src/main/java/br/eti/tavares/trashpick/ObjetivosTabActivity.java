@@ -1,5 +1,6 @@
 package br.eti.tavares.trashpick;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -18,7 +20,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +36,8 @@ public class ObjetivosTabActivity extends AppCompatActivity {
 
     private void GetObjetivosDisponiveis(){
 
-        objetivos.add(0, new Objetivo("A Papelada", "Ache e recolha 10 folhas de papel - 20 pts", R.drawable.ic_jornal_round));
-        objetivos.add(1,new Objetivo("Notícias do Dia!", "Ache e recolha 1 jornal - 10 pts", R.drawable.ic_folha_papel_round));
+        objetivos.add(0, new Objetivo("A Papelada", "Ache e recolha 10 folhas de papel - 20 pts", R.drawable.ic_folha_papel_round));
+        objetivos.add(1,new Objetivo("Notícias do Dia!", "Ache e recolha 1 jornal - 10 pts", R.drawable.ic_jornal_round));
         objetivos.add(2,new Objetivo("Algodão Doce", "Ache e recolha 20 algodões - 30 pts", R.drawable.ic_algodao_round));
         objetivos.add(3,new Objetivo("O Salvador Animal", "Ache e recolha 5 embalagens pet - 20 pts", R.drawable.ic_embalagempet_round));
         objetivos.add(4,new Objetivo("Luvas de Ouro", "Ache e recolha 2 luvas de borracha - 50 pts",  R.drawable.ic_luvasborracha_round));
@@ -53,11 +57,46 @@ public class ObjetivosTabActivity extends AppCompatActivity {
         this.GetObjetivosDisponiveis();
         onCreateView();
 
-        ListView objetivosDisponiveis = (ListView) findViewById(R.id.listDisponiveis);
+        final ListView objetivosDisponiveis = (ListView) findViewById(R.id.listDisponiveis);
         AdapterListViewObjetivos adapterobjetivos = new AdapterListViewObjetivos(this, objetivos);
         objetivosDisponiveis.setAdapter(adapterobjetivos);
 
+            objetivosDisponiveis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> objetivosDisponiveis, View view, int position, long id) {
+//                String itemSelecionado = (String) objetivosDisponiveis.getItemAtPosition(position);
 
+                final androidx.appcompat.app.AlertDialog dialog;
+                androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(ObjetivosTabActivity.this);
+                builder.setTitle(objetivos.get(position).getTitulo());
+                builder.setMessage("Deseja iniciar o objetivo?");
+                builder.setPositiveButton("Iniciar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        Toast.makeText(getApplicationContext(), "Objetivo iniciado!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                //define um botão como negativo.
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        //sem ação
+                    }
+                });
+                //cria o AlertDialog
+                dialog = builder.create();
+
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
+                    }
+                });
+
+                dialog.show();
+            }
+        });
     }
 
     public void onCreateView() {
@@ -78,6 +117,12 @@ public class ObjetivosTabActivity extends AppCompatActivity {
 //                        Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosTabActivity.class);
 //                        startActivity(iObjetivos);
                         break;
+
+//                    case "Biblioteca":
+//                        Intent iBiblioteca = new Intent(getApplicationContext(), BibliotecaActivity.class);
+//                        startActivity(iBiblioteca);
+//                        break;
+
                     case "Ranking":
                         Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
                         startActivity(iRanking);
@@ -95,53 +140,3 @@ public class ObjetivosTabActivity extends AppCompatActivity {
         });
     }
 }
-//        onCreateView();
-
-//        tabLayout = (TabLayout) findViewById(R.id.tabs);
-//        tabLayout.addTab(tabLayout.newTab().setText("Disponíveis"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Em Andamento"));
-//
-//        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-//
-//        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                int position = tab.getPosition();
-//                switch (position) {
-//                    case 0:
-//                        getSupportFragmentManager().beginTransaction()
-//                                .replace(R.id.constraintLayout, new DisponivelFragment()).commit();
-//                        break;
-//                    case 1:
-//                        getSupportFragmentManager().beginTransaction()
-//                                .replace(R.id.containerFragmentos, new EmAndamentoFragment()).commit();
-//                        break;
-//                    default:
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//            }
-//        });
-//
-//    }
-//
-//    @Override
-//    public void onTabSelected(TabLayout.Tab tab) { }
-//
-//    @Override
-//    public void onTabUnselected(TabLayout.Tab tab) { }
-//
-//    @Override
-//    public void onTabReselected(TabLayout.Tab tab) { }
-//
-//    }
-
-
-
