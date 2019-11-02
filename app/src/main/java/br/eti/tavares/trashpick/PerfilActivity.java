@@ -40,9 +40,15 @@ public class PerfilActivity extends AppCompatActivity {
                         startActivity(iMap);
                         break;
                     case "Objetivos":
-                        Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosTabActivity.class);
+                        Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
                         startActivity(iObjetivos);
                         break;
+
+                    case "Biblioteca":
+                        Intent iBiblioteca = new Intent(getApplicationContext(), BibliotecaActivity.class);
+                        startActivity(iBiblioteca);
+                        break;
+
                     case "Ranking":
                         Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
                         startActivity(iRanking);

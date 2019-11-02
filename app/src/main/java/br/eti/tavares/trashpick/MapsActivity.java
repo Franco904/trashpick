@@ -100,8 +100,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             break;
 
           case "Objetivos":
-            Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosTabActivity.class);
+            Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
             startActivity(iObjetivos);
+            break;
+
+          case "Biblioteca":
+            Intent iBiblioteca = new Intent(getApplicationContext(), BibliotecaActivity.class);
+            startActivity(iBiblioteca);
             break;
 
           case "Ranking":
@@ -276,25 +281,3 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
   }
 
 }
-
-//    findViewById().setOnClickListener(new View.OnClickListener() {
-//@Override
-//public void onClick(View v) {
-//        exibirInformacoes();
-//        }
-//        });
-
-
-//    public void exibirInformacoes(){
-//        AlertDialog.Builder magBox = new AlertDialog.Builder(this);
-//        magBox.setTitle("");
-//        magBox.setIcon(android.R.drawable.ic_dialog_map);
-//        magBox.setMessage("Este é seu lixo coletado!");
-//        magBox.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(MapsActivity.this, "Lixo coletado!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        magBox.show();
-//    }

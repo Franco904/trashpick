@@ -6,6 +6,10 @@
     <color name="colorErro">#CC0000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorTrashPick">#8BC34A</color>
+    <color name="colorAzulClaro">#FF52D5CF</color>
+    <color name="colorLaranja">#FFDA7D04</color>
+    <color name="colorVermelho">#CC0000</color>
+    <color name="colorPreto">#FF000000</color>
 
 
     <color name="alert_dialog_button_green1">#8BC34A</color>

@@ -12,6 +12,7 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
     <string name="title_activity_objetivos_tab">Objetivos</string>
+    <string name="title_activity_biblio_tab">Item Biblioteca</string>
     <string name="tab_em_andamento">Em Andamento</string>
     <string name="tab_disponiveis">Disponíveis</string>
 </resources>

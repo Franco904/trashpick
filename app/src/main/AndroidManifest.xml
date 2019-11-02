@@ -14,14 +14,14 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_jornal_round"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity
-            android:name=".ObjetivosTabActivity"
-            android:label="@string/title_activity_objetivos_tab"
-            android:theme="@style/AppTheme" />
+        <activity android:name=".PretoActivity"></activity>
+        <activity android:name=".VermelhoActivity" />
+        <activity android:name=".LaranjaActivity" />
+        <activity android:name=".AzulClaroActivity" />
+        <activity android:name=".ObjetivosActivity" />
+        <activity android:name=".BibliotecaActivity" />
         <activity android:name=".CustomInfoWindowGoogleMap" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".CadastroActivity" />
