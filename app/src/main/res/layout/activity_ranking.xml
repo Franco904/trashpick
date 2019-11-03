@@ -9,125 +9,125 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-      android:id="@+id/constraintLayout"
-      android:layout_width="597dp"
-      android:layout_height="267dp"
-      android:background="#8BC34A"
-      map:layout_constraintEnd_toEndOf="parent"
-      map:layout_constraintStart_toStartOf="parent"
-      map:layout_constraintTop_toTopOf="parent">
-
-    <TextView
-        android:id="@+id/txtNome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="133dp"
-        android:fontFamily="sans-serif-condensed-light"
-        android:text="Nome Sobrenome"
-        android:textAlignment="center"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="24sp"
-        android:textStyle="normal"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="597dp"
+        android:layout_height="267dp"
+        android:background="#8BC34A"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.54"
         map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        map:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textMediaPontos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="56dp"
-        android:fontFamily="sans-serif-condensed-light"
-        android:text="Média de pontos"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="18sp"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/txtNome" />
+        <TextView
+            android:id="@+id/txtNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="118dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="133dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="Nome Sobrenome"
+            android:textAlignment="center"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="24sp"
+            android:textStyle="normal"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintHorizontal_bias="0.54"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
-    <TextView
-        android:id="@+id/textMeusPontos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="160dp"
-        android:fontFamily="sans-serif-light"
-        android:text="Meus pontos"
-        android:textColor="@color/common_google_signin_btn_text_dark_default"
-        android:textSize="18sp"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/txtNome" />
+        <TextView
+            android:id="@+id/textMediaPontos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="152dp"
+            android:layout_marginTop="56dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:text="Média de pontos"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="18sp"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toBottomOf="@+id/txtNome" />
 
-    <TextView
-        android:id="@+id/textMediaAtual"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="192dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="6,5K"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="24sp"
-        android:textStyle="italic"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/txtNome" />
+        <TextView
+            android:id="@+id/textMeusPontos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:layout_marginEnd="160dp"
+            android:fontFamily="sans-serif-light"
+            android:text="Meus pontos"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="18sp"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintTop_toBottomOf="@+id/txtNome" />
 
-    <TextView
-        android:id="@+id/textMediaAtual2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="188dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="298"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:textSize="24sp"
-        android:textStyle="italic"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintTop_toBottomOf="@+id/txtNome" />
+        <TextView
+            android:id="@+id/textMediaAtual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="192dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="6,5K"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toBottomOf="@+id/txtNome" />
 
-    <ImageView
-        android:id="@+id/imageView2"
+        <TextView
+            android:id="@+id/textMediaAtual2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="188dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="298"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintTop_toBottomOf="@+id/txtNome" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="32dp"
+            android:scaleType="fitCenter"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:srcCompat="@drawable/ic_account_circle_black_24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ListView
+        android:id="@+id/listranking"
         android:layout_width="0dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="32dp"
-        android:scaleType="fitCenter"
+        android:layout_height="wrap_content"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="0.0"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <FrameLayout
+
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toTopOf="parent"
-        map:srcCompat="@drawable/ic_account_circle_black_24dp" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
+        map:layout_constraintTop_toTopOf="parent">
 
-  <ListView
-      android:id="@+id/listranking"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      map:layout_constraintEnd_toEndOf="parent"
-      map:layout_constraintHorizontal_bias="0.0"
-      map:layout_constraintStart_toStartOf="parent"
-      map:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            map:itemIconTint="@color/colorWhite"
+            map:itemTextColor="@color/colorWhite"
+            map:menu="@menu/bottom_navigation_menu" />
 
-  <FrameLayout
-
-      android:layout_width="0dp"
-      android:layout_height="match_parent"
-      map:layout_constraintEnd_toEndOf="parent"
-      map:layout_constraintStart_toStartOf="parent"
-      map:layout_constraintTop_toTopOf="parent">
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        map:itemIconTint="@color/colorWhite"
-        map:itemTextColor="@color/colorWhite"
-        map:menu="@menu/bottom_navigation_menu" />
-
-  </FrameLayout>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
