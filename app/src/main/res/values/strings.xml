@@ -15,4 +15,12 @@
     <string name="title_activity_biblio_tab">Item Biblioteca</string>
     <string name="tab_em_andamento">Em Andamento</string>
     <string name="tab_disponiveis">Disponíveis</string>
+    <string name="voltarVermelho">Lixos da categoria vermelho</string>
+    <string name="voltarAzulClaro">Lixos da categoria azul claro</string>
+    <string name="voltarLaranja">Lixos da categoria laranja</string>
+    <string name="voltarPreto">Lixos da categoria preto</string>
+    <string name="vermelho">Vermelho</string>
+    <string name="azulClaro">Azul Claro</string>
+    <string name="laranja">Laranja</string>
+    <string name="preto">Preto</string>
 </resources>

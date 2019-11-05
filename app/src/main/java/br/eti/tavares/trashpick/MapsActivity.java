@@ -46,7 +46,7 @@ import java.util.List;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
   private GoogleMap mMap;
-  private static final float ZOOM_CAMERA = 5f;
+  private static final float ZOOM_CAMERA = 17f;
   private final List<Coordenada_lixo> lixos = new ArrayList<>();
   private DatabaseReference dbRef;
   private DatabaseReference clRef;
@@ -215,37 +215,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
             checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
       mMap.setMyLocationEnabled(true);
+    } else {
+      //Define como padrão a localização do Senai
+      mMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).getLatLng()));
+    }
 
-      for (int i = 0; i < lixos.size(); i++) {
+    for (int i = 0; i < lixos.size(); i++) {
 
-        nomeDrawable = lixos.get(i).getImagemLixo();
+      nomeDrawable = lixos.get(i).getImagemLixo();
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(lixos.get(i).getLatLng())
-                .title("Lixo " + Integer.toString(i))
-                .snippet(lixos.get(i).getDescricaoLixo())
-                .icon(BitmapDescriptorFactory.fromResource(Imagens.getDrawable(nomeDrawable)));
+      MarkerOptions markerOptions = new MarkerOptions();
+      markerOptions.position(lixos.get(i).getLatLng())
+              .title("Lixo " + Integer.toString(i))
+              .snippet(lixos.get(i).getDescricaoLixo())
+              .icon(BitmapDescriptorFactory.fromResource(Imagens.getDrawable(nomeDrawable)));
 
-        InfoWindowData info = new InfoWindowData();
-        info.setImagem(nomeDrawable);
-        info.setNome_lixo(lixos.get(i).getDescricaoLixo());
-        info.setDetalhes_lixo("Lixo " + Integer.toString(i));
+      InfoWindowData info = new InfoWindowData();
+      info.setImagem(nomeDrawable);
+      info.setNome_lixo(lixos.get(i).getDescricaoLixo());
+      info.setDetalhes_lixo("Lixo " + Integer.toString(i));
 
-        CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
-        mMap.setInfoWindowAdapter(customInfoWindow);
+      CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
+      mMap.setInfoWindowAdapter(customInfoWindow);
 
 
 //         chamar getColetar para aparecer o AlertDialog quando InfoWindow clicada
 //        customInfoWindow(getColetar(View v))
 //
-        Marker m = mMap.addMarker(markerOptions);
-        m.setTag(info);
-      }
-
-    } else {
-      //Define como padrão a localização do Senai
-      mMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).getLatLng()));
+      Marker m = mMap.addMarker(markerOptions);
+      m.setTag(info);
     }
+
   }
 
   public void getColetar(View v){
