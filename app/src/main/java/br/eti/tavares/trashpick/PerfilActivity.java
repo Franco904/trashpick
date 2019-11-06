@@ -62,4 +62,9 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void OnClickSobre(View v){
+        Intent iSobre = new Intent(getApplicationContext(), SobreActivity.class);
+        startActivity(iSobre);
+    }
 }

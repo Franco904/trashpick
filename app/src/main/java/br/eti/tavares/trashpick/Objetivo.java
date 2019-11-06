@@ -2,12 +2,11 @@ package br.eti.tavares.trashpick;
 
 public class Objetivo {
 
-    private String id, titulo, descricao;
-    int imagem;
+    private String id, titulo, descricao, imagem;
 
     public Objetivo(){}
 
-    public Objetivo(String titulo, String descricao, int imagem){
+    public Objetivo(String titulo, String descricao, String imagem){
         this.titulo = titulo;
         this.descricao = descricao;
         this.imagem = imagem;
@@ -30,11 +29,11 @@ public class Objetivo {
         this.descricao = descricao;
     }
 
-    public int getImagem() {
+    public String getImagem() {
         return imagem;
     }
 
-    public void setImagem(int imagem) {
+    public void setImagem(String imagem) {
         this.imagem = imagem;
     }
 }

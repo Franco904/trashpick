@@ -106,6 +106,7 @@
         android:id="@+id/listranking"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="?attr/actionBarSize"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintHorizontal_bias="0.0"
         map:layout_constraintStart_toStartOf="parent"
