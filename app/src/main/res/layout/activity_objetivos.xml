@@ -39,14 +39,22 @@
     <ListView
         android:id="@+id/listDisponiveis"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="?attr/actionBarSize"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/textTeste"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
     </ListView>
 
+
+    <TextView
+        android:id="@+id/textTeste"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="540dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <FrameLayout
 

@@ -7,6 +7,58 @@
     android:layout_height="match_parent"
     tools:context=".BibliotecaActivity">
 
+    <ImageButton
+        android:id="@+id/imagePreto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="25dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:onClick="OnClickPreto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageVermelho"
+        app:layout_constraintTop_toBottomOf="@+id/imageLaranja"
+        app:srcCompat="@mipmap/ic_preto_foreground" />
+
+    <ImageButton
+        android:id="@+id/imageVermelho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="70dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:onClick="OnClickVermelho"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageAzulClaro"
+        app:srcCompat="@mipmap/ic_vermelho_foreground" />
+
+    <ImageButton
+        android:id="@+id/imageLaranja"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="25dp"
+        android:onClick="OnClickLaranja"
+        android:background="?selectableItemBackgroundBorderless"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageAzulClaro"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:srcCompat="@mipmap/ic_laranja_foreground" />
+
+    <ImageButton
+        android:id="@+id/imageAzulClaro"
+        style="@android:style/Widget.Material.Light.ImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="80dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:cropToPadding="false"
+        android:onClick="OnClickAzulClaro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:srcCompat="@mipmap/ic_azulclaro_foreground" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="0dp"
@@ -29,69 +81,6 @@
             android:textColor="@color/colorWhite" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
-        android:layout_width="408dp"
-        android:layout_height="602dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
-
-        <Button
-            android:id="@+id/btnAzulClaro"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="64dp"
-            android:onClick="OnClickAzulClaro"
-            android:text="Lixos Azul Claro"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btnLaranja"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="64dp"
-            android:onClick="OnClickLaranja"
-            android:text="Lixos laranjas"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAzulClaro" />
-
-        <Button
-            android:id="@+id/btnVermelho"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="64dp"
-            android:onClick="OnClickVermelho"
-            android:text="Lixos vermelhos"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLaranja" />
-
-        <Button
-            android:id="@+id/btnPreto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="64dp"
-            android:onClick="OnClickPreto"
-            android:text="Lixos pretos"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnVermelho" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
 

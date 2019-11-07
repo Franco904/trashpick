@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -22,18 +23,23 @@ import java.util.List;
 
 public class AzulClaroActivity extends AppCompatActivity {
 
+    private List<ItemBiblioteca> itemAzul = new ArrayList<>();
+
     private DatabaseReference dbLixoAzul;
     private DatabaseReference clRef;
     private ValueEventListener clListener;
-    private List<ItemBiblioteca> itemAzul = new ArrayList<>();
+    private Query queryAzul;
+
 
     private void GetItensBiblioteca(){
 
         dbLixoAzul = FirebaseDatabase.getInstance().getReference();
         clRef = dbLixoAzul.child("lixo");
+        queryAzul = clRef.orderByChild("categoria").equalTo("Azul");
         clListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                itemAzul.clear();
                 for (DataSnapshot cl : dataSnapshot.getChildren()) {
                     String nome = (String) cl.child("nome").getValue();
                     String descricao = (String) cl.child("descricao").getValue();
@@ -50,7 +56,7 @@ public class AzulClaroActivity extends AppCompatActivity {
                 // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
             }
         };
-        clRef.addValueEventListener(clListener);
+        queryAzul.addValueEventListener(clListener);
 
     }
 

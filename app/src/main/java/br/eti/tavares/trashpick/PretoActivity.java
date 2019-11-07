@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -22,18 +23,22 @@ import java.util.List;
 
 public class PretoActivity extends AppCompatActivity {
 
+    private List<ItemBiblioteca> itemPreto = new ArrayList<>();
+
     private DatabaseReference dbLixoPreto;
     private DatabaseReference clRef;
     private ValueEventListener clListener;
-    private List<ItemBiblioteca> itemPreto = new ArrayList<>();
+    private Query queryPreto;
 
     private void GetItensBiblioteca() {
 
         dbLixoPreto = FirebaseDatabase.getInstance().getReference();
         clRef = dbLixoPreto.child("lixo");
+        queryPreto = clRef.orderByChild("categoria").equalTo("Preto");
         clListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                itemPreto.clear();
                 for (DataSnapshot cl : dataSnapshot.getChildren()) {
                     String nome = (String) cl.child("nome").getValue();
                     String descricao = (String) cl.child("descricao").getValue();
@@ -50,7 +55,7 @@ public class PretoActivity extends AppCompatActivity {
                 // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
             }
         };
-        clRef.addValueEventListener(clListener);
+        queryPreto.addValueEventListener(clListener);
 
     }
 
