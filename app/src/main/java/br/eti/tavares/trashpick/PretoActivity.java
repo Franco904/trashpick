@@ -11,28 +11,50 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class PretoActivity extends AppCompatActivity {
 
+    private DatabaseReference dbLixoPreto;
+    private DatabaseReference clRef;
+    private ValueEventListener clListener;
     private List<ItemBiblioteca> itemPreto = new ArrayList<>();
 
-    private void GetItensBiblioteca(){
+    private void GetItensBiblioteca() {
 
-        itemPreto.add(0, new ItemBiblioteca("Pilhas e Baterias", R.drawable.ic_pilhabateria_round));
-        itemPreto.add(1, new ItemBiblioteca("Pneu", R.drawable.ic_pneu_round));
-        itemPreto.add(2, new ItemBiblioteca("Lixo Eletrônico", R.drawable.ic_lixoeletronico_round));
-        itemPreto.add(3, new ItemBiblioteca("Lata de Óleo Contaminada", R.drawable.ic_oleocontaminado_round));
+        dbLixoPreto = FirebaseDatabase.getInstance().getReference();
+        clRef = dbLixoPreto.child("lixo");
+        clListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot cl : dataSnapshot.getChildren()) {
+                    String nome = (String) cl.child("nome").getValue();
+                    String descricao = (String) cl.child("descricao").getValue();
+                    String imagem = (String) cl.child("imagem").getValue();
+
+                    itemPreto.add(new ItemBiblioteca(nome, descricao, imagem));
+                }
+                populateListPreto();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Could not successfully listen for data, log the error
+                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+            }
+        };
+        clRef.addValueEventListener(clListener);
+
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_preto);
-
-        this.GetItensBiblioteca();
-
+    private void populateListPreto() {
         final ListView itensBiblioteca = (ListView) findViewById(R.id.listPreto);
         AdapterListViewPreto adapterPreto = new AdapterListViewPreto(this, itemPreto);
         itensBiblioteca.setAdapter(adapterPreto);
@@ -45,7 +67,7 @@ public class PretoActivity extends AppCompatActivity {
                 final androidx.appcompat.app.AlertDialog dialog;
                 androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(PretoActivity.this);
                 builder.setTitle(itemPreto.get(position).getNome());
-                builder.setMessage("Aqui vão as informações\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                builder.setMessage(itemPreto.get(position).getDescricao());
                 builder.setPositiveButton("Ir ao mapa", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
 
@@ -76,7 +98,15 @@ public class PretoActivity extends AppCompatActivity {
         });
     }
 
-    public void OnClickVoltar(View v){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_preto);
+
+        this.GetItensBiblioteca();
+    }
+
+    public void OnClickVoltar (View v){
         finish();
     }
 }

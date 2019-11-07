@@ -71,7 +71,7 @@ public class AdapterListViewVermelho extends BaseAdapter {
         ItemBiblioteca itemBiblioteca = itemVermelho.get(position);
 
         itemHolder.nome.setText(itemBiblioteca.getNome());
-        itemHolder.imagem.setImageResource(itemBiblioteca.getImagem());
+        itemHolder.imagem.setImageResource(Imagens.getDrawable(itemBiblioteca.getImagem()));
 
         //retorna a view com as informações
         return view;

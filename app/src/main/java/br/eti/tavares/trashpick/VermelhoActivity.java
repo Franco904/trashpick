@@ -11,6 +11,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,23 +25,41 @@ public class VermelhoActivity extends AppCompatActivity {
 
     private List<ItemBiblioteca> itemVermelho = new ArrayList<>();
 
+    private DatabaseReference dbLixoVermelho;
+    private DatabaseReference clRef;
+    private ValueEventListener clListener;
+    private Query queryVermelho;
+
     private void GetItensBiblioteca(){
 
-        itemVermelho.add(0, new ItemBiblioteca("Cigarro", R.drawable.ic_cigarro_round));
-        itemVermelho.add(1, new ItemBiblioteca("Borracha", R.drawable.ic_borracha_round));
-        itemVermelho.add(2, new ItemBiblioteca("Cerâmica", R.drawable.ic_ceramica_round));
-        itemVermelho.add(3, new ItemBiblioteca("Esponjas", R.drawable.ic_esponja_round));
-        itemVermelho.add(4, new ItemBiblioteca("Luvas de Borracha", R.drawable.ic_luvasborracha_round));
-        itemVermelho.add(5, new ItemBiblioteca("Copo de Isopor", R.drawable.ic_copoisopor_round));
+        dbLixoVermelho = FirebaseDatabase.getInstance().getReference();
+        clRef = dbLixoVermelho.child("lixo");
+        queryVermelho = clRef.orderByChild("categoria").equalTo("Vermelho");
+        clListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                itemVermelho.clear();
+                for (DataSnapshot cl : dataSnapshot.getChildren()) {
+                    String nome = (String) cl.child("nome").getValue();
+                    String descricao = (String) cl.child("descricao").getValue();
+                    String imagem = (String) cl.child("imagem").getValue();
+                    String categoria = (String) cl.child("categoria").getValue();
 
+                    itemVermelho.add(new ItemBiblioteca(nome, descricao, imagem));
+                }
+                populateListVermelho();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Could not successfully listen for data, log the error
+                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+            }
+        };
+        queryVermelho.addValueEventListener(clListener);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vermelho);
-
-        this.GetItensBiblioteca();
+    private void populateListVermelho() {
 
         final ListView itensBiblioteca = (ListView) findViewById(R.id.listVermelho);
         AdapterListViewVermelho adapterVermelho = new AdapterListViewVermelho(this, itemVermelho);
@@ -48,7 +73,7 @@ public class VermelhoActivity extends AppCompatActivity {
                 final androidx.appcompat.app.AlertDialog dialog;
                 androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(VermelhoActivity.this);
                 builder.setTitle(itemVermelho.get(position).getNome());
-                builder.setMessage("Aqui vão as informações\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                builder.setMessage(itemVermelho.get(position).getDescricao());
                 builder.setPositiveButton("Ir ao mapa", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
 
@@ -77,6 +102,14 @@ public class VermelhoActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_vermelho);
+
+        this.GetItensBiblioteca();
     }
 
     public void OnClickVoltar(View v){
