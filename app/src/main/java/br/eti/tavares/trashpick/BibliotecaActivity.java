@@ -21,7 +21,7 @@ public class BibliotecaActivity extends AppCompatActivity {
     }
 
     public void onCreateView() {
-        BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
+        final BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
         menu.setSelectedItemId(R.id.bottomNavigationBibliotecaMenuId);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -31,6 +31,7 @@ public class BibliotecaActivity extends AppCompatActivity {
                     case "Jogar":
                         Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
                         startActivity(iMap);
+
                         break;
                     case "Objetivos":
                         Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);

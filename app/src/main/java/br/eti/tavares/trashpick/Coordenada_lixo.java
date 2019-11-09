@@ -4,19 +4,33 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class Coordenada_lixo {
 
+  private String id;
   Lixo lixo;
   Coordinate coordenada;
 
   public Coordenada_lixo(){}
 
-  public Coordenada_lixo(Double latitude, Double longitude, String descricao, String imagem) {
+  public Coordenada_lixo(String key, Double latitude, Double longitude, String nome,String descricao, String imagem) {
+
+    id = key;
+
     lixo = new Lixo();
+    lixo.setNome(nome);
     lixo.setDescricao(descricao);
     lixo.setImagem(imagem);
+
 
     coordenada = new Coordinate();
     coordenada.setLatitude(latitude);
     coordenada.setLongitude(longitude);
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   public Lixo getLixo() {
@@ -41,6 +55,10 @@ public class Coordenada_lixo {
 
   /////////////////////////////////////////////////////////////////
 
+  public String getNomeLixo(){
+    return lixo.nome;
+  }
+
   public String getDescricaoLixo(){
     return lixo.descricao;
   }
@@ -52,10 +70,28 @@ public class Coordenada_lixo {
   /////////////////////////////////////////////////////////////////
   // Classe Lixo
   private class Lixo {
+    private String id;
+    private String nome;
     private String descricao;
     private String imagem;
 
     public Lixo() {
+    }
+
+    public String getId() {
+      return id;
+    }
+
+    public void setId(String id) {
+      this.id = id;
+    }
+
+    public String getNome() {
+      return nome;
+    }
+
+    public void setNome(String nome) {
+      this.nome = nome;
     }
 
     public String getDescricao() {
@@ -77,10 +113,19 @@ public class Coordenada_lixo {
 
   // Classe Coordinate
   private class Coordinate {
+    private String id;
     private double latitude;
     private double longitude;
 
     public Coordinate() {
+    }
+
+    public String getId() {
+      return id;
+    }
+
+    public void setId(String id) {
+      this.id = id;
     }
 
     public double getLatitude() {

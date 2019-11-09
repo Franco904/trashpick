@@ -8,31 +8,25 @@
     android:paddingRight="0dp"
     android:orientation="vertical" >
 
-  <FrameLayout
-
+  <ImageView
+      android:id="@+id/imgFoto"
+      style="f"
       android:layout_width="0dp"
-      android:layout_height="match_parent"
+      android:layout_height="75dp"
+      android:layout_marginTop="80dp"
+      android:scaleType="fitCenter"
       map:layout_constraintEnd_toEndOf="parent"
       map:layout_constraintStart_toStartOf="parent"
-      map:layout_constraintTop_toTopOf="parent">
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        map:itemIconTint="@color/colorWhite"
-        map:itemTextColor="@color/colorWhite"
-        map:menu="@menu/bottom_navigation_menu" />
-  </FrameLayout>
+      map:layout_constraintTop_toTopOf="parent"
+      map:srcCompat="@drawable/ic_account_circle_black_24dp" />
 
   <TextView
-      android:id="@+id/txtNomeSobrenome"
+      android:id="@+id/txtUsuario"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="20dp"
       android:fontFamily="sans-serif-condensed-light"
-      android:text="Nome Sobrenome"
+      android:text="Usuário"
       android:textAlignment="center"
       android:textColor="#8BC34A"
       android:textSize="30sp"
@@ -43,16 +37,26 @@
       map:layout_constraintTop_toBottomOf="@+id/imgFoto" />
 
   <Button
+      android:id="@+id/btnMeusPontos"
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="50dp"
+      android:text="Meus pontos"
+      map:layout_constraintEnd_toEndOf="parent"
+      map:layout_constraintStart_toStartOf="parent"
+      map:layout_constraintTop_toBottomOf="@+id/txtUsuario" />
+
+  <Button
       android:id="@+id/btnConfiguracoes"
       style="@style/Widget.AppCompat.Button.Borderless"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
 
-      android:layout_marginTop="44dp"
       android:text="Configurações"
       map:layout_constraintEnd_toEndOf="parent"
       map:layout_constraintStart_toStartOf="parent"
-      map:layout_constraintTop_toBottomOf="@+id/txtNomeSobrenome" />
+      map:layout_constraintTop_toBottomOf="@+id/btnMeusPontos" />
 
   <Button
       android:id="@+id/btnSobre"
@@ -66,16 +70,24 @@
       map:layout_constraintStart_toStartOf="parent"
       map:layout_constraintTop_toBottomOf="@+id/btnConfiguracoes" />
 
-  <ImageView
-      android:id="@+id/imgFoto"
-      style="f"
+  <FrameLayout
+
+      android:id="@+id/frameLayout2"
       android:layout_width="0dp"
-      android:layout_height="75dp"
-      android:layout_marginTop="80dp"
-      android:scaleType="fitCenter"
+      android:layout_height="match_parent"
       map:layout_constraintEnd_toEndOf="parent"
       map:layout_constraintStart_toStartOf="parent"
-      map:layout_constraintTop_toTopOf="parent"
-      map:srcCompat="@drawable/ic_account_circle_black_24dp" />
+      map:layout_constraintTop_toTopOf="parent">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        map:itemIconTint="@drawable/navigation_item_colors"
+        map:itemTextColor="@drawable/navigation_item_colors"
+        map:menu="@menu/bottom_navigation_menu" />
+
+  </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

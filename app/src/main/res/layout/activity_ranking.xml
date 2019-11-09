@@ -125,8 +125,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            map:itemIconTint="@color/colorWhite"
-            map:itemTextColor="@color/colorWhite"
+            map:itemIconTint="@drawable/navigation_item_colors"
+            map:itemTextColor="@drawable/navigation_item_colors"
             map:menu="@menu/bottom_navigation_menu" />
 
     </FrameLayout>

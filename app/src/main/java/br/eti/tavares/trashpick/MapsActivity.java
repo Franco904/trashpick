@@ -29,6 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DataSnapshot;
@@ -84,20 +85,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
   public void onCreateView() {
 
-    BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
+    final BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
 
     menu.setSelectedItemId(R.id.bottomNavigationJogarMenuId);
+//    BadgeDrawable badgeDrawable = menu.getOrCreateBadge(R.id.bottomNavigationJogarMenuId);
 
     menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
       @Override
       public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
 
         String title = (String) item.getTitle();
         switch (title) {
           case "Jogar":
 //           Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
 //           startActivity(iMap);
-            break;
+          break;
 
           case "Objetivos":
             Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
@@ -157,16 +160,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
         for (DataSnapshot cl : dataSnapshot.getChildren()) {
+          String key = cl.getKey();
           Double latitude = (Double)cl.child("coordenada").child("latitude").getValue();
           Double longitude = (Double)cl.child("coordenada").child("longitude").getValue();
           String descricao = (String)cl.child("lixo").child("descricao").getValue();
+          String nome = (String)cl.child("lixo").child("descricao").getValue();
           String imagem = (String)cl.child("lixo").child("imagem").getValue();
 
-          lixos.add(new Coordenada_lixo(latitude, longitude, descricao, imagem));
-          debug = 0; // Apenas para colocar um brakepoint aqui;
+          lixos.add(new Coordenada_lixo(key, latitude, longitude, nome, descricao, imagem));
         }
         criaMarcadores(oMap);
-        debug = 0; // Apenas para colocar um brakepoint aqui;
       }
 
       @Override
@@ -198,8 +201,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
       @Override
-      public boolean onMarkerClick(Marker marker) {
-        marker.showInfoWindow();
+      public boolean onMarkerClick(final Marker marker) {
+//        marker.showInfoWindow();
+
+        final androidx.appcompat.app.AlertDialog dialog;
+        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+
+        final String[] snippet = marker.getSnippet().split(";");
+
+
+        builder.setIcon(Imagens.getDrawable(snippet[1]));
+        builder.setTitle("Lixo encontrado no chão!");
+        builder.setMessage("Veja! Parece que você encontrou " + snippet[0].toLowerCase() + " enquanto andava!");
+        builder.setPositiveButton("Coletar", new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface arg0, int arg1) {
+
+            coletarLixo(snippet[2]);
+          }
+        });
+
+        //define um botão como negativo.
+//        builder.setNegativeButton("Sair", new DialogInterface.OnClickListener() {
+//          public void onClick(DialogInterface arg0, int arg1) {
+//            //sem ação
+//          }
+//        });
+        //cria o AlertDialog
+        dialog = builder.create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+          @Override
+          public void onShow(DialogInterface arg0) {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
+          }
+        });
+
+        dialog.show();
 //                Toast.makeText(MapsActivity.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
 //                synchronized (DataStorage.paradas) {
 //                    Parada p = DataStorage.paradas.get(Integer.parseInt(marker.getTitle()));
@@ -227,57 +264,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
       MarkerOptions markerOptions = new MarkerOptions();
       markerOptions.position(lixos.get(i).getLatLng())
               .title("Lixo " + Integer.toString(i))
-              .snippet(lixos.get(i).getDescricaoLixo())
+              .snippet(lixos.get(i).getNomeLixo() + ";" + lixos.get(i).getImagemLixo() + ";" + lixos.get(i).getId())
               .icon(BitmapDescriptorFactory.fromResource(Imagens.getDrawable(nomeDrawable)));
 
-      InfoWindowData info = new InfoWindowData();
-      info.setImagem(nomeDrawable);
-      info.setNome_lixo(lixos.get(i).getDescricaoLixo());
-      info.setDetalhes_lixo("Lixo " + Integer.toString(i));
-
-      CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
-      mMap.setInfoWindowAdapter(customInfoWindow);
+//      InfoWindowData info = new InfoWindowData();
+//      info.setImagem(nomeDrawable);
+//      info.setNome_lixo(lixos.get(i).getDescricaoLixo());
+//      info.setDetalhes_lixo("Lixo " + Integer.toString(i));
+//
+//      CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
+//      mMap.setInfoWindowAdapter(customInfoWindow);
 
 
 //         chamar getColetar para aparecer o AlertDialog quando InfoWindow clicada
 //        customInfoWindow(getColetar(View v))
 //
       Marker m = mMap.addMarker(markerOptions);
-      m.setTag(info);
+//      m.setTag(info);
     }
 
   }
 
-  public void getColetar(View v){
+  private void coletarLixo(String id) {
+    String idLixo = "0"; // Alterar isso para o valor que vira na Coordenada Lixo
 
-    androidx.appcompat.app.AlertDialog dialog;
-    androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder.setTitle("Informações do lixo");
-    builder.setMessage("Este é seu lixo encontrado!");
-    builder.setPositiveButton("Coletar", new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface arg0, int arg1) {
+    clRef = dbRef.child("coordenada_lixo/" + id);
 
-        Toast.makeText(getApplicationContext(), "Lixo coletado! :)", Toast.LENGTH_SHORT).show();
-      }
-    });
 
-    //define um botão como negativo.
-    builder.setNegativeButton("Sair", new DialogInterface.OnClickListener() {
-      public void onClick(DialogInterface arg0, int arg1) {
-        //sem ação
-      }
-    });
-    //cria o AlertDialog
-    dialog = builder.create();
-    dialog.show();
+    Toast.makeText(getApplicationContext(), "Vou coletar da Coordenada Lixo: " + id, Toast.LENGTH_LONG).show();
+    //colocarNaSacola(idLixo);
   }
 
-//
-
-
-  private int getLixoImagem(String imagem) {
-    Resources resources = this.getResources();
-    return resources.getIdentifier(imagem, "drawable", this.getPackageName());
+  private void colocarNaSacola(String idLixo) {
+    // TODO
+    Toast.makeText(getApplicationContext(), "Colocando Lixo: " + idLixo + " na sacola do jogador", Toast.LENGTH_LONG).show();
   }
 
 }

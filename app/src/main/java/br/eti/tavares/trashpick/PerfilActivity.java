@@ -23,12 +23,12 @@ public class PerfilActivity extends AppCompatActivity {
         onCreateView();
         auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-        final TextView txtNomeSobrenome = findViewById(R.id.txtNomeSobrenome);
+        final TextView txtNomeSobrenome = findViewById(R.id.txtUsuario);
         txtNomeSobrenome.setText(user.getDisplayName());
     }
 
     public void onCreateView() {
-        BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
+        final BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
         menu.setSelectedItemId(R.id.bottomNavigationPerfilMenuId);
         menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -38,6 +38,7 @@ public class PerfilActivity extends AppCompatActivity {
                     case "Jogar":
                         Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
                         startActivity(iMap);
+
                         break;
                     case "Objetivos":
                         Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
