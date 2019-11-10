@@ -209,7 +209,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         final String[] snippet = marker.getSnippet().split(";");
 
-
         builder.setIcon(Imagens.getDrawable(snippet[1]));
         builder.setTitle("Lixo encontrado no chão!");
         builder.setMessage("Veja! Parece que você encontrou " + snippet[0].toLowerCase() + " enquanto andava!");

@@ -4,30 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fundotrashpick"
     tools:context=".SobreActivity">
 
     <ImageView
         android:id="@+id/imgLogo"
         android:layout_width="144dp"
         android:layout_height="165dp"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="46dp"
-        android:layout_marginEnd="134dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="125dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textSobre2"
         app:srcCompat="@mipmap/ic_trashpickextenso" />
 
     <TextView
         android:id="@+id/txtSobre"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="180dp"
-        android:text="CREDITOS ETC"
+        android:layout_marginTop="110dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="TrashPick"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textSobre2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="Versão 1.0"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSobre" />
+
+    <TextView
+        android:id="@+id/textSobre3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="2019 TrashPick Inc."
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+
+    <TextView
+        android:id="@+id/textSobre4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed-light"
+        android:text="Todos os direitos reservados"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/textSobre3"
+        tools:layout_editor_absoluteX="175dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
