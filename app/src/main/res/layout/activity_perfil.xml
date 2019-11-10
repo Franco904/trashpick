@@ -53,22 +53,33 @@
       android:layout_width="0dp"
       android:layout_height="wrap_content"
 
-      android:text="Configurações"
+      android:onClick="OnClickConfiguracoes"
+      android:text="Configurações de jogo"
       map:layout_constraintEnd_toEndOf="parent"
       map:layout_constraintStart_toStartOf="parent"
       map:layout_constraintTop_toBottomOf="@+id/btnMeusPontos" />
 
   <Button
-      android:id="@+id/btnSobre"
+      android:id="@+id/btnCreditos"
       style="@style/Widget.AppCompat.Button.Borderless"
-      android:layout_width="0dp"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:onClick="OnClickSobre"
-      android:text="Sobre o app"
+      android:onClick="OnClickCreditos"
+      android:text="Créditos"
       map:layout_constraintEnd_toEndOf="parent"
-      map:layout_constraintHorizontal_bias="1.0"
       map:layout_constraintStart_toStartOf="parent"
       map:layout_constraintTop_toBottomOf="@+id/btnConfiguracoes" />
+
+  <Button
+      android:id="@+id/btnSobre"
+      style="@style/Widget.AppCompat.Button.Borderless"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:onClick="OnClickSobre"
+      android:text="Informações do aplicativo"
+      map:layout_constraintEnd_toEndOf="parent"
+      map:layout_constraintStart_toStartOf="parent"
+      map:layout_constraintTop_toBottomOf="@+id/btnCreditos" />
 
   <FrameLayout
 

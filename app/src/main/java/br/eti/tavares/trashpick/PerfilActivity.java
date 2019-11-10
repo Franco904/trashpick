@@ -68,4 +68,12 @@ public class PerfilActivity extends AppCompatActivity {
         Intent iSobre = new Intent(getApplicationContext(), SobreActivity.class);
         startActivity(iSobre);
     }
+    public void OnClickCreditos(View v) {
+        Intent iCreditos = new Intent(getApplicationContext(), CreditosActivity.class);
+        startActivity(iCreditos);
+    }
+    public void OnClickConfiguracoes(View v) {
+        Intent iConfiguracoes = new Intent(getApplicationContext(), ConfiguracoesActivity.class);
+        startActivity(iConfiguracoes);
+    }
 }

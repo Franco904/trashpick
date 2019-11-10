@@ -3,6 +3,7 @@ package br.eti.tavares.trashpick;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,6 +23,8 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,6 +76,8 @@ public class ObjetivosActivity extends AppCompatActivity {
         AdapterListViewObjetivos adapterobjetivos = new AdapterListViewObjetivos(this, objetivos);
         objetivosDisponiveis.setAdapter(adapterobjetivos);
 
+        final Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
         objetivosDisponiveis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> objetivosDisponiveis, View view, int position, long id) {
@@ -85,16 +90,21 @@ public class ObjetivosActivity extends AppCompatActivity {
                 builder.setPositiveButton("Iniciar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
 
+                        if (Build.VERSION.SDK_INT >= 26) {
+                            vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE));
+                        } else {
+                            vibrator.vibrate(200);
+                        }
                         Toast.makeText(getApplicationContext(), "Objetivo iniciado!", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
-                //define um botão como negativo.
-                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    }
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface arg0, int arg1) {
                         //sem ação
                     }
                 });
+
+                //define um botão como negativo.
                 //cria o AlertDialog
                 dialog = builder.create();
 
