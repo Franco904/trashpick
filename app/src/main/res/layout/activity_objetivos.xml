@@ -28,12 +28,6 @@
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
             android:textColor="@color/colorWhite" />
 
-        <!--<com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorTrashPick" />-->
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <ListView

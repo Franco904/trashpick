@@ -12,17 +12,33 @@
       android:id="@+id/map"
       android:name="com.google.android.gms.maps.SupportMapFragment"
       android:layout_width="0dp"
-      android:layout_height="675dp"
+      android:layout_height="fill_parent"
+      android:layout_marginEnd="0dp"
       map:layout_constraintEnd_toEndOf="parent"
       map:layout_constraintStart_toStartOf="parent"
       map:layout_constraintTop_toTopOf="parent"
       tools:context=".MapsActivity" />
+
+  <com.google.android.material.floatingactionbutton.FloatingActionButton
+      android:id="@+id/fab_inventario"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_gravity="bottom|end"
+      android:layout_marginEnd="@dimen/fab_end_margin"
+      android:layout_marginBottom="@dimen/fab_bottom_margin"
+      android:clickable="true"
+      android:onClick="onClickInventario"
+      map:backgroundTint="@color/colorTrashPick"
+      map:layout_constraintBottom_toBottomOf="parent"
+      map:layout_constraintEnd_toEndOf="parent"
+      map:srcCompat="@drawable/ic_card_travel_white_24dp" />
 
   <FrameLayout
 
       android:layout_width="0dp"
       android:layout_height="match_parent"
       map:layout_constraintEnd_toEndOf="parent"
+      map:layout_constraintHorizontal_bias="0.0"
       map:layout_constraintStart_toStartOf="parent"
       map:layout_constraintTop_toTopOf="parent">
 

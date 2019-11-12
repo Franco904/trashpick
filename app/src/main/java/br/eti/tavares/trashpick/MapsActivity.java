@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
@@ -54,13 +56,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
   private DatabaseReference clRef;
   private ValueEventListener clListener;
 
-//    private ConstraintLayout main_constraint;
-//
-//    private MapsActivity mapsFragment;
-//    private ObjetivosActivity objetivosFragment;
-//    private RankingActivity rankingFragment;
-//    private PerfilActivity perfilFragment;
-
   private int debug;
 
   @Override
@@ -69,12 +64,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     setContentView(R.layout.activity_maps);
 
     onCreateView();
-
-//        main_constraint = (ConstraintLayout) findViewById(R.id.map);
-//        mapsFragment = new MapsActivity();
-//        objetivosFragment = new ObjetivosActivity();
-//        rankingFragment = new RankingActivity();
-//        perfilFragment = new PerfilActivity();
 
     dbRef = FirebaseDatabase.getInstance().getReference();
 
@@ -131,13 +120,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     });
   }
 
-//    private void setFragment(Fragment fragment) {
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.map, fragment);
-//        fragmentTransaction.commit();
-//
-//    }
+  public void onClickInventario(View v){
+    Intent iInventario = new Intent(getApplicationContext(), InventarioActivity.class);
+    ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(), R.anim.fade_out, R.anim.mover_esquerda);
+    ActivityCompat.startActivity(MapsActivity.this, iInventario, activityOptionsCompat.toBundle());
 
+  }
 
   @Override
   public void onStart() {
@@ -212,7 +200,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
       @Override
       public boolean onMarkerClick(final Marker marker) {
-//        marker.showInfoWindow();
 
         final androidx.appcompat.app.AlertDialog dialog;
         androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
@@ -229,12 +216,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
           }
         });
 
-        //define um botão como negativo.
-//        builder.setNegativeButton("Sair", new DialogInterface.OnClickListener() {
-//          public void onClick(DialogInterface arg0, int arg1) {
-//            //sem ação
-//          }
-//        });
         //cria o AlertDialog
         dialog = builder.create();
 
@@ -246,12 +227,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         dialog.show();
-//                Toast.makeText(MapsActivity.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
-//                synchronized (DataStorage.paradas) {
-//                    Parada p = DataStorage.paradas.get(Integer.parseInt(marker.getTitle()));
-//                    DialogFragment f = MostrarInfoParada.newInstance(p.getId());
-//                    f.show(getActivity().getSupportFragmentManager(), "Info");
-//                }
 
         return true;
       }
@@ -291,13 +266,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     clRef.removeValue();
 
 
-    Toast.makeText(getApplicationContext(), "Vou coletar da Coordenada Lixo: " + id, Toast.LENGTH_LONG).show();
+    Toast.makeText(getApplicationContext(), "Lixo coletado!", Toast.LENGTH_LONG).show();
     //colocarNaSacola(idLixo);
   }
 
   private void colocarNaSacola(String idLixo) {
     // TODO
-    Toast.makeText(getApplicationContext(), "Colocando Lixo: " + idLixo + " na sacola do jogador", Toast.LENGTH_LONG).show();
+    Toast.makeText(getApplicationContext(), "Colocando lixo " + idLixo + " na sacola do jogador", Toast.LENGTH_LONG).show();
   }
 
 }

@@ -39,16 +39,16 @@ public class ObjetivosActivity extends AppCompatActivity {
 // implements TabLayout.OnTabSelectedListener
 
     private DatabaseReference dbObjetivo;
-    private DatabaseReference clRef;
-    private ValueEventListener clListener;
+    private DatabaseReference obRef;
+    private ValueEventListener obListener;
     private List<Objetivo> objetivos = new ArrayList<>();
 //    TabLayout tabLayout;
 
 
     private void GetObjetivosDisponiveis(){
         dbObjetivo = FirebaseDatabase.getInstance().getReference();
-        clRef = dbObjetivo.child("objetivos");
-        clListener = new ValueEventListener() {
+        obRef = dbObjetivo.child("objetivos");
+        obListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot cl : dataSnapshot.getChildren()) {
@@ -67,7 +67,7 @@ public class ObjetivosActivity extends AppCompatActivity {
                 // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
             }
         };
-        clRef.addValueEventListener(clListener);
+        obRef.addValueEventListener(obListener);
 
     }
 
