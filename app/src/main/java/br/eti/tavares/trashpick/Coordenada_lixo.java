@@ -14,10 +14,14 @@ public class Coordenada_lixo {
 
     id = key;
 
-    lixo = new Lixo();
-    lixo.setNome(nome);
-    lixo.setDescricao(descricao);
-    lixo.setImagem(imagem);
+    if (nome != null) {
+      lixo = new Lixo();
+      lixo.setNome(nome);
+      lixo.setDescricao(descricao);
+      lixo.setImagem(imagem);
+    } else {
+      lixo = null;
+    }
 
 
     coordenada = new Coordinate();

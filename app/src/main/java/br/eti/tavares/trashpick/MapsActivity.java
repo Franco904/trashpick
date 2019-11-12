@@ -49,6 +49,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
   private GoogleMap mMap;
   private static final float ZOOM_CAMERA = 17f;
   private final List<Coordenada_lixo> lixos = new ArrayList<>();
+  private ArrayList<Marker> mMarkerArray = new ArrayList<Marker>();
   private DatabaseReference dbRef;
   private DatabaseReference clRef;
   private ValueEventListener clListener;
@@ -159,16 +160,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     clListener = new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
+        lixos.clear();
         for (DataSnapshot cl : dataSnapshot.getChildren()) {
           String key = cl.getKey();
           Double latitude = (Double)cl.child("coordenada").child("latitude").getValue();
           Double longitude = (Double)cl.child("coordenada").child("longitude").getValue();
           String descricao = (String)cl.child("lixo").child("descricao").getValue();
-          String nome = (String)cl.child("lixo").child("descricao").getValue();
+          String nome = (String)cl.child("lixo").child("nome").getValue();
           String imagem = (String)cl.child("lixo").child("imagem").getValue();
 
           lixos.add(new Coordenada_lixo(key, latitude, longitude, nome, descricao, imagem));
         }
+        eliminaMarcadores();
         criaMarcadores(oMap);
       }
 
@@ -190,6 +193,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
   public void onMapReady(GoogleMap googleMap) {
     basicListen(googleMap);
   }
+
+  private void eliminaMarcadores(){
+    for (Marker marker : mMarkerArray) {
+      marker.remove();
+    }
+  }
+
 
   private void criaMarcadores(GoogleMap googleMap) {
     String nomeDrawable;
@@ -258,28 +268,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     for (int i = 0; i < lixos.size(); i++) {
 
-      nomeDrawable = lixos.get(i).getImagemLixo();
+      if (lixos.get(i).lixo != null) {
+        nomeDrawable = lixos.get(i).getImagemLixo();
 
-      MarkerOptions markerOptions = new MarkerOptions();
-      markerOptions.position(lixos.get(i).getLatLng())
-              .title("Lixo " + Integer.toString(i))
-              .snippet(lixos.get(i).getNomeLixo() + ";" + lixos.get(i).getImagemLixo() + ";" + lixos.get(i).getId())
-              .icon(BitmapDescriptorFactory.fromResource(Imagens.getDrawable(nomeDrawable)));
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(lixos.get(i).getLatLng())
+                .title("Lixo " + Integer.toString(i))
+                .snippet(lixos.get(i).getNomeLixo() + ";" + lixos.get(i).getImagemLixo() + ";" + lixos.get(i).getId())
+                .icon(BitmapDescriptorFactory.fromResource(Imagens.getDrawable(nomeDrawable)));
 
-//      InfoWindowData info = new InfoWindowData();
-//      info.setImagem(nomeDrawable);
-//      info.setNome_lixo(lixos.get(i).getDescricaoLixo());
-//      info.setDetalhes_lixo("Lixo " + Integer.toString(i));
-//
-//      CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(this);
-//      mMap.setInfoWindowAdapter(customInfoWindow);
-
-
-//         chamar getColetar para aparecer o AlertDialog quando InfoWindow clicada
-//        customInfoWindow(getColetar(View v))
-//
-      Marker m = mMap.addMarker(markerOptions);
-//      m.setTag(info);
+        Marker m = mMap.addMarker(markerOptions);
+        mMarkerArray.add(m);
+      }
     }
 
   }
@@ -287,7 +287,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
   private void coletarLixo(String id) {
     String idLixo = "0"; // Alterar isso para o valor que vira na Coordenada Lixo
 
-    clRef = dbRef.child("coordenada_lixo/" + id);
+    clRef = dbRef.child("coordenada_lixo/" + id + "/lixo");
+    clRef.removeValue();
 
 
     Toast.makeText(getApplicationContext(), "Vou coletar da Coordenada Lixo: " + id, Toast.LENGTH_LONG).show();
