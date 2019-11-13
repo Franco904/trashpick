@@ -1,12 +1,15 @@
 package br.eti.tavares.trashpick;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.MenuItem;
@@ -48,6 +51,7 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+  private static final int REQUEST_PERMISSION_LOCALIZATION = 221;
   private GoogleMap mMap;
   private static final float ZOOM_CAMERA = 17f;
   private final List<Coordenada_lixo> lixos = new ArrayList<>();
@@ -122,8 +126,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
   public void onClickInventario(View v){
     Intent iInventario = new Intent(getApplicationContext(), InventarioActivity.class);
-    ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(), R.anim.fade_out, R.anim.mover_esquerda);
-    ActivityCompat.startActivity(MapsActivity.this, iInventario, activityOptionsCompat.toBundle());
+    startActivity(iInventario);
 
   }
 
@@ -142,7 +145,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        cleanBasicQuery();
   }
 
-  public void basicListen(GoogleMap googleMap) {
+  public void basicListen(final GoogleMap googleMap) {
     final GoogleMap oMap = googleMap;
     clRef = dbRef.child("coordenada_lixo");
     clListener = new ValueEventListener() {
@@ -160,7 +163,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
           lixos.add(new Coordenada_lixo(key, latitude, longitude, nome, descricao, imagem));
         }
         eliminaMarcadores();
-        criaMarcadores(oMap);
+        criaMarcadores(googleMap);
       }
 
       @Override
@@ -179,6 +182,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
   @Override
   public void onMapReady(GoogleMap googleMap) {
+    googleMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
     basicListen(googleMap);
   }
 
@@ -188,15 +192,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
   }
 
+  public boolean naoPermitidaLocalizacao(){
+    return (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
+            checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+  }
 
-  private void criaMarcadores(GoogleMap googleMap) {
+  public boolean ativarLocalizacao(){
+    LocationManager localizacao = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+    boolean isOn = localizacao.isProviderEnabled( LocationManager.GPS_PROVIDER);
+
+    return (isOn);
+  }
+
+
+  private void criaMarcadores(final GoogleMap googleMap) {
     String nomeDrawable;
     int idDrawable;
-    mMap = googleMap;
-    //zoom da câmera
-    mMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
 
-    mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+    googleMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
       @Override
       public boolean onMarkerClick(final Marker marker) {
@@ -233,12 +246,62 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     });
 
     //Caso tenha permissão para localização via GPS
-    if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-            checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-      mMap.setMyLocationEnabled(true);
+    if (naoPermitidaLocalizacao()) {
+
+      if (ActivityCompat.shouldShowRequestPermissionRationale(MapsActivity.this,
+              Manifest.permission.ACCESS_FINE_LOCATION)) {
+        // Show an explanation to the user *asynchronously* -- don't block
+        // this thread waiting for the user's response! After the user
+        // sees the explanation, try again to request the permission.
+      } else {
+        // No explanation needed; request the permission
+        ActivityCompat.requestPermissions(MapsActivity.this,
+                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                REQUEST_PERMISSION_LOCALIZATION);
+      }
+    }else if(ativarLocalizacao()){
+        mMap.setMyLocationEnabled(true);
+
     } else {
-      //Define como padrão a localização do Senai
-      mMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).getLatLng()));
+
+      final androidx.appcompat.app.AlertDialog dialog;
+      androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+      builder.setTitle("GPS desabilitado");
+      builder.setMessage("É preciso configurar o GPS para utilizar esta aplicação");
+      builder.setPositiveButton("Ativar", new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface arg0, int arg1) {
+
+          Intent iSettings = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+          startActivity(iSettings);
+
+            if (ativarLocalizacao()) {
+              mMap.setMyLocationEnabled(true);
+
+          }
+        }
+      });
+
+      //define um botão como negativo.
+      builder.setNegativeButton("Fechar", new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface arg0, int arg1) {
+
+          //Define como padrão a localização da coordenada_lixo da posicao[0]
+          googleMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).getLatLng()));
+        }
+      });
+      //cria o AlertDialog
+      dialog = builder.create();
+
+      dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+        @Override
+        public void onShow(DialogInterface arg0) {
+          dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
+          dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
+        }
+      });
+
+      dialog.show();
+
     }
 
     for (int i = 0; i < lixos.size(); i++) {
@@ -252,7 +315,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .snippet(lixos.get(i).getNomeLixo() + ";" + lixos.get(i).getImagemLixo() + ";" + lixos.get(i).getId())
                 .icon(BitmapDescriptorFactory.fromResource(Imagens.getDrawable(nomeDrawable)));
 
-        Marker m = mMap.addMarker(markerOptions);
+        Marker m = googleMap.addMarker(markerOptions);
         mMarkerArray.add(m);
       }
     }

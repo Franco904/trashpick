@@ -86,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     FirebaseUser user = auth.getCurrentUser();
                     Intent iMaps = new Intent(getApplicationContext(), MapsActivity.class);
                     startActivity(iMaps);
+                    finish();
                     Toast.makeText(getApplicationContext(), "Bem-vindo(a) " + (user.getDisplayName()) + "!", Toast.LENGTH_LONG).show();
                   } else {
                     txtErroAutenticar.setText("Não foi possível encontrar este usuário e/ou senha!");

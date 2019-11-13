@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
     }
     private void mostrarLoginActivity() {
         Intent iLogin = new Intent(getApplicationContext(), LoginActivity.class);
-//        Intent iLogin = new Intent(getApplicationContext(), BibliotecaActivity.class);
+//        Intent iLogin = new Intent(getApplicationContext(), MapsActivity.class);
         startActivity(iLogin);
         finish();
     }

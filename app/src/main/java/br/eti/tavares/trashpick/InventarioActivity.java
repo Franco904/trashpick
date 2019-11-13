@@ -103,8 +103,7 @@ public class InventarioActivity extends AppCompatActivity {
         this.GetLixosInventario();
     }
 
-    public void onClickVoltar(View v){
+    public void onClickVoltar(View v) {
         finish();
-        overridePendingTransition(R.anim.mover_direita, R.anim.fade_in);
     }
 }

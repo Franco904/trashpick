@@ -3,42 +3,91 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     tools:context=".InventarioActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintInventario"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:background="@color/colorTrashPick"
-        android:theme="@style/AppTheme.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/titleInventario"
+        <ImageView
+            android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="onClickVoltar"
+            android:src="@drawable/ic_close_white_24dp"
+            app:layout_constraintEnd_toStartOf="@+id/textInventario"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textInventario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="124dp"
             android:gravity="center"
             android:minHeight="?actionBarSize"
             android:padding="@dimen/appbar_padding"
             android:text="Meu inventário de lixos"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-            android:textColor="@color/colorWhite" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <GridView
         android:id="@+id/gridInventario"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="25dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
         android:columnWidth="60dp"
         android:numColumns="4"
+        android:paddingStart="24dp"
+        android:paddingLeft="24dp"
+        android:paddingEnd="24dp"
+        android:paddingRight="24dp"
+        android:paddingBottom="24dp"
         android:verticalSpacing="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPontuacao" />
+
+    <TextView
+        android:id="@+id/txtPontuacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="MINHA PONTUAÇÃO:"
+        android:textColor="@color/colorTrashPick"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintInventario" />
+
+    <TextView
+        android:id="@+id/txtPontosAtual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="88dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="pontos"
+        android:textAlignment="center"
+        android:textColor="@color/colorPreto"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintInventario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
