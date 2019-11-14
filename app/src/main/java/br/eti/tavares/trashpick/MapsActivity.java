@@ -122,9 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
   public void onClickInventario(View v){
     Intent iInventario = new Intent(getApplicationContext(), InventarioActivity.class);
-    ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(), R.anim.fade_out, R.anim.mover_esquerda);
-    ActivityCompat.startActivity(MapsActivity.this, iInventario, activityOptionsCompat.toBundle());
-
+    startActivity(iInventario);
   }
 
   @Override
