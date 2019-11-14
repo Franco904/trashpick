@@ -2,20 +2,19 @@ package br.eti.tavares.trashpick;
 
 public class Inventario {
 
-    private String id, imagem;
+    private String idJogador;
+    private Lixo lixo;
 
     public Inventario(){}
 
-    public Inventario(String imagem){
-        this.imagem = imagem;
-
+    public Inventario(String idJogador, Lixo lixo) {
+        this.idJogador = idJogador;
+        this.lixo = lixo;
     }
 
-    public String getImagem() {
-        return imagem;
-    }
+    public Lixo getLixo() { return lixo; }
+    public void setLixo(Lixo lixo) { this.lixo = lixo; }
 
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
-    }
+    public String getIdJogador() { return idJogador; }
+    public void setIdJogador(String idJogador) { this.idJogador = idJogador; }
 }

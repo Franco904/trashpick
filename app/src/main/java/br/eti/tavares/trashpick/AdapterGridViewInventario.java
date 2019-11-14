@@ -72,7 +72,7 @@ public class AdapterGridViewInventario extends BaseAdapter {
         //e define os valores nos itens.
         Inventario inventario = lixoInventario.get(position);
 
-        itemHolder.imagem.setImageResource(Imagens.getDrawable(inventario.getImagem()));
+        //itemHolder.imagem.setImageResource(Imagens.getDrawable(inventario.getLixo().getImagem()));
 
         //retorna a view com as informações
         return view;

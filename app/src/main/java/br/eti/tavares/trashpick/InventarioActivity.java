@@ -30,16 +30,15 @@ public class InventarioActivity extends AppCompatActivity {
 
     private void GetLixosInventario(){
         dbInventario = FirebaseDatabase.getInstance().getReference();
-        inRef = dbInventario.child("lixo");
+        inRef = dbInventario.child("inventario");
         inListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot cl : dataSnapshot.getChildren()) {
-                    String imagem = (String)cl.child("imagem").getValue();
-
-                    lixoInventario.add(new Inventario(imagem));
+                    int a = 0;
+                    //lixoInventario.add(new Inventario());
                 }
-                populateGridInventario();
+                //populateGridInventario();
             }
 
             @Override

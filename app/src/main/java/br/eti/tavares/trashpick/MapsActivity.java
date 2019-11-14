@@ -1,15 +1,12 @@
 package br.eti.tavares.trashpick;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.location.LocationManager;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.MenuItem;
@@ -51,16 +48,13 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-  private static final int REQUEST_PERMISSION_LOCALIZATION = 221;
   private GoogleMap mMap;
   private static final float ZOOM_CAMERA = 17f;
   private final List<Coordenada_lixo> lixos = new ArrayList<>();
-  private ArrayList<Marker> mMarkerArray = new ArrayList<>();
+  private ArrayList<Marker> mMarkerArray = new ArrayList<Marker>();
   private DatabaseReference dbRef;
   private DatabaseReference clRef;
   private ValueEventListener clListener;
-
-  private ObtainGPS obtainGPS = new ObtainGPS(this);
 
   private int debug;
 
@@ -68,6 +62,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_maps);
+
     onCreateView();
 
     dbRef = FirebaseDatabase.getInstance().getReference();
@@ -76,10 +71,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
             .findFragmentById(R.id.map);
     mapFragment.getMapAsync(this);
-
-    if(!obtainGPS.canGetLocation()) {
-      obtainGPS.showSettingsAlert();
-    }
   }
 
   public void onCreateView() {
@@ -99,7 +90,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
           case "Jogar":
 //           Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
 //           startActivity(iMap);
-          break;
+            break;
 
           case "Objetivos":
             Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
@@ -131,7 +122,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
   public void onClickInventario(View v){
     Intent iInventario = new Intent(getApplicationContext(), InventarioActivity.class);
-    startActivity(iInventario);
+    ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeCustomAnimation(getApplicationContext(), R.anim.fade_out, R.anim.mover_esquerda);
+    ActivityCompat.startActivity(MapsActivity.this, iInventario, activityOptionsCompat.toBundle());
 
   }
 
@@ -150,8 +142,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        cleanBasicQuery();
   }
 
-  public void basicListen(final GoogleMap googleMap) {
+  public void basicListen(GoogleMap googleMap) {
     final GoogleMap oMap = googleMap;
+    //zoom da câmera
+    oMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
     clRef = dbRef.child("coordenada_lixo");
     clListener = new ValueEventListener() {
       @Override
@@ -168,7 +162,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
           lixos.add(new Coordenada_lixo(key, latitude, longitude, nome, descricao, imagem));
         }
         eliminaMarcadores();
-        criaMarcadores(googleMap);
+        criaMarcadores(oMap);
       }
 
       @Override
@@ -187,7 +181,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
   @Override
   public void onMapReady(GoogleMap googleMap) {
-    googleMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
     basicListen(googleMap);
   }
 
@@ -197,23 +190,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
   }
 
-  public boolean naoPermitidaLocalizacao(){
-    return (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ||
-            checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
-  }
 
-  public boolean ativarLocalizacao(){
-    LocationManager localizacao = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    boolean isOn = localizacao.isProviderEnabled( LocationManager.GPS_PROVIDER);
-
-    return (isOn);
-  }
-
-  private void criaMarcadores(final GoogleMap googleMap) {
+  private void criaMarcadores(GoogleMap googleMap) {
     String nomeDrawable;
     int idDrawable;
+    mMap = googleMap;
 
-    googleMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+    mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
       @Override
       public boolean onMarkerClick(final Marker marker) {
@@ -249,28 +232,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
       }
     });
 
-//    //Caso não tenha permissão para localização via GPS
-//    if (naoPermitidaLocalizacao()) {
-//
-//      if (ActivityCompat.shouldShowRequestPermissionRationale(MapsActivity.this,
-//              Manifest.permission.ACCESS_FINE_LOCATION)) {
-//        // Show an explanation to the user *asynchronously* -- don't block
-//        // this thread waiting for the user's response! After the user
-//        // sees the explanation, try again to request the permission.
-//      } else {
-//        // No explanation needed; request the permission
-//        ActivityCompat.requestPermissions(MapsActivity.this,
-//                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-//                REQUEST_PERMISSION_LOCALIZATION);
-//      }
-//    }else if(ativarLocalizacao()){
-//        mMap.setMyLocationEnabled(true);
-//
-//    } else {
-//
-//
-//
-//    }
+    //Caso tenha permissão para localização via GPS
+    if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+            checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+      mMap.setMyLocationEnabled(true);
+    } else {
+      //Define como padrão a localização do Senai
+      mMap.moveCamera(CameraUpdateFactory.newLatLng(lixos.get(0).getLatLng()));
+    }
 
     for (int i = 0; i < lixos.size(); i++) {
 
@@ -283,7 +252,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .snippet(lixos.get(i).getNomeLixo() + ";" + lixos.get(i).getImagemLixo() + ";" + lixos.get(i).getId())
                 .icon(BitmapDescriptorFactory.fromResource(Imagens.getDrawable(nomeDrawable)));
 
-        Marker m = googleMap.addMarker(markerOptions);
+        Marker m = mMap.addMarker(markerOptions);
         mMarkerArray.add(m);
       }
     }
