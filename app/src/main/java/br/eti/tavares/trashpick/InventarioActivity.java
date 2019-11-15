@@ -10,12 +10,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -26,19 +29,31 @@ public class InventarioActivity extends AppCompatActivity {
     private DatabaseReference dbInventario;
     private DatabaseReference inRef;
     private ValueEventListener inListener;
+    private Query queryInventario;
     private List<Inventario> lixoInventario = new ArrayList<>();
+    private long pontos = 0;
+
 
     private void GetLixosInventario(){
         dbInventario = FirebaseDatabase.getInstance().getReference();
         inRef = dbInventario.child("inventario");
+        queryInventario = inRef.orderByChild("idJogador").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
         inListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
-                    int a = 0;
-                    //lixoInventario.add(new Inventario());
+                    String idLixo = item.child("lixo").child("id").getValue().toString();
+                    String nomeLixo = item.child("lixo").child("nome").getValue().toString();
+                    String descricaoLixo = item.child("lixo").child("descricao").getValue().toString();
+                    String imagemLixo = item.child("lixo").child("imagem").getValue().toString();
+                    String categoria = item.child("lixo").child("categoria").getValue().toString();
+                    String idJogador = item.child("idJogador").getValue().toString();
+                    LixoPayload lixo = new LixoPayload(idLixo, nomeLixo, imagemLixo, descricaoLixo, categoria);
+                    lixoInventario.add(new Inventario(idJogador, lixo));
                 }
-                //populateGridInventario();
+                populateGridInventario();
+                contarPontos();
             }
 
             @Override
@@ -47,7 +62,7 @@ public class InventarioActivity extends AppCompatActivity {
                 // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
             }
         };
-        inRef.addValueEventListener(inListener);
+        queryInventario.addValueEventListener(inListener);
 
     }
 
@@ -55,43 +70,34 @@ public class InventarioActivity extends AppCompatActivity {
         final GridView inventarioLixos = (GridView) findViewById(R.id.gridInventario);
         AdapterGridViewInventario adapterGridViewInventario = new AdapterGridViewInventario(this, lixoInventario);
         inventarioLixos.setAdapter(adapterGridViewInventario);
+    }
 
-//        objetivosDisponiveis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> objetivosDisponiveis, View view, int position, long id) {
-//                String itemSelecionado = (String) objetivosDisponiveis.getItemAtPosition(position);
+    private void contarPontos() {
 
-//                final androidx.appcompat.app.AlertDialog dialog;
-//                androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(InventarioActivity.this);
-//                builder.setTitle(lixoInventario.get(position).getTitulo());
-//                builder.setMessage("Deseja iniciar o objetivo?");
-//                builder.setPositiveButton("Iniciar", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//
-//                        Toast.makeText(getApplicationContext(), "Objetivo iniciado!", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        //sem ação
-//                    }
-//                });
-//
-//                //define um botão como negativo.
-//                //cria o AlertDialog
-//                dialog = builder.create();
-//
-//                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-//                    @Override
-//                    public void onShow(DialogInterface arg0) {
-////                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
-//                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
-//                    }
-//                });
-//
-//                dialog.show();
-//            }
-//        });
+        TextView pontosAtual = findViewById(R.id.txtPontosAtual);
+        pontosAtual.setText("");
+
+        for (int i=0; i < lixoInventario.size(); i++){
+
+            switch (lixoInventario.get(i).getLixo().getCategoria()) {
+                case "Azul":
+                    pontos = pontos + 20;
+                    break;
+
+                case "Laranja":
+                    pontos = pontos + 25;
+                    break;
+
+                case "Vermelho":
+                    pontos = pontos + 35;
+                    break;
+
+                case "Preto":
+                    pontos = pontos + 50;
+                    break;
+            }
+            pontosAtual.setText(String.valueOf(pontos));
+        }
     }
 
     @Override
