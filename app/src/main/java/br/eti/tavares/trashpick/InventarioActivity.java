@@ -34,7 +34,7 @@ public class InventarioActivity extends AppCompatActivity {
         inListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot cl : dataSnapshot.getChildren()) {
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
                     int a = 0;
                     //lixoInventario.add(new Inventario());
                 }

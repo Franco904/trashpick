@@ -73,6 +73,7 @@ public class Coordenada_lixo {
 
   /////////////////////////////////////////////////////////////////
   // Classe Lixo
+
   private class Lixo {
     private String id;
     private String nome;

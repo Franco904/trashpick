@@ -35,6 +35,7 @@ public class LaranjaActivity extends AppCompatActivity {
         dbLixoLaranja = FirebaseDatabase.getInstance().getReference();
         clRef = dbLixoLaranja.child("lixo");
         queryLaranja = clRef.orderByChild("categoria").equalTo("Laranja");
+
         clListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

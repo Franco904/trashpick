@@ -36,14 +36,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObjetivosActivity extends AppCompatActivity {
-// implements TabLayout.OnTabSelectedListener
 
     private DatabaseReference dbObjetivo;
     private DatabaseReference obRef;
     private ValueEventListener obListener;
     private List<Objetivo> objetivos = new ArrayList<>();
-//    TabLayout tabLayout;
-
 
     private void GetObjetivosDisponiveis(){
         dbObjetivo = FirebaseDatabase.getInstance().getReference();
@@ -63,8 +60,7 @@ public class ObjetivosActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Could not successfully listen for data, log the error
-                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+
             }
         };
         obRef.addValueEventListener(obListener);
@@ -81,7 +77,6 @@ public class ObjetivosActivity extends AppCompatActivity {
         objetivosDisponiveis.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> objetivosDisponiveis, View view, int position, long id) {
-//                String itemSelecionado = (String) objetivosDisponiveis.getItemAtPosition(position);
 
                 final androidx.appcompat.app.AlertDialog dialog;
                 androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(ObjetivosActivity.this);

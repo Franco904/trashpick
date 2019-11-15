@@ -1,13 +1,13 @@
 package br.eti.tavares.trashpick;
 
-public class Lixo {
+public class LixoPayload {
     private String id;
     private String nome;
     private String imagem;
     private String descricao;
     private String categoria;
 
-    public Lixo(String id, String nome, String imagem, String descricao, String categoria) {
+    public LixoPayload(String id, String nome, String imagem, String descricao, String categoria) {
         this.id = id;
         this.nome = nome;
         this.imagem = imagem;
