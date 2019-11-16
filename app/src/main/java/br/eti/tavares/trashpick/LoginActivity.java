@@ -54,10 +54,10 @@ public class LoginActivity extends AppCompatActivity {
     editEmail.setHintTextColor(Color.parseColor("#AAAAAA"));
     editSenha.setHintTextColor(Color.parseColor("#AAAAAA"));
 
-//       String email = editEmail.getText().toString();
-//       String senha = editSenha.getText().toString();
-    String email = "francostavares2003@gmail.com";
-    String senha = "minhasenha";
+       String email = editEmail.getText().toString();
+       String senha = editSenha.getText().toString();
+//    String email = "francostavares2003@gmail.com";
+//    String senha = "minhasenha";
     boolean erro = false;
 
 
@@ -84,9 +84,11 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                   if (task.isSuccessful()) {
                     FirebaseUser user = auth.getCurrentUser();
+
                     Intent iMaps = new Intent(getApplicationContext(), MapsActivity.class);
                     startActivity(iMaps);
                     finish();
+
                     Toast.makeText(getApplicationContext(), "Bem-vindo(a) " + (user.getDisplayName()) + "!", Toast.LENGTH_LONG).show();
                   } else {
                     txtErroAutenticar.setText("Não foi possível encontrar este usuário e/ou senha!");

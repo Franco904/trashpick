@@ -192,6 +192,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, this.myLocationListener);
 
         } else {
+            //Define como padrão a localização da coordenada_lixo da posição 0
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-27.5481014, -48.4980635)));
         }
 
@@ -401,5 +402,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        ActivityCompat.requestPermissions(thisActivity,
 //                new String[]{Manifest.permission.READ_CONTACTS},
 //                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-    //Define como padrão a localização do Senai
 }

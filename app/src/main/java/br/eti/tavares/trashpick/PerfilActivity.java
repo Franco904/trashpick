@@ -1,13 +1,18 @@
 package br.eti.tavares.trashpick;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,5 +80,39 @@ public class PerfilActivity extends AppCompatActivity {
     public void OnClickConfiguracoes(View v) {
         Intent iConfiguracoes = new Intent(getApplicationContext(), ConfiguracoesActivity.class);
         startActivity(iConfiguracoes);
+    }
+
+    public void onClickLogout(View v){
+        final androidx.appcompat.app.AlertDialog dialog;
+        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(PerfilActivity.this);
+        builder.setTitle("Confirmar Logout");
+        builder.setMessage("Deseja sair da conta?");
+        builder.setPositiveButton("Fazer logout", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+
+                FirebaseAuth.getInstance().signOut();
+                Intent iSplash = new Intent(getApplicationContext(), SplashActivity.class);
+                startActivity(iSplash);
+
+            }
+        }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                //sem ação
+            }
+        });
+        //define um botão como negativo.
+
+        //cria o AlertDialog
+        dialog = builder.create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface arg0) {
+
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
+            }
+        });
+
+        dialog.show();
     }
 }
