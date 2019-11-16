@@ -2,7 +2,7 @@ package br.eti.tavares.trashpick;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public abstract class Coordenada {
+public class Coordenada {
 
     protected double latitude;
     protected double longitude;

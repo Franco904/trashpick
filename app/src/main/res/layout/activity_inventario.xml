@@ -19,11 +19,11 @@
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
             android:onClick="onClickVoltar"
             android:src="@drawable/ic_close_white_24dp"
-            app:layout_constraintEnd_toStartOf="@+id/textInventario"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -38,6 +38,8 @@
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
             android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -86,8 +88,20 @@
         android:textAlignment="center"
         android:textColor="@color/colorPreto"
         android:textSize="18sp"
-        android:textStyle="italic"
+        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtPontuacao"
         app:layout_constraintTop_toBottomOf="@+id/constraintInventario" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="40dp"
+        android:onClick="onClickInformacoes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintInventario"
+        app:srcCompat="@drawable/ic_help_outline_gray_24dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,13 @@
 package br.eti.tavares.trashpick;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.MenuItem;
@@ -18,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -42,269 +47,359 @@ import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-  private GoogleMap mMap;
-  private static final float ZOOM_CAMERA = 17f;
-  private final List<Coordenada_lixo> lixos = new ArrayList<>();
-  private ArrayList<Marker> mMarkerArray = new ArrayList<Marker>();
-  private DatabaseReference dbRef;
-  private DatabaseReference clRef;
-  private ValueEventListener clListener;
+    private GoogleMap mMap;
+    private static final float ZOOM_CAMERA = 18f;
+    private final List<Coordenada_lixo> lixos = new ArrayList<>();
+    private ArrayList<Marker> mMarkerArray = new ArrayList<Marker>();
+    private DatabaseReference dbRef;
+    private DatabaseReference clRef;
+    private ValueEventListener clListener;
 
-  private int debug;
+    private int debug;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_maps);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_maps);
 
-    onCreateView();
+        onCreateView();
 
-    dbRef = FirebaseDatabase.getInstance().getReference();
+        dbRef = FirebaseDatabase.getInstance().getReference();
 
-    // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-    SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-            .findFragmentById(R.id.map);
-    mapFragment.getMapAsync(this);
-  }
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
 
-  public void onCreateView() {
+    public void onCreateView() {
 
-    final BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
+        final BottomNavigationView menu = findViewById(R.id.bottomNavigationView);
 
-    menu.setSelectedItemId(R.id.bottomNavigationJogarMenuId);
+        menu.setSelectedItemId(R.id.bottomNavigationJogarMenuId);
 //    BadgeDrawable badgeDrawable = menu.getOrCreateBadge(R.id.bottomNavigationJogarMenuId);
 
-    menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-      @Override
-      public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        menu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
 
-        String title = (String) item.getTitle();
-        switch (title) {
-          case "Jogar":
+                String title = (String) item.getTitle();
+                switch (title) {
+                    case "Jogar":
 //           Intent iMap = new Intent(getApplicationContext(), MapsActivity.class);
 //           startActivity(iMap);
-            break;
+                        break;
 
-          case "Objetivos":
-            Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
-            startActivity(iObjetivos);
-            break;
+                    case "Objetivos":
+                        Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
+                        startActivity(iObjetivos);
+                        break;
 
-          case "Biblioteca":
-            Intent iBiblioteca = new Intent(getApplicationContext(), BibliotecaActivity.class);
-            startActivity(iBiblioteca);
-            break;
+                    case "Biblioteca":
+                        Intent iBiblioteca = new Intent(getApplicationContext(), BibliotecaActivity.class);
+                        startActivity(iBiblioteca);
+                        break;
 
-          case "Ranking":
-            Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
-            startActivity(iRanking);
-            break;
+                    case "Ranking":
+                        Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
+                        startActivity(iRanking);
+                        break;
 
-          case "Perfil":
-            Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
-            startActivity(iPerfil);
-            break;
+                    case "Perfil":
+                        Intent iPerfil = new Intent(getApplicationContext(), PerfilActivity.class);
+                        startActivity(iPerfil);
+                        break;
 
-          default:
-            break;
-        }
-        return false;
-      }
-    });
-  }
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
+    }
 
-  public void onClickInventario(View v){
-    Intent iInventario = new Intent(getApplicationContext(), InventarioActivity.class);
-    startActivity(iInventario);
-  }
+    public void onClickInventario(View v) {
+        Intent iInventario = new Intent(getApplicationContext(), InventarioActivity.class);
+        startActivity(iInventario);
+    }
 
-  @Override
-  public void onStart() {
-    super.onStart();
-    //basicListen();
+    @Override
+    public void onStart() {
+        super.onStart();
+        //basicListen();
 //        basicQuery();
 //        basicQueryValueListener();
-  }
+    }
 
-  @Override
-  public void onStop() {
-    super.onStop();
-    cleanBasicListener();
-    clRef.removeEventListener(clListener);
+    @Override
+    public void onStop() {
+        super.onStop();
+        cleanBasicListener();
+        clRef.removeEventListener(clListener);
 //        cleanBasicQuery();
-  }
+    }
 
-  public void basicListen(GoogleMap googleMap) {
-    final GoogleMap oMap = googleMap;
-    //zoom da câmera
-    oMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
-    clRef = dbRef.child("coordenada_lixo");
-    clListener = new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        lixos.clear();
-        for (DataSnapshot cl : dataSnapshot.getChildren()) {
-          String key = cl.getKey();
-          Double latitude = (Double)cl.child("coordenada").child("latitude").getValue();
-          Double longitude = (Double)cl.child("coordenada").child("longitude").getValue();
-          String descricao = (String)cl.child("lixo").child("descricao").getValue();
-          String nome = (String)cl.child("lixo").child("nome").getValue();
-          String imagem = (String)cl.child("lixo").child("imagem").getValue();
+    public void basicListen(GoogleMap googleMap) {
+        final GoogleMap oMap = googleMap;
+        //zoom da câmera
+        oMap.moveCamera(CameraUpdateFactory.zoomTo(ZOOM_CAMERA));
+        clRef = dbRef.child("coordenada_lixo");
+        clListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                lixos.clear();
+                for (DataSnapshot cl : dataSnapshot.getChildren()) {
+                    String key = cl.getKey();
+                    Double latitude = (Double) cl.child("coordenada").child("latitude").getValue();
+                    Double longitude = (Double) cl.child("coordenada").child("longitude").getValue();
+                    String descricao = (String) cl.child("lixo").child("descricao").getValue();
+                    String nome = (String) cl.child("lixo").child("nome").getValue();
+                    String imagem = (String) cl.child("lixo").child("imagem").getValue();
 
-          lixos.add(new Coordenada_lixo(key, latitude, longitude, nome, descricao, imagem));
+                    lixos.add(new Coordenada_lixo(key, latitude, longitude, nome, descricao, imagem));
+                }
+                eliminaMarcadores();
+                criaMarcadores(oMap);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Could not successfully listen for data, log the error
+                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+            }
+        };
+        clRef.addValueEventListener(clListener);
+    }
+
+    public void cleanBasicListener() {
+        clRef.removeEventListener(clListener);
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        final GoogleMap myMap = googleMap;
+
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        //Caso tenha permissão para localização via GPS
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+                checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            googleMap.setMyLocationEnabled(true);
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, this.myLocationListener);
+
+        } else {
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-27.5481014, -48.4980635)));
         }
-        eliminaMarcadores();
-        criaMarcadores(oMap);
-      }
 
-      @Override
-      public void onCancelled(DatabaseError error) {
-        // Could not successfully listen for data, log the error
-        // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
-      }
-    };
-    clRef.addValueEventListener(clListener);
-  }
-
-  public void cleanBasicListener() {
-    clRef.removeEventListener(clListener);
-  }
-
-
-  @Override
-  public void onMapReady(GoogleMap googleMap) {
-
-    //Caso tenha permissão para localização via GPS
-    if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
-            checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-      googleMap.setMyLocationEnabled(true);
-    } else {
-      //Define como padrão a localização do Senai
-      googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(-27.5481014, -48.4980635)));
+        basicListen(googleMap);
     }
 
-    basicListen(googleMap);
-  }
+    private LocationListener myLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            // called when the listener is notified with a location update from the GPS
+            LatLng userPosition = new LatLng(location.getLatitude(),
+                    location.getLongitude());
+            if (mMap != null) {
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userPosition, ZOOM_CAMERA));
+            }
 
-  private void eliminaMarcadores(){
-    for (Marker marker : mMarkerArray) {
-      marker.remove();
-    }
-  }
+        }
 
+        @Override
+        public void onProviderDisabled(String provider) {
+            // called when the GPS provider is turned off (user turning off the GPS on the phone)
 
-  private void criaMarcadores(GoogleMap googleMap) {
-    String nomeDrawable;
-    int idDrawable;
-    mMap = googleMap;
+        }
 
-    mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+        @Override
+        public void onProviderEnabled(String provider) {
+            // called when the GPS provider is turned on (user turning on the GPS on the phone)
+        }
 
-      @Override
-      public boolean onMarkerClick(final Marker marker) {
-
-        final androidx.appcompat.app.AlertDialog dialog;
-        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
-
-        final String[] snippet = marker.getSnippet().split(";");
-
-        builder.setIcon(Imagens.getDrawable(snippet[1]));
-        builder.setTitle("Lixo encontrado no chão!");
-        builder.setMessage("Veja! Parece que você encontrou " + snippet[0].toLowerCase() + " enquanto andava!");
-        builder.setPositiveButton("Coletar", new DialogInterface.OnClickListener() {
-          public void onClick(DialogInterface arg0, int arg1) {
-
-            coletarLixo(snippet[2]);
-          }
-        });
-
-        //cria o AlertDialog
-        dialog = builder.create();
-
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-          @Override
-          public void onShow(DialogInterface arg0) {
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
-          }
-        });
-
-        dialog.show();
-
-        return true;
-      }
-    });
-
-    for (int i = 0; i < lixos.size(); i++) {
-
-      if (lixos.get(i).lixo != null) {
-        nomeDrawable = lixos.get(i).getImagemLixo();
-
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(lixos.get(i).getLatLng())
-                .title("Lixo " + Integer.toString(i))
-                .snippet(lixos.get(i).getNomeLixo() + ";" + lixos.get(i).getImagemLixo() + ";" + lixos.get(i).getId())
-                .icon(BitmapDescriptorFactory.fromResource(Imagens.getDrawable(nomeDrawable)));
-
-        Marker m = mMap.addMarker(markerOptions);
-        mMarkerArray.add(m);
-      }
-    }
-
-  }
-
-  private void coletarLixo(final String id) {
-    clRef = dbRef.child("coordenada_lixo/" + id + "/lixo");
-
-    ValueEventListener listener = new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        Map<String, String> map = new HashMap<>();
-
-        LixoPayload lixo;
-        Object lixoLido;
-
-        lixoLido = dataSnapshot.getValue();
-        map = ((HashMap) lixoLido);
-
-        lixo = new LixoPayload(map.get("id"), map.get("nome"), map.get("imagem"), map.get("descricao"), map.get("categoria"));
-        colocarNoInventario(lixo, id, clRef, this);
-      }
-
-      @Override
-      public void onCancelled(DatabaseError error) {
-        // Could not successfully listen for data, log the error
-        // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
-      }
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            // called when the status of the GPS provider changes
+        }
     };
 
-    clRef.addValueEventListener(listener);
-  }
-
-  private void colocarNoInventario(final LixoPayload lixo, final String id, final DatabaseReference clRef, ValueEventListener listener) {
-
-    // Remover ValueEventListener do clRef
-    clRef.removeEventListener(listener);
-
-    final FirebaseUser jogador = FirebaseAuth.getInstance().getCurrentUser();
-    Inventario item = new Inventario(jogador.getUid(), lixo);
-
-    DatabaseReference iRef = dbRef.child("inventario");
-    String key = iRef.push().getKey();
-    iRef.child(key).setValue(item)
-      .addOnSuccessListener(new OnSuccessListener<Void>() {
-        @Override
-        public void onSuccess(Void aVoid) {
-          clRef.removeValue();
-          Toast.makeText(getApplicationContext(), "Colocando " + lixo.getNome() + " no inventário de " + jogador.getDisplayName(), Toast.LENGTH_LONG).show();
+    private void eliminaMarcadores() {
+        for (Marker marker : mMarkerArray) {
+            marker.remove();
         }
-      })
-      .addOnFailureListener(new OnFailureListener() {
-        @Override
-        public void onFailure(@NonNull Exception e) {
-          Toast.makeText(getApplicationContext(), "Erro ao gravar item no inventário", Toast.LENGTH_LONG).show();
-        }
-      });
-  }
+    }
 
+    private double rad(double x) {
+        return x * Math.PI / 180;
+    }
+
+    private double distancia(Coordenada p1, Coordenada p2) {
+        double R = 6378137; // Earth’s mean radius in meter
+        double dLat = rad(p2.latitude - p1.latitude);
+        double dLong = rad(p2.longitude - p1.longitude);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(rad(p1.latitude)) * Math.cos(rad(p2.latitude)) *
+                        Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double d = R * c;
+        return d;
+    }
+
+
+    private void criaMarcadores(GoogleMap googleMap) {
+        String nomeDrawable;
+        int idDrawable;
+        mMap = googleMap;
+
+        mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+
+            @Override
+            public boolean onMarkerClick(final Marker marker) {
+
+                final androidx.appcompat.app.AlertDialog dialog;
+                androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+
+                final String[] snippet = marker.getSnippet().split(";");
+
+                builder.setIcon(Imagens.getDrawable(snippet[1]));
+                builder.setTitle("Lixo encontrado no chão!");
+                builder.setMessage("Veja! Parece que você encontrou " + snippet[0].toLowerCase() + " enquanto andava!");
+                builder.setPositiveButton("Coletar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                        coletarLixo(snippet[2]);
+                    }
+                });
+
+                //cria o AlertDialog
+                dialog = builder.create();
+
+                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface arg0) {
+                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
+                    }
+                });
+
+                dialog.show();
+
+                return true;
+            }
+        });
+
+        for (int i = 0; i < lixos.size(); i++) {
+
+            if (lixos.get(i).lixo != null) {
+                nomeDrawable = lixos.get(i).getImagemLixo();
+
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(lixos.get(i).getLatLng())
+                        .title("Lixo " + Integer.toString(i))
+                        .snippet(lixos.get(i).getNomeLixo() + ";" + lixos.get(i).getImagemLixo() + ";" + lixos.get(i).getId())
+                        .icon(BitmapDescriptorFactory.fromResource(Imagens.getDrawable(nomeDrawable)));
+
+                Marker m = mMap.addMarker(markerOptions);
+                mMarkerArray.add(m);
+            }
+        }
+
+    }
+
+    private void coletarLixo(final String id) {
+
+        final Coordenada coordenadaAtual;
+
+        CameraPosition posicaoAtual = mMap.getCameraPosition();
+        coordenadaAtual = new Coordenada(posicaoAtual.target.latitude, posicaoAtual.target.longitude);
+
+        clRef = dbRef.child("coordenada_lixo/" + id);
+
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Coordenada coordenadaLixo;
+
+                Map<String, String> map = new HashMap<>();
+
+                LixoPayload lixo;
+                Object coordenadaLixoLida;
+
+                coordenadaLixoLida = dataSnapshot.getValue();
+                map = ((HashMap) coordenadaLixoLida);
+
+                String id = (String) ((HashMap) ((Object) map.get("lixo"))).get("id");
+                String nome = (String) ((HashMap) ((Object) map.get("lixo"))).get("nome");
+                String descricao = (String) ((HashMap) ((Object) map.get("lixo"))).get("descricao");
+                String imagem = (String) ((HashMap) ((Object) map.get("lixo"))).get("imagem");
+                String categoria = (String) ((HashMap) ((Object) map.get("lixo"))).get("categoria");
+
+                Double latitude = (Double) ((HashMap) ((Object) map.get("coordenada"))).get("latitude");
+                Double longitude = (Double) ((HashMap) ((Object) map.get("coordenada"))).get("longitude");
+
+                coordenadaLixo = new Coordenada(latitude, longitude);
+
+                lixo = new LixoPayload(id, nome, imagem, descricao, categoria);
+
+
+                // Calcular a distância entre o ponto atual e o ponto do ixo coletado
+                double d = distancia(coordenadaAtual, coordenadaLixo);
+
+                if (d <= 10) {
+                    colocarNoInventario(lixo, id, clRef, this);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Você está muito longe desse lixo. Chegue mais perto!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Could not successfully listen for data, log the error
+                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+            }
+        };
+
+        clRef.addValueEventListener(listener);
+    }
+
+    private void colocarNoInventario(final LixoPayload lixo, final String id, final DatabaseReference clRef, ValueEventListener listener) {
+
+        // Remover ValueEventListener do clRef
+        clRef.removeEventListener(listener);
+
+        final FirebaseUser jogador = FirebaseAuth.getInstance().getCurrentUser();
+        Inventario item = new Inventario(jogador.getUid(), lixo);
+
+        DatabaseReference iRef = dbRef.child("inventario");
+        String key = iRef.push().getKey();
+        iRef.child(key).setValue(item)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        clRef.child("lixo").removeValue();
+                        Toast.makeText(getApplicationContext(), "Colocando " + lixo.getNome() + " no inventário de " + jogador.getDisplayName(), Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(), "Erro ao gravar item no inventário", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    //      if (ActivityCompat.shouldShowRequestPermissionRationale(thisActivity,
+//              Manifest.permission.READ_CONTACTS)) {
+//        // Show an explanation to the user *asynchronously* -- don't block
+//        // this thread waiting for the user's response! After the user
+//        // sees the explanation, try again to request the permission.
+//      } else {
+//        // No explanation needed; request the permission
+//        ActivityCompat.requestPermissions(thisActivity,
+//                new String[]{Manifest.permission.READ_CONTACTS},
+//                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+    //Define como padrão a localização do Senai
 }
