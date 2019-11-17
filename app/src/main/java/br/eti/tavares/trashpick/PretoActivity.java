@@ -26,16 +26,16 @@ public class PretoActivity extends AppCompatActivity {
     private List<ItemBiblioteca> itemPreto = new ArrayList<>();
 
     private DatabaseReference dbLixoPreto;
-    private DatabaseReference clRef;
-    private ValueEventListener clListener;
+    private DatabaseReference pRef;
+    private ValueEventListener pListener;
     private Query queryPreto;
 
     private void GetItensBiblioteca() {
 
         dbLixoPreto = FirebaseDatabase.getInstance().getReference();
-        clRef = dbLixoPreto.child("lixo");
-        queryPreto = clRef.orderByChild("categoria").equalTo("Preto");
-        clListener = new ValueEventListener() {
+        pRef = dbLixoPreto.child("lixo");
+        queryPreto = pRef.orderByChild("categoria").equalTo("Preto");
+        pListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 itemPreto.clear();
@@ -55,7 +55,7 @@ public class PretoActivity extends AppCompatActivity {
                 // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
             }
         };
-        queryPreto.addValueEventListener(clListener);
+        queryPreto.addValueEventListener(pListener);
 
     }
 

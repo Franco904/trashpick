@@ -21,6 +21,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+
     private void mostrarLoginActivity() {
         Intent iLogin = new Intent(getApplicationContext(), LoginActivity.class);
 //        Intent iLogin = new Intent(getApplicationContext(), MapsActivity.class);

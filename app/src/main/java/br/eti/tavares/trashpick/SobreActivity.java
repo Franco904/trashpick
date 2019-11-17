@@ -13,7 +13,7 @@ public class SobreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sobre);
     }
 
-    public void OnClickVoltar(View view){
-     finish();
+    public void OnClickVoltar(View view) {
+        finish();
     }
 }

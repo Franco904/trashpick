@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,16 +25,16 @@ public class VermelhoActivity extends AppCompatActivity {
     private List<ItemBiblioteca> itemVermelho = new ArrayList<>();
 
     private DatabaseReference dbLixoVermelho;
-    private DatabaseReference clRef;
-    private ValueEventListener clListener;
+    private DatabaseReference vRef;
+    private ValueEventListener vListener;
     private Query queryVermelho;
 
     private void GetItensBiblioteca(){
 
         dbLixoVermelho = FirebaseDatabase.getInstance().getReference();
-        clRef = dbLixoVermelho.child("lixo");
-        queryVermelho = clRef.orderByChild("categoria").equalTo("Vermelho");
-        clListener = new ValueEventListener() {
+        vRef = dbLixoVermelho.child("lixo");
+        queryVermelho = vRef.orderByChild("categoria").equalTo("Vermelho");
+        vListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 itemVermelho.clear();
@@ -56,7 +55,7 @@ public class VermelhoActivity extends AppCompatActivity {
                 // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
             }
         };
-        queryVermelho.addValueEventListener(clListener);
+        queryVermelho.addValueEventListener(vListener);
     }
 
     private void populateListVermelho() {

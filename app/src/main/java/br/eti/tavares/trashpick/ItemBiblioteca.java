@@ -5,9 +5,10 @@ public class ItemBiblioteca {
     private String nomeLixo, descricao;
     String imagem;
 
-    public ItemBiblioteca(){}
+    public ItemBiblioteca() {
+    }
 
-    public ItemBiblioteca(String nomeLixo, String descricao, String imagem){
+    public ItemBiblioteca(String nomeLixo, String descricao, String imagem) {
         this.nomeLixo = nomeLixo;
         this.descricao = descricao;
         this.imagem = imagem;

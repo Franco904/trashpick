@@ -1,9 +1,7 @@
 package br.eti.tavares.trashpick;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 

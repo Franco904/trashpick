@@ -2,14 +2,10 @@ package br.eti.tavares.trashpick;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,14 +14,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,7 +34,7 @@ public class ObjetivosActivity extends AppCompatActivity {
     private ValueEventListener obListener;
     private List<Objetivo> objetivos = new ArrayList<>();
 
-    private void GetObjetivosDisponiveis(){
+    private void GetObjetivosDisponiveis() {
         dbObjetivo = FirebaseDatabase.getInstance().getReference();
         obRef = dbObjetivo.child("objetivos");
         obListener = new ValueEventListener() {
@@ -51,7 +43,7 @@ public class ObjetivosActivity extends AppCompatActivity {
                 for (DataSnapshot cl : dataSnapshot.getChildren()) {
                     String nome = (String) cl.child("nome").getValue();
                     String descricao = (String) cl.child("descricao").getValue();
-                    String imagem = (String)cl.child("imagem").getValue();
+                    String imagem = (String) cl.child("imagem").getValue();
 
                     objetivos.add(new Objetivo(nome, descricao, imagem));
                 }

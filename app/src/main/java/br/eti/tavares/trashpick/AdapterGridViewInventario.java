@@ -1,12 +1,9 @@
 package br.eti.tavares.trashpick;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.ImageView;
 import android.view.View;
 

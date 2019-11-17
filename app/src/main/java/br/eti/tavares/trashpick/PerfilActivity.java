@@ -6,13 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.VibrationEffect;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,20 +66,22 @@ public class PerfilActivity extends AppCompatActivity {
         });
     }
 
-    public void OnClickSobre(View v){
+    public void OnClickSobre(View v) {
         Intent iSobre = new Intent(getApplicationContext(), SobreActivity.class);
         startActivity(iSobre);
     }
+
     public void OnClickCreditos(View v) {
         Intent iCreditos = new Intent(getApplicationContext(), CreditosActivity.class);
         startActivity(iCreditos);
     }
+
     public void OnClickConfiguracoes(View v) {
         Intent iConfiguracoes = new Intent(getApplicationContext(), ConfiguracoesActivity.class);
         startActivity(iConfiguracoes);
     }
 
-    public void onClickLogout(View v){
+    public void onClickLogout(View v) {
         final androidx.appcompat.app.AlertDialog dialog;
         androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(PerfilActivity.this);
         builder.setTitle("Confirmar Logout");

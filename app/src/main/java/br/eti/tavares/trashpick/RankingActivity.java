@@ -1,11 +1,11 @@
 package br.eti.tavares.trashpick;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,19 +22,19 @@ public class RankingActivity extends AppCompatActivity {
 
     private List<PessoaRanking> jogadores = new ArrayList<>();
 
-    private void GetPessoasRanking(){
+    private void GetPessoasRanking() {
 
         jogadores.add(0, new PessoaRanking("Henry Hudson", 11569, 1));
-        jogadores.add(1,new PessoaRanking("Will Jones", 10567, 1));
-        jogadores.add(2,new PessoaRanking("Earl Oliver", 10300, 1));
-        jogadores.add(3,new PessoaRanking("Ruth Shermann", 9978, 1));
-        jogadores.add(4,new PessoaRanking("Dora Morton", 8900, 1));
-        jogadores.add(5,new PessoaRanking("Gary Warren", 8876, 1));
-        jogadores.add(6,new PessoaRanking("Andre Houston", 8769, 1));
-        jogadores.add(7,new PessoaRanking("Taylor Cage", 8704, 1));
-        jogadores.add(8,new PessoaRanking("Augusta Abbott", 8408, 1));
-        jogadores.add(9,new PessoaRanking("Scarlett Wilson", 8405, 1));
-        jogadores.add(10,new PessoaRanking("Tony Neff", 8357, 1));
+        jogadores.add(1, new PessoaRanking("Will Jones", 10567, 1));
+        jogadores.add(2, new PessoaRanking("Earl Oliver", 10300, 1));
+        jogadores.add(3, new PessoaRanking("Ruth Shermann", 9978, 1));
+        jogadores.add(4, new PessoaRanking("Dora Morton", 8900, 1));
+        jogadores.add(5, new PessoaRanking("Gary Warren", 8876, 1));
+        jogadores.add(6, new PessoaRanking("Andre Houston", 8769, 1));
+        jogadores.add(7, new PessoaRanking("Taylor Cage", 8704, 1));
+        jogadores.add(8, new PessoaRanking("Augusta Abbott", 8408, 1));
+        jogadores.add(9, new PessoaRanking("Scarlett Wilson", 8405, 1));
+        jogadores.add(10, new PessoaRanking("Tony Neff", 8357, 1));
     }
 
     @Override

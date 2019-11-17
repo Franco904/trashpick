@@ -4,9 +4,10 @@ public class Objetivo {
 
     private String id, titulo, descricao, imagem;
 
-    public Objetivo(){}
+    public Objetivo() {
+    }
 
-    public Objetivo(String titulo, String descricao, String imagem){
+    public Objetivo(String titulo, String descricao, String imagem) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.imagem = imagem;

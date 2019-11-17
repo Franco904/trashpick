@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,17 +25,17 @@ public class AzulClaroActivity extends AppCompatActivity {
     private List<ItemBiblioteca> itemAzul = new ArrayList<>();
 
     private DatabaseReference dbLixoAzul;
-    private DatabaseReference clRef;
-    private ValueEventListener clListener;
+    private DatabaseReference aRef;
+    private ValueEventListener aListener;
     private Query queryAzul;
 
 
     private void GetItensBiblioteca(){
 
         dbLixoAzul = FirebaseDatabase.getInstance().getReference();
-        clRef = dbLixoAzul.child("lixo");
-        queryAzul = clRef.orderByChild("categoria").equalTo("Azul");
-        clListener = new ValueEventListener() {
+        aRef = dbLixoAzul.child("lixo");
+        queryAzul = aRef.orderByChild("categoria").equalTo("Azul");
+        aListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 itemAzul.clear();
@@ -56,7 +55,7 @@ public class AzulClaroActivity extends AppCompatActivity {
                 // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
             }
         };
-        queryAzul.addValueEventListener(clListener);
+        queryAzul.addValueEventListener(aListener);
 
     }
 

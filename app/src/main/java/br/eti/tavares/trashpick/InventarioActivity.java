@@ -4,16 +4,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +31,7 @@ public class InventarioActivity extends AppCompatActivity {
     private long pontos = 0;
 
 
-    private void GetLixosInventario(){
+    private void GetLixosInventario() {
         dbInventario = FirebaseDatabase.getInstance().getReference();
         inRef = dbInventario.child("inventario");
         queryInventario = inRef.orderByChild("idJogador").equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -79,7 +74,7 @@ public class InventarioActivity extends AppCompatActivity {
         TextView pontosAtual = findViewById(R.id.txtPontosAtual);
         pontosAtual.setText("0");
 
-        for (int i=0; i < lixoInventario.size(); i++){
+        for (int i = 0; i < lixoInventario.size(); i++) {
 
             switch (lixoInventario.get(i).getLixo().getCategoria()) {
                 case "Azul":
@@ -110,13 +105,13 @@ public class InventarioActivity extends AppCompatActivity {
         this.GetLixosInventario();
     }
 
-    public void onClickInformacoes(View v){
+    public void onClickInformacoes(View v) {
 
         final androidx.appcompat.app.AlertDialog dialog;
         androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(InventarioActivity.this);
         builder.setIcon(R.drawable.ic_help_outline_gray_24dp);
         builder.setTitle("Como funciona a pontuação ?");
-        builder.setMessage(Html.fromHtml("\n\n  Os " + "<font color='#80DEEA'><b>lixos azuis</b></font>" + " possuem uma pontuação de 20 pontos, enquanto os " + "<font color='#FB8C00'><b>lixos laranjas</b></font>" + " valem 25 pontos.\n" + " Os " + "<font color='#CC0000'><b>lixos vermelhos</b></font>" + " possuem uma pontuação de 35 pontos, e os " + "<font color='#000000'><b>lixos pretos</b></font>" + " valem 50 pontos!\n"));
+        builder.setMessage(Html.fromHtml("Todos os lixos que você coleta possuem sua pontuação respectiva a sua cor.\n  Os " + "<font color='#80DEEA'><b>lixos azuis</b></font>" + " possuem uma pontuação de 20 pontos, enquanto os " + "<font color='#FB8C00'><b>lixos laranjas</b></font>" + " valem 25 pontos.\n" + " Os " + "<font color='#CC0000'><b>lixos vermelhos</b></font>" + " possuem uma pontuação de 35 pontos, e com os " + "<font color='#000000'><b>lixos pretos</b></font>" + " você ganha 50 pontos!\n"));
         builder.setPositiveButton("Entendi!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
             }

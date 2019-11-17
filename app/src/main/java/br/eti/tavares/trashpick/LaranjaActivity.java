@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,18 +23,18 @@ import java.util.List;
 public class LaranjaActivity extends AppCompatActivity {
 
     private DatabaseReference dbLixoLaranja;
-    private DatabaseReference clRef;
-    private ValueEventListener clListener;
+    private DatabaseReference laRef;
+    private ValueEventListener laListener;
     private Query queryLaranja;
     private List<ItemBiblioteca> itemLaranja = new ArrayList<>();
 
     private void GetItensBiblioteca(){
 
         dbLixoLaranja = FirebaseDatabase.getInstance().getReference();
-        clRef = dbLixoLaranja.child("lixo");
-        queryLaranja = clRef.orderByChild("categoria").equalTo("Laranja");
+        laRef = dbLixoLaranja.child("lixo");
+        queryLaranja = laRef.orderByChild("categoria").equalTo("Laranja");
 
-        clListener = new ValueEventListener() {
+        laListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 itemLaranja.clear();
@@ -56,7 +54,7 @@ public class LaranjaActivity extends AppCompatActivity {
                 // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
             }
         };
-        queryLaranja.addValueEventListener(clListener);
+        queryLaranja.addValueEventListener(laListener);
 
     }
 

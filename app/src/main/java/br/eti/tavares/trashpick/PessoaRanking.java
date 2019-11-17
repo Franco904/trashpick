@@ -6,7 +6,7 @@ public class PessoaRanking {
     private int pontos;
     private int foto;
 
-    public PessoaRanking(String nome, int pontos, int foto){
+    public PessoaRanking(String nome, int pontos, int foto) {
         this.nome = nome;
         this.pontos = pontos;
         this.foto = foto;

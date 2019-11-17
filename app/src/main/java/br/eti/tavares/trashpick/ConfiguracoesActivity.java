@@ -2,7 +2,6 @@ package br.eti.tavares.trashpick;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
