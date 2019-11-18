@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TrashPick</string>
     <string name="title_activity_maps">Mapa</string>
-    <string name="title_activity_login_excluir">Sign in</string>
+    <string name="title_activity_login_excluir">Entrar</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
