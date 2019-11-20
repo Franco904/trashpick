@@ -90,13 +90,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 jogador = new PessoaRanking(user.getDisplayName(), (long) dataSnapshot.child("pontos").getValue(),"ic_account_circle_black_24dp");
-                int a = 0;
+
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Could not successfully listen for data, log the error
-                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
             }
         };
         rRef.addValueEventListener(rListener);
