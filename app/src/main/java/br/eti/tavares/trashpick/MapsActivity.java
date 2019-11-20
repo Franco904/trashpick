@@ -254,7 +254,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     location.getLongitude());
             if (mMap != null) {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userPosition, ZOOM_CAMERA));
-                Toast.makeText(getApplicationContext(), "mMap.moveCamera efetuado", Toast.LENGTH_SHORT).show();
             }
 
         }
