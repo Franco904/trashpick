@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,6 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import br.eti.tavares.trashpick.adapter.AdapterListViewPreto;
+import br.eti.tavares.trashpick.model.ItemBiblioteca;
 
 public class PretoActivity extends AppCompatActivity {
 
@@ -39,10 +41,10 @@ public class PretoActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 itemPreto.clear();
-                for (DataSnapshot cl : dataSnapshot.getChildren()) {
-                    String nome = (String) cl.child("nome").getValue();
-                    String descricao = (String) cl.child("descricao").getValue();
-                    String imagem = (String) cl.child("imagem").getValue();
+                for (DataSnapshot p : dataSnapshot.getChildren()) {
+                    String nome = (String) p.child("nome").getValue();
+                    String descricao = (String) p.child("descricao").getValue();
+                    String imagem = (String) p.child("imagem").getValue();
 
                     itemPreto.add(new ItemBiblioteca(nome, descricao, imagem));
                 }
@@ -51,8 +53,7 @@ public class PretoActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Could not successfully listen for data, log the error
-                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+                // Erro ao fazer o listen de dados
             }
         };
         queryPreto.addValueEventListener(pListener);
@@ -67,7 +68,6 @@ public class PretoActivity extends AppCompatActivity {
         itensBiblioteca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> objetivosDisponiveis, View view, int position, long id) {
-//                String itemSelecionado = (String) objetivosDisponiveis.getItemAtPosition(position);
 
                 final androidx.appcompat.app.AlertDialog dialog;
                 androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(PretoActivity.this);
@@ -93,7 +93,6 @@ public class PretoActivity extends AppCompatActivity {
                 dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface arg0) {
-//                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
                     }
                 });

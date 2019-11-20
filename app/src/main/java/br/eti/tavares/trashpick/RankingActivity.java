@@ -12,29 +12,82 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import br.eti.tavares.trashpick.adapter.AdapterListViewRank;
+import br.eti.tavares.trashpick.model.PessoaRanking;
 
 public class RankingActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
 
+    private DatabaseReference dbRanking;
+    private DatabaseReference rRef;
+    private ValueEventListener rListener;
+    private Query queryPontos;
+
+    private long meusPontos;
+
     private List<PessoaRanking> jogadores = new ArrayList<>();
 
     private void GetPessoasRanking() {
 
-        jogadores.add(0, new PessoaRanking("Henry Hudson", 11569, 1));
-        jogadores.add(1, new PessoaRanking("Will Jones", 10567, 1));
-        jogadores.add(2, new PessoaRanking("Earl Oliver", 10300, 1));
-        jogadores.add(3, new PessoaRanking("Ruth Shermann", 9978, 1));
-        jogadores.add(4, new PessoaRanking("Dora Morton", 8900, 1));
-        jogadores.add(5, new PessoaRanking("Gary Warren", 8876, 1));
-        jogadores.add(6, new PessoaRanking("Andre Houston", 8769, 1));
-        jogadores.add(7, new PessoaRanking("Taylor Cage", 8704, 1));
-        jogadores.add(8, new PessoaRanking("Augusta Abbott", 8408, 1));
-        jogadores.add(9, new PessoaRanking("Scarlett Wilson", 8405, 1));
-        jogadores.add(10, new PessoaRanking("Tony Neff", 8357, 1));
+        final String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        dbRanking = FirebaseDatabase.getInstance().getReference();
+        rRef = dbRanking.child("ranking");
+        queryPontos = rRef.orderByChild("pontos");
+
+        rListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                jogadores.clear();
+                for (DataSnapshot r : dataSnapshot.getChildren()) {
+                    String nome = (String) r.child("nome").getValue();
+                    long pontos = (long) r.child("pontos").getValue();
+                    String foto = (String) r.child("foto").getValue();
+
+                    jogadores.add(new PessoaRanking(nome, pontos, foto));
+
+                    if(uId.equals(r.getKey())){
+                        meusPontos = pontos;
+                    }
+                }
+
+                Collections.sort(jogadores, Collections.reverseOrder());
+                populateHeader();
+                populateListRanking();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Erro ao fazer o listen de dados
+            }
+        };
+        queryPontos.addValueEventListener(rListener);
+
+    }
+
+
+    private void populateHeader() {
+        TextView pontosAtual = findViewById(R.id.textPontosAtual);
+        pontosAtual.setText(String.valueOf(meusPontos));
+    }
+
+    private void populateListRanking() {
+
+        ListView ranking = (ListView) findViewById(R.id.listranking);
+        AdapterListViewRank adapterrank = new AdapterListViewRank(this, jogadores);
+        ranking.setAdapter(adapterrank);
     }
 
     @Override
@@ -51,10 +104,6 @@ public class RankingActivity extends AppCompatActivity {
 
         final TextView txtNome = findViewById(R.id.txtNome);
         txtNome.setText(user.getDisplayName());
-
-        ListView ranking = (ListView) findViewById(R.id.listranking);
-        AdapterListViewRank adapterrank = new AdapterListViewRank(this, jogadores);
-        ranking.setAdapter(adapterrank);
 
     }
 
@@ -84,8 +133,8 @@ public class RankingActivity extends AppCompatActivity {
                         break;
 
                     case "Ranking":
-//                        Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
-//                        startActivity(iRanking);
+//                       Intent iRanking = new Intent(getApplicationContext(), RankingActivity.class);
+//                       startActivity(iRanking);
                         break;
 
                     case "Perfil":
@@ -99,5 +148,4 @@ public class RankingActivity extends AppCompatActivity {
             }
         });
     }
-
 }

@@ -1,51 +1,66 @@
-package br.eti.tavares.trashpick;
+package br.eti.tavares.trashpick.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.TextView;
 import android.widget.ImageView;
 import android.view.View;
+
 import java.util.List;
 
-public class AdapterListViewRank extends BaseAdapter {
+import br.eti.tavares.trashpick.services.Imagens;
+import br.eti.tavares.trashpick.R;
+import br.eti.tavares.trashpick.model.Inventario;
 
+public class AdapterGridViewInventario extends BaseAdapter {
+
+    Context context;
     private LayoutInflater mInflater;
-    private List<PessoaRanking> itens;
+    private List<Inventario> lixoInventario;
 
-    public AdapterListViewRank(Context context, List<PessoaRanking> itens) {
+    public AdapterGridViewInventario(Context context, List<Inventario> lixoInventario) {
         //Itens do listview
-        this.itens = itens;
+        this.lixoInventario = lixoInventario;
+
         //Objeto responsável por pegar o Layout do item.
         mInflater = LayoutInflater.from(context);
     }
+
     public int getCount() {
 
-        return itens.size();
+        return lixoInventario.size();
     }
-    public PessoaRanking getItem(int position) {
 
-        return itens.get(position);
+    public Inventario getItem(int position) {
+
+        return lixoInventario.get(position);
     }
+
     public long getItemId(int position) {
 
         return position;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
+
+        if (mInflater == null) {
+            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+
         ItemSuporte itemHolder;
+
         //se a view estiver nula (nunca criada), inflamos o layout nela.
         if (view == null) {
             //infla o layout para podermos pegar as views
-            view = mInflater.inflate(R.layout.listview_item_ranking, null);
+            view = mInflater.inflate(R.layout.gridview_item_inventario, null);
+
 
             //cria um item de suporte para não precisarmos sempre
             //inflar as mesmas informacoes
             itemHolder = new ItemSuporte();
-            itemHolder.nome = ((TextView) view.findViewById(R.id.txtNome));
-            itemHolder.pontos = ((TextView) view.findViewById(R.id.txtPontos));
-            itemHolder.foto = ((ImageView) view.findViewById(R.id.imgPerfil));
+
+            itemHolder.imagem = ((ImageView) view.findViewById(R.id.imgLixoInventario));
 
             //define os itens na view;
             view.setTag(itemHolder);
@@ -56,10 +71,9 @@ public class AdapterListViewRank extends BaseAdapter {
 
         //pega os dados da lista    "@tools:sample/avatars[" + Integer.toString(item.getFoto()) + "]"
         //e define os valores nos itens.
-        PessoaRanking item = itens.get(position);
-        itemHolder.nome.setText(item.getNome());
-        itemHolder.pontos.setText(Integer.toString(item.getPontos()) + " pontos");
-        itemHolder.foto.setImageResource(R.drawable.ic_account_circle_black_24dp);
+        Inventario inventario = lixoInventario.get(position);
+
+        itemHolder.imagem.setImageResource(Imagens.getDrawable(inventario.getLixo().getImagem()));
 
         //retorna a view com as informações
         return view;
@@ -70,8 +84,7 @@ public class AdapterListViewRank extends BaseAdapter {
      */
     private class ItemSuporte {
 
-        ImageView foto;
-        TextView pontos;
-        TextView nome;
+        ImageView imagem;
+
     }
 }

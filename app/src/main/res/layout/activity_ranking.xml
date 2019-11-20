@@ -33,36 +33,34 @@
 
         <TextView
             android:id="@+id/txtNome"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="110dp"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="133dp"
             android:fontFamily="sans-serif-condensed-light"
+            android:gravity="center|fill_horizontal"
             android:text="Nome Sobrenome"
             android:textAlignment="center"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="24sp"
             android:textStyle="normal"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintHorizontal_bias="0.54"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 
         <TextView
-            android:id="@+id/textMediaAtual2"
+            android:id="@+id/textPontosAtual"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-condensed-medium"
-            android:text="298"
+            android:text="pontos"
             android:textAlignment="center"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="24sp"
             android:textStyle="italic"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintStart_toEndOf="@+id/textMediaAtual"
+            map:layout_constraintStart_toEndOf="@+id/textRecordeAtual"
             map:layout_constraintTop_toBottomOf="@+id/txtNome" />
 
         <TextView
@@ -76,25 +74,25 @@
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="18sp"
             map:layout_constraintEnd_toEndOf="parent"
-            map:layout_constraintStart_toEndOf="@+id/textMediaPontos"
-            map:layout_constraintTop_toBottomOf="@+id/textMediaAtual2" />
+            map:layout_constraintStart_toEndOf="@+id/textRecordePontos"
+            map:layout_constraintTop_toBottomOf="@+id/textRecordeAtual" />
 
         <TextView
-            android:id="@+id/textMediaPontos"
+            android:id="@+id/textRecordePontos"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-condensed-light"
-            android:text="Média de pontos"
+            android:text="Recorde de pontos"
             android:textAlignment="center"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
             android:textSize="18sp"
             map:layout_constraintEnd_toStartOf="@+id/textMeusPontos"
             map:layout_constraintStart_toStartOf="parent"
-            map:layout_constraintTop_toBottomOf="@+id/textMediaAtual" />
+            map:layout_constraintTop_toBottomOf="@+id/textPontosAtual" />
 
         <TextView
-            android:id="@+id/textMediaAtual"
+            android:id="@+id/textRecordeAtual"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -104,7 +102,7 @@
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="24sp"
             android:textStyle="italic"
-            map:layout_constraintEnd_toStartOf="@+id/textMediaAtual2"
+            map:layout_constraintEnd_toStartOf="@+id/textPontosAtual"
             map:layout_constraintStart_toStartOf="parent"
             map:layout_constraintTop_toBottomOf="@+id/txtNome" />
 

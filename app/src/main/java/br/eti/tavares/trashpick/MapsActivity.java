@@ -44,6 +44,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.eti.tavares.trashpick.model.Coordenada;
+import br.eti.tavares.trashpick.model.Coordenada_lixo;
+import br.eti.tavares.trashpick.model.Inventario;
+import br.eti.tavares.trashpick.model.LixoPayload;
+import br.eti.tavares.trashpick.model.PessoaRanking;
+import br.eti.tavares.trashpick.services.Imagens;
+
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -54,6 +61,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DatabaseReference dbRef;
     private DatabaseReference clRef;
     private ValueEventListener clListener;
+    private ValueEventListener rListener;
+
+    private PessoaRanking jogador;
 
     private int debug;
 
@@ -70,6 +80,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    private void createPessoaRanking() {
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference rRef = FirebaseDatabase.getInstance().getReference("ranking/" + user.getUid());
+        rListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                jogador = new PessoaRanking(user.getDisplayName(), (long) dataSnapshot.child("pontos").getValue(),"ic_account_circle_black_24dp");
+                int a = 0;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Could not successfully listen for data, log the error
+                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+            }
+        };
+        rRef.addValueEventListener(rListener);
+
+    }
+
+    private int pontosLixo(String categoria) {
+        int pontos = 0;
+        switch (categoria) {
+            case "Azul":
+                pontos = 20;
+                break;
+            case "Laranja":
+                pontos = 25;
+                break;
+            case "Vermelho":
+                pontos = 35;
+                break;
+            case "Preto":
+                pontos = 50;
+                break;
+        }
+        return pontos;
     }
 
     public void onCreateView() {
@@ -127,9 +177,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onStart() {
         super.onStart();
-        //basicListen();
-//        basicQuery();
-//        basicQueryValueListener();
+        createPessoaRanking();
     }
 
     @Override
@@ -137,7 +185,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onStop();
         cleanBasicListener();
         clRef.removeEventListener(clListener);
-//        cleanBasicQuery();
     }
 
     public void basicListen(GoogleMap googleMap) {
@@ -207,6 +254,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     location.getLongitude());
             if (mMap != null) {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userPosition, ZOOM_CAMERA));
+                Toast.makeText(getApplicationContext(), "mMap.moveCamera efetuado", Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -240,10 +288,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private double distancia(Coordenada p1, Coordenada p2) {
         double R = 6378137; // Earth’s mean radius in meter
-        double dLat = rad(p2.latitude - p1.latitude);
-        double dLong = rad(p2.longitude - p1.longitude);
+        double dLat = rad(p2.getLatitude() - p1.getLatitude());
+        double dLong = rad(p2.getLongitude() - p1.getLongitude());
         double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(rad(p1.latitude)) * Math.cos(rad(p2.latitude)) *
+                Math.cos(rad(p1.getLatitude())) * Math.cos(rad(p2.getLatitude())) *
                         Math.sin(dLong / 2) * Math.sin(dLong / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double d = R * c;
@@ -294,7 +342,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         for (int i = 0; i < lixos.size(); i++) {
 
-            if (lixos.get(i).lixo != null) {
+            if (lixos.get(i).getLixo() != null) {
                 nomeDrawable = lixos.get(i).getImagemLixo();
 
                 MarkerOptions markerOptions = new MarkerOptions();
@@ -371,8 +419,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Remover ValueEventListener do clRef
         clRef.removeEventListener(listener);
 
-        final FirebaseUser jogador = FirebaseAuth.getInstance().getCurrentUser();
-        Inventario item = new Inventario(jogador.getUid(), lixo);
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Inventario item = new Inventario(user.getUid(), lixo);
 
         DatabaseReference iRef = dbRef.child("inventario");
         String key = iRef.push().getKey();
@@ -381,7 +429,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onSuccess(Void aVoid) {
                         clRef.child("lixo").removeValue();
-                        Toast.makeText(getApplicationContext(), "Colocando " + lixo.getNome() + " no inventário de " + jogador.getDisplayName(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Colocando " + lixo.getNome() + " no inventário de " + user.getDisplayName(), Toast.LENGTH_LONG).show();
+                        atualizaRanking(user.getUid(), lixo.getCategoria());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -392,14 +441,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 });
     }
 
-    //      if (ActivityCompat.shouldShowRequestPermissionRationale(thisActivity,
-//              Manifest.permission.READ_CONTACTS)) {
-//        // Show an explanation to the user *asynchronously* -- don't block
-//        // this thread waiting for the user's response! After the user
-//        // sees the explanation, try again to request the permission.
-//      } else {
-//        // No explanation needed; request the permission
-//        ActivityCompat.requestPermissions(thisActivity,
-//                new String[]{Manifest.permission.READ_CONTACTS},
-//                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+    private void atualizaRanking(String IdUser, String categoria) {
+        jogador.getNome().hashCode();
+        jogador.addPontos(pontosLixo(categoria));
+
+        Map<String, Object> mJogador = new HashMap<>();
+        mJogador.put("nome", jogador.getNome());
+        mJogador.put("foto", jogador.getFoto());
+        mJogador.put("pontos", jogador.getPontos());
+
+
+        DatabaseReference rRef = dbRef.child("ranking/" + IdUser);
+        rRef.setValue(mJogador)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "Erro ao gravar jogador no ranking", Toast.LENGTH_LONG).show();
+                }
+            });
+
+    }
+
 }

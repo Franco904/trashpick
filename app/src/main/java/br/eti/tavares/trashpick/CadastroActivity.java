@@ -12,11 +12,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import br.eti.tavares.trashpick.model.Cadastro;
+import br.eti.tavares.trashpick.model.PessoaRanking;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -91,7 +98,7 @@ public class CadastroActivity extends AppCompatActivity {
         }
 
         if (!erro) {
-            //Objeto c1 da classe Carro
+            //Objeto c1 da classe Cadastro
             Cadastro c1 = new Cadastro(nome, email, senha, confirmacaoSenha);
 
             //Firebase
@@ -116,9 +123,30 @@ public class CadastroActivity extends AppCompatActivity {
                                             }
                                         });
 
+                                FirebaseUser jogador = auth.getCurrentUser();
+
+                                PessoaRanking pessoaRanking = new PessoaRanking(jogador.getDisplayName(), 0, "ic_account_circle_black_24dp");
+
+
+                                DatabaseReference rRef = FirebaseDatabase.getInstance().getReference("ranking/" + jogador.getUid());
+                                rRef.setValue(pessoaRanking)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(getApplicationContext(), "Erro ao colocar jogador ao ranking", Toast.LENGTH_LONG).show();
+                                            }
+                                        });
+
                                 Intent iMaps = new Intent(getApplicationContext(), MapsActivity.class);
                                 startActivity(iMaps);
                                 Toast.makeText(getApplicationContext(), "Cadastro efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+
                             } else {
                                 Toast.makeText(getApplicationContext(), "Falha na criação do usuário!", Toast.LENGTH_SHORT).show();
                             }

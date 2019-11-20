@@ -1,23 +1,28 @@
-package br.eti.tavares.trashpick;
+package br.eti.tavares.trashpick.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 import android.widget.ImageView;
 import android.view.View;
 
 import java.util.List;
 
-public class AdapterGridViewInventario extends BaseAdapter {
+import br.eti.tavares.trashpick.services.Imagens;
+import br.eti.tavares.trashpick.R;
+import br.eti.tavares.trashpick.model.ItemBiblioteca;
+
+public class AdapterListViewLaranja extends BaseAdapter {
 
     Context context;
     private LayoutInflater mInflater;
-    private List<Inventario> lixoInventario;
+    private List<ItemBiblioteca> itemLaranja;
 
-    public AdapterGridViewInventario(Context context, List<Inventario> lixoInventario) {
+    public AdapterListViewLaranja(Context context, List<ItemBiblioteca> itemLaranja) {
         //Itens do listview
-        this.lixoInventario = lixoInventario;
+        this.itemLaranja = itemLaranja;
 
         //Objeto responsável por pegar o Layout do item.
         mInflater = LayoutInflater.from(context);
@@ -25,12 +30,12 @@ public class AdapterGridViewInventario extends BaseAdapter {
 
     public int getCount() {
 
-        return lixoInventario.size();
+        return itemLaranja.size();
     }
 
-    public Inventario getItem(int position) {
+    public ItemBiblioteca getItem(int position) {
 
-        return lixoInventario.get(position);
+        return itemLaranja.get(position);
     }
 
     public long getItemId(int position) {
@@ -49,14 +54,14 @@ public class AdapterGridViewInventario extends BaseAdapter {
         //se a view estiver nula (nunca criada), inflamos o layout nela.
         if (view == null) {
             //infla o layout para podermos pegar as views
-            view = mInflater.inflate(R.layout.gridview_item_inventario, null);
+            view = mInflater.inflate(R.layout.listview_item_laranja, null);
 
 
             //cria um item de suporte para não precisarmos sempre
             //inflar as mesmas informacoes
             itemHolder = new ItemSuporte();
-
-            itemHolder.imagem = ((ImageView) view.findViewById(R.id.imgLixoInventario));
+            itemHolder.nome = ((TextView) view.findViewById(R.id.txtLixoLaranja));
+            itemHolder.imagem = ((ImageView) view.findViewById(R.id.imgLixoLaranja));
 
             //define os itens na view;
             view.setTag(itemHolder);
@@ -67,9 +72,10 @@ public class AdapterGridViewInventario extends BaseAdapter {
 
         //pega os dados da lista    "@tools:sample/avatars[" + Integer.toString(item.getFoto()) + "]"
         //e define os valores nos itens.
-        Inventario inventario = lixoInventario.get(position);
+        ItemBiblioteca itemBiblioteca = itemLaranja.get(position);
 
-        itemHolder.imagem.setImageResource(Imagens.getDrawable(inventario.getLixo().getImagem()));
+        itemHolder.nome.setText(itemBiblioteca.getNome());
+        itemHolder.imagem.setImageResource(Imagens.getDrawable(itemBiblioteca.getImagem()));
 
         //retorna a view com as informações
         return view;
@@ -81,6 +87,6 @@ public class AdapterGridViewInventario extends BaseAdapter {
     private class ItemSuporte {
 
         ImageView imagem;
-
+        TextView nome;
     }
 }

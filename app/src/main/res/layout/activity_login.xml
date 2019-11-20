@@ -81,6 +81,7 @@
         android:ems="10"
         android:hint="Insira sua senha"
         android:inputType="textPassword"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtEmailInvalido" />
@@ -95,6 +96,7 @@
         android:ems="10"
         android:hint="Insira seu e-mail"
         android:inputType="textEmailAddress"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -107,7 +109,7 @@
         android:layout_marginTop="98dp"
         android:layout_marginEnd="8dp"
         android:textColor="@color/colorErro"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -121,7 +123,7 @@
         android:padding="10dp"
         android:textAlignment="center"
         android:textColor="@color/colorErro"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +138,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:textColor="@color/colorErro"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editSenha" />

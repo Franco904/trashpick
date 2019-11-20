@@ -27,6 +27,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.eti.tavares.trashpick.adapter.AdapterListViewObjetivos;
+import br.eti.tavares.trashpick.model.Objetivo;
+
 public class ObjetivosActivity extends AppCompatActivity {
 
     private DatabaseReference dbObjetivo;
@@ -40,10 +43,10 @@ public class ObjetivosActivity extends AppCompatActivity {
         obListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot cl : dataSnapshot.getChildren()) {
-                    String nome = (String) cl.child("nome").getValue();
-                    String descricao = (String) cl.child("descricao").getValue();
-                    String imagem = (String) cl.child("imagem").getValue();
+                for (DataSnapshot ob : dataSnapshot.getChildren()) {
+                    String nome = (String) ob.child("nome").getValue();
+                    String descricao = (String) ob.child("descricao").getValue();
+                    String imagem = (String) ob.child("imagem").getValue();
 
                     objetivos.add(new Objetivo(nome, descricao, imagem));
                 }
@@ -90,15 +93,14 @@ public class ObjetivosActivity extends AppCompatActivity {
                         //sem ação
                     }
                 });
-
                 //define um botão como negativo.
+
                 //cria o AlertDialog
                 dialog = builder.create();
 
                 dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface arg0) {
-//                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
                     }
                 });
@@ -134,8 +136,8 @@ public class ObjetivosActivity extends AppCompatActivity {
 
                         break;
                     case "Objetivos":
-//                        Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
-//                        startActivity(iObjetivos);
+//                       Intent iObjetivos = new Intent(getApplicationContext(), ObjetivosActivity.class);
+//                       startActivity(iObjetivos);
                         break;
 
                     case "Biblioteca":

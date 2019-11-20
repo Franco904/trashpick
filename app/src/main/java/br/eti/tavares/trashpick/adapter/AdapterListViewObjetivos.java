@@ -1,4 +1,4 @@
-package br.eti.tavares.trashpick;
+package br.eti.tavares.trashpick.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import android.widget.ImageView;
 import android.view.View;
 
 import java.util.List;
+
+import br.eti.tavares.trashpick.services.Imagens;
+import br.eti.tavares.trashpick.R;
+import br.eti.tavares.trashpick.model.Objetivo;
 
 public class AdapterListViewObjetivos extends BaseAdapter {
 

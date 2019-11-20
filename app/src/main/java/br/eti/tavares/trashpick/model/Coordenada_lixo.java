@@ -1,4 +1,4 @@
-package br.eti.tavares.trashpick;
+package br.eti.tavares.trashpick.model;
 
 import com.google.android.gms.maps.model.LatLng;
 

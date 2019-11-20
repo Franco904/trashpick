@@ -1,4 +1,4 @@
-package br.eti.tavares.trashpick;
+package br.eti.tavares.trashpick.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,57 +7,48 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.view.View;
-
 import java.util.List;
 
-public class AdapterListViewPreto extends BaseAdapter {
+import br.eti.tavares.trashpick.model.PessoaRanking;
+import br.eti.tavares.trashpick.R;
 
-    Context context;
+public class AdapterListViewRank extends BaseAdapter {
+
     private LayoutInflater mInflater;
-    private List<ItemBiblioteca> itemPreto;
+    private List<PessoaRanking> itens;
 
-    public AdapterListViewPreto(Context context, List<ItemBiblioteca> itemPreto) {
+    public AdapterListViewRank(Context context, List<PessoaRanking> itens) {
         //Itens do listview
-        this.itemPreto = itemPreto;
-
+        this.itens = itens;
         //Objeto responsável por pegar o Layout do item.
         mInflater = LayoutInflater.from(context);
     }
-
     public int getCount() {
 
-        return itemPreto.size();
+        return itens.size();
     }
+    public PessoaRanking getItem(int position) {
 
-    public ItemBiblioteca getItem(int position) {
-
-        return itemPreto.get(position);
+        return itens.get(position);
     }
-
     public long getItemId(int position) {
 
         return position;
     }
 
     public View getView(int position, View view, ViewGroup parent) {
-
-        if (mInflater == null) {
-            mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-
         ItemSuporte itemHolder;
-
         //se a view estiver nula (nunca criada), inflamos o layout nela.
         if (view == null) {
             //infla o layout para podermos pegar as views
-            view = mInflater.inflate(R.layout.listview_item_preto, null);
-
+            view = mInflater.inflate(R.layout.listview_item_ranking, null);
 
             //cria um item de suporte para não precisarmos sempre
             //inflar as mesmas informacoes
             itemHolder = new ItemSuporte();
-            itemHolder.nome = ((TextView) view.findViewById(R.id.txtLixoPreto));
-            itemHolder.imagem = ((ImageView) view.findViewById(R.id.imgLixoPreto));
+            itemHolder.nome = ((TextView) view.findViewById(R.id.txtNome));
+            itemHolder.pontos = ((TextView) view.findViewById(R.id.txtPontos));
+            itemHolder.foto = ((ImageView) view.findViewById(R.id.imgPerfil));
 
             //define os itens na view;
             view.setTag(itemHolder);
@@ -68,10 +59,10 @@ public class AdapterListViewPreto extends BaseAdapter {
 
         //pega os dados da lista    "@tools:sample/avatars[" + Integer.toString(item.getFoto()) + "]"
         //e define os valores nos itens.
-        ItemBiblioteca itemBiblioteca = itemPreto.get(position);
-
-        itemHolder.nome.setText(itemBiblioteca.getNome());
-        itemHolder.imagem.setImageResource(Imagens.getDrawable(itemBiblioteca.getImagem()));
+        PessoaRanking item = itens.get(position);
+        itemHolder.nome.setText(item.getNome());
+        itemHolder.pontos.setText(Long.toString(item.getPontos()) + " pontos");
+        itemHolder.foto.setImageResource(R.drawable.ic_account_circle_black_24dp);
 
         //retorna a view com as informações
         return view;
@@ -82,7 +73,8 @@ public class AdapterListViewPreto extends BaseAdapter {
      */
     private class ItemSuporte {
 
-        ImageView imagem;
+        ImageView foto;
+        TextView pontos;
         TextView nome;
     }
 }

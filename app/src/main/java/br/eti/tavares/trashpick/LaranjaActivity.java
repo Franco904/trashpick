@@ -20,6 +20,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.eti.tavares.trashpick.adapter.AdapterListViewLaranja;
+import br.eti.tavares.trashpick.model.ItemBiblioteca;
+import br.eti.tavares.trashpick.services.Imagens;
+
 public class LaranjaActivity extends AppCompatActivity {
 
     private DatabaseReference dbLixoLaranja;
@@ -38,10 +42,10 @@ public class LaranjaActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 itemLaranja.clear();
-                for (DataSnapshot cl : dataSnapshot.getChildren()) {
-                    String nome = (String) cl.child("nome").getValue();
-                    String descricao = (String) cl.child("descricao").getValue();
-                    String imagem = (String) cl.child("imagem").getValue();
+                for (DataSnapshot l : dataSnapshot.getChildren()) {
+                    String nome = (String) l.child("nome").getValue();
+                    String descricao = (String) l.child("descricao").getValue();
+                    String imagem = (String) l.child("imagem").getValue();
 
                     itemLaranja.add(new ItemBiblioteca(nome, descricao, imagem));
                 }
@@ -50,8 +54,7 @@ public class LaranjaActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Could not successfully listen for data, log the error
-                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+                // Erro ao fazer o listen de dados
             }
         };
         queryLaranja.addValueEventListener(laListener);
@@ -94,7 +97,6 @@ public class LaranjaActivity extends AppCompatActivity {
                 dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface arg0) {
-//                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
                     }
                 });

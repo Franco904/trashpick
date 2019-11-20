@@ -1,25 +1,25 @@
-package br.eti.tavares.trashpick;
+package br.eti.tavares.trashpick.model;
 
-public class ItemBiblioteca {
+public class Objetivo {
 
-    private String nomeLixo, descricao;
-    String imagem;
+    private String id, titulo, descricao, imagem;
 
-    public ItemBiblioteca() {
+    public Objetivo() {
     }
 
-    public ItemBiblioteca(String nomeLixo, String descricao, String imagem) {
-        this.nomeLixo = nomeLixo;
+    public Objetivo(String titulo, String descricao, String imagem) {
+        this.titulo = titulo;
         this.descricao = descricao;
         this.imagem = imagem;
+
     }
 
-    public String getNome() {
-        return nomeLixo;
+    public String getTitulo() {
+        return titulo;
     }
 
     public void setTitulo(String titulo) {
-        this.nomeLixo = nomeLixo;
+        this.titulo = titulo;
     }
 
     public String getDescricao() {

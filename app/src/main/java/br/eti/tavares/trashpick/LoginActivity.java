@@ -17,6 +17,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import br.eti.tavares.trashpick.model.Login;
+
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
@@ -74,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (!erro) {
-            //Objeto c1 da classe Carro
+            //Objeto ll da classe Login
             Login l1 = new Login(email, senha);
 
             //Firebase autentication

@@ -1,4 +1,4 @@
-package br.eti.tavares.trashpick;
+package br.eti.tavares.trashpick.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,15 +10,19 @@ import android.view.View;
 
 import java.util.List;
 
-public class AdapterListViewVermelho extends BaseAdapter {
+import br.eti.tavares.trashpick.services.Imagens;
+import br.eti.tavares.trashpick.R;
+import br.eti.tavares.trashpick.model.ItemBiblioteca;
+
+public class AdapterListViewAzulClaro extends BaseAdapter {
 
     Context context;
     private LayoutInflater mInflater;
-    private List<ItemBiblioteca> itemVermelho;
+    private List<ItemBiblioteca> itemAzul;
 
-    public AdapterListViewVermelho(Context context, List<ItemBiblioteca> itemVermelho) {
+    public AdapterListViewAzulClaro(Context context, List<ItemBiblioteca> itemAzul) {
         //Itens do listview
-        this.itemVermelho = itemVermelho;
+        this.itemAzul = itemAzul;
 
         //Objeto responsável por pegar o Layout do item.
         mInflater = LayoutInflater.from(context);
@@ -26,12 +30,12 @@ public class AdapterListViewVermelho extends BaseAdapter {
 
     public int getCount() {
 
-        return itemVermelho.size();
+        return itemAzul.size();
     }
 
     public ItemBiblioteca getItem(int position) {
 
-        return itemVermelho.get(position);
+        return itemAzul.get(position);
     }
 
     public long getItemId(int position) {
@@ -50,14 +54,14 @@ public class AdapterListViewVermelho extends BaseAdapter {
         //se a view estiver nula (nunca criada), inflamos o layout nela.
         if (view == null) {
             //infla o layout para podermos pegar as views
-            view = mInflater.inflate(R.layout.listview_item_vermelho, null);
+            view = mInflater.inflate(R.layout.listview_item_azul_claro, null);
 
 
             //cria um item de suporte para não precisarmos sempre
             //inflar as mesmas informacoes
             itemHolder = new ItemSuporte();
-            itemHolder.nome = ((TextView) view.findViewById(R.id.txtLixoVermelho));
-            itemHolder.imagem = ((ImageView) view.findViewById(R.id.imgLixoVermelho));
+            itemHolder.nome = ((TextView) view.findViewById(R.id.txtLixoAzul));
+            itemHolder.imagem = ((ImageView) view.findViewById(R.id.imgLixoAzul));
 
             //define os itens na view;
             view.setTag(itemHolder);
@@ -68,7 +72,7 @@ public class AdapterListViewVermelho extends BaseAdapter {
 
         //pega os dados da lista    "@tools:sample/avatars[" + Integer.toString(item.getFoto()) + "]"
         //e define os valores nos itens.
-        ItemBiblioteca itemBiblioteca = itemVermelho.get(position);
+        ItemBiblioteca itemBiblioteca = itemAzul.get(position);
 
         itemHolder.nome.setText(itemBiblioteca.getNome());
         itemHolder.imagem.setImageResource(Imagens.getDrawable(itemBiblioteca.getImagem()));

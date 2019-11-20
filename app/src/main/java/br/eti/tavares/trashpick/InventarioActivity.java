@@ -21,6 +21,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.eti.tavares.trashpick.adapter.AdapterGridViewInventario;
+import br.eti.tavares.trashpick.model.Inventario;
+import br.eti.tavares.trashpick.model.LixoPayload;
+
 public class InventarioActivity extends AppCompatActivity {
 
     private DatabaseReference dbInventario;

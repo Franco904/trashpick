@@ -34,7 +34,7 @@ public class ConfiguracoesActivity extends AppCompatActivity {
                     finish();
                 }else
                     vibrator.cancel();
-                    Toast.makeText(ConfiguracoesActivity.this, "As vibrações foram desativadas", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ConfiguracoesActivity.this, "Configurações salvas!", Toast.LENGTH_SHORT).show();
                     finish();
             }
         });

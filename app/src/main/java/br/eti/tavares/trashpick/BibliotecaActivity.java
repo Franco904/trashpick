@@ -39,8 +39,8 @@ public class BibliotecaActivity extends AppCompatActivity {
                         break;
 
                     case "Biblioteca":
-//                        Intent iBiblioteca = new Intent(getApplicationContext(), BibliotecaActivity.class);
-//                        startActivity(iBiblioteca);
+//                       Intent iBiblioteca = new Intent(getApplicationContext(), BibliotecaActivity.class);
+//                       startActivity(iBiblioteca);
                         break;
 
                     case "Ranking":

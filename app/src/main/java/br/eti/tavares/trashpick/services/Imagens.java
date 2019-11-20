@@ -1,4 +1,6 @@
-package br.eti.tavares.trashpick;
+package br.eti.tavares.trashpick.services;
+
+import br.eti.tavares.trashpick.R;
 
 public class Imagens {
 

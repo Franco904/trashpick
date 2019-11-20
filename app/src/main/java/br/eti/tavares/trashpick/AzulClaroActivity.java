@@ -20,6 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.eti.tavares.trashpick.adapter.AdapterListViewAzulClaro;
+import br.eti.tavares.trashpick.model.ItemBiblioteca;
+
 public class AzulClaroActivity extends AppCompatActivity {
 
     private List<ItemBiblioteca> itemAzul = new ArrayList<>();
@@ -39,10 +42,10 @@ public class AzulClaroActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 itemAzul.clear();
-                for (DataSnapshot cl : dataSnapshot.getChildren()) {
-                    String nome = (String) cl.child("nome").getValue();
-                    String descricao = (String) cl.child("descricao").getValue();
-                    String imagem = (String) cl.child("imagem").getValue();
+                for (DataSnapshot a : dataSnapshot.getChildren()) {
+                    String nome = (String) a.child("nome").getValue();
+                    String descricao = (String) a.child("descricao").getValue();
+                    String imagem = (String) a.child("imagem").getValue();
 
                     itemAzul.add(new ItemBiblioteca(nome, descricao, imagem));
                 }
@@ -51,8 +54,7 @@ public class AzulClaroActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Could not successfully listen for data, log the error
-                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+                // Erro ao fazer o listen de dados
             }
         };
         queryAzul.addValueEventListener(aListener);
@@ -67,7 +69,6 @@ public class AzulClaroActivity extends AppCompatActivity {
         itensBiblioteca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> objetivosDisponiveis, View view, int position, long id) {
-//                String itemSelecionado = (String) objetivosDisponiveis.getItemAtPosition(position);
 
                 final androidx.appcompat.app.AlertDialog dialog;
                 androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(AzulClaroActivity.this);
@@ -93,7 +94,6 @@ public class AzulClaroActivity extends AppCompatActivity {
                 dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface arg0) {
-//                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
                     }
                 });

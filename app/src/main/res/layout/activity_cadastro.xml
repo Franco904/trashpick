@@ -9,9 +9,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="415dp"
+        android:layout_width="0dp"
         android:layout_height="60dp"
         android:background="@color/colorTrashPick"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -31,60 +32,26 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="412dp"
-        android:layout_height="671dp"
-        android:layout_marginEnd="411dp"
+        android:id="@+id/constraintLayout4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:padding="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" >
-
-        <EditText
-            android:id="@+id/editNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="24dp"
-            android:ems="10"
-            android:hint="Nome de usuário"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/editEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="24dp"
-            android:ems="10"
-            android:hint="Endereço de e-mail "
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textNomeInvalido" />
-
-        <TextView
-            android:id="@+id/textConfirmacaoInvalido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editConfirmarSenha" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <Button
             android:id="@+id/btnLogin"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="185dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="35dp"
+            android:layout_marginEnd="8dp"
             android:onClick="OnClickLogin"
             android:text="Já tenho conta"
+            app:layout_constraintEnd_toStartOf="@+id/btnPronto"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textConfirmacaoInvalido" />
 
@@ -93,9 +60,9 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="35dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
             android:background="@color/colorTrashPick"
             android:onClick="OnClickEntrar"
             android:text="Pronto"
@@ -104,14 +71,46 @@
             app:layout_constraintTop_toBottomOf="@+id/textConfirmacaoInvalido" />
 
         <EditText
+            android:id="@+id/editNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Nome de usuário"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Endereço de e-mail "
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textNomeInvalido" />
+
+        <EditText
             android:id="@+id/editSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
             android:ems="10"
             android:hint="Senha"
             android:inputType="textPassword"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtEmailInvalido" />
@@ -120,25 +119,40 @@
             android:id="@+id/editConfirmarSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
             android:cursorVisible="false"
             android:ems="10"
             android:hint="Confirmar senha"
             android:inputType="textPassword"
             android:singleLine="false"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textSenhaInvalido" />
 
         <TextView
+            android:id="@+id/textConfirmacaoInvalido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editConfirmarSenha" />
+
+        <TextView
             android:id="@+id/textNomeInvalido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editNome" />
@@ -147,10 +161,11 @@
             android:id="@+id/textSenhaInvalido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editSenha" />
@@ -159,10 +174,11 @@
             android:id="@+id/txtEmailInvalido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editEmail" />

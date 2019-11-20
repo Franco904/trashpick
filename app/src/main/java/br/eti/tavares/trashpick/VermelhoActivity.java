@@ -20,6 +20,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.eti.tavares.trashpick.adapter.AdapterListViewVermelho;
+import br.eti.tavares.trashpick.model.ItemBiblioteca;
+
 public class VermelhoActivity extends AppCompatActivity {
 
     private List<ItemBiblioteca> itemVermelho = new ArrayList<>();
@@ -29,7 +32,7 @@ public class VermelhoActivity extends AppCompatActivity {
     private ValueEventListener vListener;
     private Query queryVermelho;
 
-    private void GetItensBiblioteca(){
+    private void GetItensBiblioteca() {
 
         dbLixoVermelho = FirebaseDatabase.getInstance().getReference();
         vRef = dbLixoVermelho.child("lixo");
@@ -38,11 +41,11 @@ public class VermelhoActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 itemVermelho.clear();
-                for (DataSnapshot cl : dataSnapshot.getChildren()) {
-                    String nome = (String) cl.child("nome").getValue();
-                    String descricao = (String) cl.child("descricao").getValue();
-                    String imagem = (String) cl.child("imagem").getValue();
-                    String categoria = (String) cl.child("categoria").getValue();
+                for (DataSnapshot v : dataSnapshot.getChildren()) {
+                    String nome = (String) v.child("nome").getValue();
+                    String descricao = (String) v.child("descricao").getValue();
+                    String imagem = (String) v.child("imagem").getValue();
+                    String categoria = (String) v.child("categoria").getValue();
 
                     itemVermelho.add(new ItemBiblioteca(nome, descricao, imagem));
                 }
@@ -51,8 +54,7 @@ public class VermelhoActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Could not successfully listen for data, log the error
-                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+                // Erro ao fazer o listen de dados
             }
         };
         queryVermelho.addValueEventListener(vListener);
@@ -67,7 +69,6 @@ public class VermelhoActivity extends AppCompatActivity {
         itensBiblioteca.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> objetivosDisponiveis, View view, int position, long id) {
-//                String itemSelecionado = (String) objetivosDisponiveis.getItemAtPosition(position);
 
                 final androidx.appcompat.app.AlertDialog dialog;
                 androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(VermelhoActivity.this);
@@ -93,7 +94,6 @@ public class VermelhoActivity extends AppCompatActivity {
                 dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface arg0) {
-//                        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
                         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
                     }
                 });
@@ -111,7 +111,7 @@ public class VermelhoActivity extends AppCompatActivity {
         this.GetItensBiblioteca();
     }
 
-    public void OnClickVoltar(View v){
+    public void OnClickVoltar(View v) {
         finish();
     }
 }
