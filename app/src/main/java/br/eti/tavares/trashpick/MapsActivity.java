@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -80,7 +81,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
+
+        }
+
 
     private void createPessoaRanking() {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -212,8 +215,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             @Override
             public void onCancelled(DatabaseError error) {
-                // Could not successfully listen for data, log the error
-                // Log.e(TAG, "messages:onCancelled:" + error.getMessage());
+
             }
         };
         clRef.addValueEventListener(clListener);
