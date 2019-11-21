@@ -1,11 +1,14 @@
 package br.eti.tavares.trashpick;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -147,6 +150,30 @@ public class CadastroActivity extends AppCompatActivity {
                                 Intent iMaps = new Intent(getApplicationContext(), MapsActivity.class);
                                 startActivity(iMaps);
                                 Toast.makeText(getApplicationContext(), "Cadastro efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+
+                                final androidx.appcompat.app.AlertDialog dialog;
+                                androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(CadastroActivity.this);
+                                builder.setTitle("Permitir acesso ao GPS");
+                                builder.setMessage("Para o bom funcionamento do aplicativo e melhorar a sua experiência, permita o acesso ao Local. Vá a Aplicativos - TrashPick - Permissões - Ativar Local.");
+                                builder.setPositiveButton("Configurações", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface arg0, int arg1) {
+
+                                        Intent iSettings = new Intent(Settings.ACTION_SETTINGS);
+                                        startActivity(iSettings);
+                                    }
+                                });
+
+                                //cria o AlertDialog
+                                dialog = builder.create();
+
+                                dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                                    @Override
+                                    public void onShow(DialogInterface arg0) {
+                                        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorTrashPick));
+                                    }
+                                });
+
+                                dialog.show();
 
                             } else {
                                 Toast.makeText(getApplicationContext(), "Falha na criação do usuário!", Toast.LENGTH_SHORT).show();
